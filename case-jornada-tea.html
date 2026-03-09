@@ -1,0 +1,1597 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Jornada de Clara e Lucas · Claudia Mori</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --preto: #0E0C18;
+      --violeta: #2D2260;
+      --violeta2: #3D3080;
+      --lilac: #8176B5;
+      --ambar: #C08A44;
+      --ambar-pale: #F2E0C0;
+      --areia: #D4C8B8;
+      --creme: #F2EFEA;
+      --fundo: #141414;
+      --fundo-alt: #1E1E1C;
+      --texto: #EFE9E1;
+      --t60: rgba(239, 233, 225, .65);
+      --t35: rgba(239, 233, 225, .35);
+      --t12: rgba(239, 233, 225, .1);
+      --titulo: 'Playfair Display', Georgia, serif;
+      --corpo: 'DM Sans', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--fundo);
+      color: var(--texto);
+      font-family: var(--corpo);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── ANIMAÇÕES ── */
+    .rev {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all .8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .rev.vis {
+      opacity: 1;
+      transform: none;
+    }
+
+    .rev-d1 {
+      transition-delay: .1s;
+    }
+
+    .rev-d2 {
+      transition-delay: .2s;
+    }
+
+    .rev-d3 {
+      transition-delay: .3s;
+    }
+
+    .rev-d4 {
+      transition-delay: .4s;
+    }
+
+    /* ── BARRA DE PROGRESSO ── */
+    #prog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      height: 3px;
+      width: 0;
+      background: var(--ambar);
+      transition: width .1s linear;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3.5rem;
+      background: rgba(20, 20, 20, .96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--t12);
+    }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      text-decoration: none;
+      color: var(--t60);
+      font-size: .68rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+
+    .nav-back:hover {
+      color: var(--creme);
+    }
+
+    .nav-back svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .nav-projeto {
+      font-family: var(--titulo);
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--creme);
+    }
+
+    .nav-cta {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--violeta);
+      padding: .55rem 1.5rem;
+      text-decoration: none;
+      transition: background .2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--ambar);
+      color: #fff;
+    }
+
+    /* ── HERO ── */
+    .hero-case {
+      padding-top: 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 88vh;
+    }
+
+    .hero-esq {
+      background: var(--violeta);
+      padding: 6rem 4.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-esq::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(129, 118, 181, .3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-esq::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -60px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(192, 138, 68, .15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-num {
+      font-family: var(--titulo);
+      font-size: 10rem;
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(242, 239, 234, .04);
+      line-height: 1;
+      position: absolute;
+      top: 3rem;
+      right: 2.5rem;
+    }
+
+    .hero-cat {
+      font-size: .65rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ambar);
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+
+    .hero-titulo-case {
+      font-family: var(--titulo);
+      font-size: clamp(2.8rem, 4.5vw, 5rem);
+      font-weight: 400;
+      line-height: .95;
+      color: var(--creme);
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-titulo-case em {
+      font-style: italic;
+      display: block;
+      color: var(--ambar);
+    }
+
+    .hero-sub {
+      font-size: .95rem;
+      font-weight: 300;
+      color: rgba(242, 239, 234, .5);
+      line-height: 1.9;
+      max-width: 380px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(242, 239, 234, .1);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+    }
+
+    .meta-label {
+      font-size: .58rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(242, 239, 234, .3);
+    }
+
+    .meta-valor {
+      font-size: .8rem;
+      color: rgba(242, 239, 234, .7);
+      font-weight: 400;
+    }
+
+    .hero-dir {
+      background: #1A1A18;
+      padding: 6rem 4.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .resumo-label {
+      font-size: .65rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ambar);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .resumo-frase {
+      font-family: var(--titulo);
+      font-size: 1.85rem;
+      font-weight: 400;
+      font-style: italic;
+      color: #A89BD5;
+      line-height: 1.5;
+      border-left: 3px solid var(--ambar);
+      padding-left: 1.8rem;
+    }
+
+    .hero-nums {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--t12);
+    }
+
+    .hero-n {
+      padding: 1.8rem 2rem;
+      border-right: 1px solid var(--t12);
+      border-bottom: 1px solid var(--t12);
+    }
+
+    .hero-n:nth-child(even) {
+      border-right: none;
+    }
+
+    .hero-n:nth-child(3),
+    .hero-n:nth-child(4) {
+      border-bottom: none;
+    }
+
+    .n-val {
+      font-family: var(--titulo);
+      font-size: 2.6rem;
+      font-style: italic;
+      color: var(--ambar);
+      line-height: 1;
+    }
+
+    .n-desc {
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--t35);
+      margin-top: .4rem;
+    }
+
+    /* ── SEÇÕES COMUNS ── */
+    .sec {
+      padding: 7rem 4.5rem;
+    }
+
+    .sec-alt {
+      background: var(--fundo-alt);
+    }
+
+    .sec-escura {
+      background: var(--preto);
+    }
+
+    .sec-violeta {
+      background: var(--violeta);
+    }
+
+    .sec-max {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .sec-label {
+      font-size: .65rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ambar);
+      font-weight: 500;
+      display: block;
+      margin-bottom: .8rem;
+    }
+
+    .sec-label-claro {
+      color: rgba(242, 239, 234, .4);
+    }
+
+    .sec-titulo {
+      font-family: var(--titulo);
+      font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--creme);
+    }
+
+    .sec-titulo em {
+      font-style: italic;
+      color: #A89BD5;
+    }
+
+    .sec-titulo-claro {
+      color: var(--creme);
+    }
+
+    .sec-titulo-claro em {
+      color: var(--ambar-pale);
+    }
+
+    .sec-corpo {
+      font-size: 1.08rem;
+      font-weight: 300;
+      color: var(--t60);
+      line-height: 1.95;
+    }
+
+    .sec-corpo-claro {
+      color: rgba(242, 239, 234, .55);
+    }
+
+    /* ── CONTEXTO / PROBLEMA ── */
+    .contexto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+      margin-top: 5rem;
+    }
+
+    .diagnostico-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .diag-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--t12);
+    }
+
+    .diag-item:first-child {
+      border-top: 1px solid var(--t12);
+    }
+
+    .diag-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border: 1px solid var(--t12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .diag-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .diag-titulo {
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--creme);
+      font-weight: 600;
+      margin-bottom: .4rem;
+    }
+
+    .diag-desc {
+      font-size: .95rem;
+      color: var(--t60);
+      line-height: 1.75;
+    }
+
+    .contexto-destaque {
+      margin-top: 4rem;
+      padding: 2.5rem 3rem;
+      background: var(--violeta);
+      color: var(--creme);
+    }
+
+    .contexto-destaque p {
+      font-family: var(--titulo);
+      font-size: 1.3rem;
+      font-style: italic;
+      line-height: 1.55;
+    }
+
+    .contexto-destaque strong {
+      color: var(--ambar);
+      font-style: normal;
+    }
+
+    /* ── DECISÃO PEDAGÓGICA ── */
+    .tres-pilares {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      background: var(--t12);
+      margin-top: 4rem;
+    }
+
+    .pilar {
+      background: var(--fundo);
+      padding: 3rem 2.5rem;
+    }
+
+    .pilar-num {
+      font-family: var(--titulo);
+      font-size: 3rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--areia);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .pilar-titulo {
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--creme);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+
+    .pilar-lista {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+    }
+
+    .pilar-lista li {
+      font-size: .95rem;
+      color: var(--t60);
+      padding-left: 1.2rem;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .pilar-lista li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: .65em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--ambar);
+    }
+
+    .decisao-destaque {
+      margin-top: 2px;
+      background: var(--violeta2);
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .decisao-destaque p {
+      font-size: 1rem;
+      color: rgba(242, 239, 234, .8);
+      line-height: 1.85;
+    }
+
+    .decisao-destaque strong {
+      color: var(--creme);
+      font-weight: 500;
+    }
+
+    /* ── CAPITULOS / JORNADA ── */
+    .capitulos-lista {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .cap {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr;
+      align-items: center;
+      background: var(--fundo);
+      padding: 2.5rem 3rem;
+      gap: 4rem;
+      transition: background .2s;
+    }
+
+    .cap:hover {
+      background: var(--fundo-alt);
+    }
+
+    .cap-n {
+      font-family: var(--titulo);
+      font-size: 3.5rem;
+      font-style: italic;
+      color: var(--areia);
+      line-height: 1;
+    }
+
+    .cap-titulo {
+      font-size: .7rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--creme);
+      margin-bottom: .5rem;
+    }
+
+    .cap-nome {
+      font-family: var(--titulo);
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #A89BD5;
+      margin-bottom: .3rem;
+    }
+
+    .cap-desc {
+      font-size: .97rem;
+      color: var(--t60);
+      line-height: 1.75;
+    }
+
+    .cap-foco {
+      font-size: .93rem;
+      color: var(--t60);
+      font-style: italic;
+      line-height: 1.7;
+      padding-left: 2rem;
+      border-left: 2px solid var(--ambar-pale);
+    }
+
+    /* ── RECURSOS / VÍDEOS ── */
+    .recursos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--t12);
+      margin-top: 4rem;
+    }
+
+    .recurso {
+      background: var(--preto);
+      padding: 3rem;
+    }
+
+    .rec-titulo {
+      font-size: .7rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ambar);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+
+    .rec-val {
+      font-family: var(--titulo);
+      font-size: 2.2rem;
+      font-style: italic;
+      color: var(--creme);
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+
+    .rec-desc {
+      font-size: 1rem;
+      color: rgba(242, 239, 234, .55);
+      line-height: 1.85;
+    }
+
+    /* ── ACESSIBILIDADE ── */
+    .acessib-grade {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--t12);
+      margin-top: 4rem;
+    }
+
+    .acessib {
+      background: var(--fundo-alt);
+      padding: 2.5rem 2rem;
+    }
+
+    .ac-icone {
+      width: 44px;
+      height: 44px;
+      background: var(--violeta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .ac-icone svg {
+      width: 20px;
+      height: 20px;
+      color: var(--creme);
+    }
+
+    .ac-titulo {
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--creme);
+      margin-bottom: .7rem;
+    }
+
+    .ac-desc {
+      font-size: .9rem;
+      color: var(--t60);
+      line-height: 1.75;
+    }
+
+    /* ── MEU PAPEL ── */
+    .papel-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      margin-top: 4rem;
+      align-items: start;
+    }
+
+    .papel-texto-wrap {
+      padding: 3rem;
+      background: rgba(168, 155, 213, .1);
+    }
+
+    .papel-label {
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--ambar);
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .papel-quote {
+      font-family: var(--titulo);
+      font-size: 1.4rem;
+      font-style: italic;
+      color: #A89BD5;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .papel-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    .missao-tag {
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .35rem .9rem;
+      border: 1px solid rgba(14, 12, 24, .2);
+      color: var(--t60);
+    }
+
+    .parceria-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .parceria-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--t12);
+    }
+
+    .parceria-item:first-child {
+      border-top: 1px solid var(--t12);
+    }
+
+    .parceria-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      background: var(--violeta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .parceria-icon svg {
+      width: 14px;
+      height: 14px;
+      color: var(--creme);
+    }
+
+    .parceria-titulo {
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--creme);
+      font-weight: 600;
+      margin-bottom: .4rem;
+    }
+
+    .parceria-desc {
+      font-size: .95rem;
+      color: var(--t60);
+      line-height: 1.75;
+    }
+
+    /* ── ESPECIALISTA ── */
+    .esp-destaque {
+      margin-top: 5rem;
+      padding: 3rem 4rem;
+      background: var(--creme);
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      border-left: 4px solid var(--ambar);
+    }
+
+    .esp-inicial {
+      font-family: var(--titulo);
+      font-size: 4rem;
+      font-style: italic;
+      color: var(--ambar);
+      line-height: 1;
+    }
+
+    .esp-nome {
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ambar);
+      margin-bottom: .5rem;
+    }
+
+    .esp-bio {
+      font-size: .97rem;
+      color: var(--t60);
+      line-height: 1.8;
+    }
+
+    /* ── RESULTADOS ── */
+    .resultados-big {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: rgba(242, 239, 234, .08);
+      margin-top: 4rem;
+    }
+
+    .res-stat {
+      padding: 2.5rem;
+    }
+
+    .res-val {
+      font-family: var(--titulo);
+      font-size: 3rem;
+      font-style: italic;
+      color: var(--creme);
+      line-height: 1;
+      margin-bottom: .4rem;
+    }
+
+    .res-desc {
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(242, 239, 234, .4);
+    }
+
+    .resultados-qualitativos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--t12);
+      margin-top: 2px;
+    }
+
+    .res-qual {
+      background: var(--fundo);
+      padding: 2.5rem 3rem;
+    }
+
+    .res-qual-titulo {
+      font-size: .7rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #A89BD5;
+      margin-bottom: .8rem;
+    }
+
+    .res-qual-desc {
+      font-size: .97rem;
+      color: var(--t60);
+      line-height: 1.8;
+    }
+
+    /* ── LINK AO VIVO ── */
+    .live-banner {
+      margin-top: 5rem;
+      padding: 3rem 4rem;
+      background: var(--violeta);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .live-texto {
+      font-family: var(--titulo);
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--creme);
+      line-height: 1.4;
+    }
+
+    .live-sub {
+      font-size: .8rem;
+      color: rgba(242, 239, 234, .5);
+      margin-top: .4rem;
+    }
+
+    .live-btn {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #A89BD5;
+      background: var(--ambar);
+      padding: .9rem 2.2rem;
+      text-decoration: none;
+      transition: background .2s;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+    }
+
+    .live-btn:hover {
+      background: var(--ambar-pale);
+    }
+
+    .live-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ── FOOTER ── */
+    .footer-case {
+      background: var(--preto);
+      padding: 3.5rem 4.5rem;
+      border-top: 1px solid rgba(242, 239, 234, .06);
+    }
+
+    .footer-case-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-case-volta {
+      font-family: var(--titulo);
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(242, 239, 234, .3);
+    }
+
+    .footer-case-nav {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .footer-case-nav a {
+      font-size: .65rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(242, 239, 234, .4);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-case-nav a:hover {
+      color: var(--creme);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav {
+        padding: 0 1.5rem;
+      }
+
+      .nav-projeto {
+        display: none;
+      }
+
+      .hero-case {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-esq,
+      .hero-dir {
+        padding: 4rem 1.5rem;
+      }
+
+      .hero-esq {
+        min-height: 60vh;
+      }
+
+      .sec {
+        padding: 4rem 1.5rem;
+      }
+
+      .contexto-grid,
+      .papel-grid,
+      .narrativa-wrap {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .tres-pilares,
+      .acessib-grade {
+        grid-template-columns: 1fr;
+      }
+
+      .cap {
+        grid-template-columns: 50px 1fr;
+        gap: 1.5rem;
+      }
+
+      .cap-foco {
+        display: none;
+      }
+
+      .resultados-big {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .resultados-qualitativos {
+        grid-template-columns: 1fr;
+      }
+
+      .recursos-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .live-banner {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .footer-case-inner {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .esp-destaque {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="prog"></div>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-back" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+      Portfólio
+    </a>
+    <span class="nav-projeto">A Jornada de Clara e Lucas</span>
+    <a class="nav-cta" href="https://apps.univesp.br/repositorio/jornada-de-clara-e-lucas/" target="_blank"
+      rel="noopener">Ver projeto →</a>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero-case">
+    <div class="hero-esq">
+      <div class="hero-num">04</div>
+      <div>
+        <div class="hero-cat">Design Instrucional · Acessibilidade · Storytelling</div>
+        <h1 class="hero-titulo-case">
+          A Jornada de
+          <em>Clara e Lucas</em>
+        </h1>
+        <p class="hero-sub">Guia interativo sobre TEA que usa storytelling para acolher e orientar famílias nos
+          primeiros passos do diagnóstico.</p>
+      </div>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Cliente</span>
+          <span class="meta-valor">SEDPcD · Escola de Inclusão</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Parceria</span>
+          <span class="meta-valor">Univesp</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Entrega</span>
+          <span class="meta-valor">2025</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-dir">
+      <div>
+        <span class="resumo-label">O que foi feito</span>
+        <p class="resumo-frase">"Transformar a complexidade do diagnóstico de TEA em uma história que abraça, em vez de
+          assustar."</p>
+      </div>
+      <div class="hero-nums">
+        <div class="hero-n">
+          <div class="n-val">5</div>
+          <div class="n-desc">Capítulos narrativos</div>
+        </div>
+        <div class="hero-n">
+          <div class="n-val">11</div>
+          <div class="n-desc">Vídeos especializados</div>
+        </div>
+        <div class="hero-n">
+          <div class="n-val">3</div>
+          <div class="n-desc">Recursos de acessibilidade</div>
+        </div>
+        <div class="hero-n">
+          <div class="n-val">≈66'</div>
+          <div class="n-desc">De conteúdo em vídeo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTEXTO ══ -->
+  <section class="sec rev">
+    <div class="sec-max">
+      <span class="sec-label">O ponto de partida</span>
+      <h2 class="sec-titulo">A demanda que<br>originou <em>o projeto</em></h2>
+
+      <div class="contexto-grid">
+        <div>
+          <p class="sec-corpo">A Secretaria dos Direitos da Pessoa com Deficiência (SEDPcD) identificou uma lacuna
+            crítica: famílias, especialmente mães de baixa renda da rede pública paulista, chegavam ao diagnóstico de
+            TEA sem nenhum material de orientação acessível, acolhedor e prático.</p>
+          <p class="sec-corpo" style="margin-top:1.2rem;">O pedido feito à Escola de Inclusão, em parceria com a
+            Univesp, era direto: criar um recurso que ajudasse a reconhecer os sinais, entender o caminho do diagnóstico
+            e encontrar a rede de apoio disponível em São Paulo, tudo em linguagem humana, não técnica.</p>
+        </div>
+
+        <div class="diagnostico-lista">
+          <div class="diag-item">
+            <div class="diag-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+            </div>
+            <div>
+              <div class="diag-titulo">Ausência de material acessível</div>
+              <div class="diag-desc">Faltava conteúdo sobre TEA em linguagem clara e não técnica para famílias sem
+                letramento médico.</div>
+            </div>
+          </div>
+          <div class="diag-item">
+            <div class="diag-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <div>
+              <div class="diag-titulo">Público em situação de vulnerabilidade</div>
+              <div class="diag-desc">Mães de baixa renda, muitas vezes sozinhas no processo de busca por diagnóstico e
+                terapias.</div>
+            </div>
+          </div>
+          <div class="diag-item">
+            <div class="diag-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+            </div>
+            <div>
+              <div class="diag-titulo">Estigma e falta de orientação sobre direitos</div>
+              <div class="diag-desc">Muitas famílias desconheciam os direitos garantidos pelo diagnóstico e os serviços
+                da rede pública disponíveis.</div>
+            </div>
+          </div>
+          <div class="diag-item">
+            <div class="diag-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+            </div>
+            <div>
+              <div class="diag-titulo">Necessidade de acolhimento emocional</div>
+              <div class="diag-desc">O diagnóstico chega acompanhado de medo, culpa e incerteza. O material precisava
+                endereçar isso antes de informar.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contexto-destaque">
+        <p>O projeto nasceu de uma escuta real: <strong>a pessoa escolhida para conduzir o conteúdo é mãe de uma criança
+            autista.</strong> Isso não foi acidental. Foi a principal decisão pedagógica do projeto.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ DECISÃO PEDAGÓGICA ══ -->
+  <section class="sec sec-alt rev">
+    <div class="sec-max">
+      <span class="sec-label">A escolha central</span>
+      <h2 class="sec-titulo">Por que um guia em<br><em>formato de história?</em></h2>
+      <p class="sec-corpo" style="max-width:660px; margin-top:1.2rem;">A decisão de usar storytelling em vez de um
+        manual ou curso convencional foi o ponto de inflexão do projeto. Três razões sustentam essa escolha.</p>
+
+      <div class="tres-pilares">
+        <div class="pilar">
+          <div class="pilar-num">01</div>
+          <div class="pilar-titulo">Identificação emocional</div>
+          <ul class="pilar-lista">
+            <li>Clara e Lucas são personagens fictícios que espelham situações reais vividas pelas famílias</li>
+            <li>Ver outra mãe passando pelo mesmo processo reduz o isolamento e a culpa</li>
+            <li>Normalização de sentimentos como medo, confusão e esperança</li>
+          </ul>
+        </div>
+        <div class="pilar">
+          <div class="pilar-num">02</div>
+          <div class="pilar-titulo">Acessibilidade cognitiva</div>
+          <ul class="pilar-lista">
+            <li>Narrativa sequencial elimina a barreira do jargão clínico</li>
+            <li>Informações técnicas chegam contextualizadas dentro da história</li>
+            <li>O ritmo de leitura é da família, não do sistema médico</li>
+          </ul>
+        </div>
+        <div class="pilar">
+          <div class="pilar-num">03</div>
+          <div class="pilar-titulo">Empoderamento pela narrativa</div>
+          <ul class="pilar-lista">
+            <li>Cada capítulo mostra ação possível, com foco em possibilidade e não em limitação</li>
+            <li>A perspectiva é de possibilidade, não de limitação</li>
+            <li>Informação como ferramenta de autonomia, não de ansiedade</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="decisao-destaque">
+        <p>A estrutura em 5 capítulos acompanha a <strong>jornada emocional real</strong> das famílias: da primeira
+          intuição ("tem algo diferente") até a celebração das conquistas, passando pela busca por profissionais, o
+          processo de avaliação e as adaptações práticas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CAPÍTULOS ══ -->
+  <section class="sec rev">
+    <div class="sec-max">
+      <span class="sec-label">A estrutura narrativa</span>
+      <h2 class="sec-titulo">Cinco capítulos,<br>uma <em>jornada completa</em></h2>
+
+      <div class="capitulos-lista">
+        <div class="cap rev rev-d1">
+          <div class="cap-n">1</div>
+          <div>
+            <div class="cap-titulo">Capítulo 1</div>
+            <div class="cap-nome">"A Pulguinha Atrás da Orelha"</div>
+            <div class="cap-desc">As primeiras percepções e dúvidas. Clara observa Lucas na pracinha e sente que algo é
+              diferente, sem saber ainda o que fazer com esse sentimento.</div>
+          </div>
+          <div class="cap-foco">Foco: primeiras observações comportamentais e marcos de desenvolvimento. O capítulo
+            valida a intuição materna como ponto de partida legítimo.</div>
+        </div>
+        <div class="cap rev rev-d2">
+          <div class="cap-n">2</div>
+          <div>
+            <div class="cap-titulo">Capítulo 2</div>
+            <div class="cap-nome">"Buscando Entender Melhor"</div>
+            <div class="cap-desc">Clara consulta o pediatra e envolve a escola. O capítulo orienta sobre os
+              encaminhamentos iniciais e prepara emocionalmente para o processo de avaliação.</div>
+          </div>
+          <div class="cap-foco">Foco: navegação pelo sistema de saúde e educação. Dicas práticas sobre como conversar
+            com a escola e com o pediatra sobre as primeiras suspeitas.</div>
+        </div>
+        <div class="cap rev rev-d1">
+          <div class="cap-n">3</div>
+          <div>
+            <div class="cap-titulo">Capítulo 3</div>
+            <div class="cap-nome">"O Caminho da Avaliação"</div>
+            <div class="cap-desc">O processo de diagnóstico multiprofissional. Clara entende o que o laudo significa e o
+              que ele não determina sobre o futuro de Lucas.</div>
+          </div>
+          <div class="cap-foco">Foco: desmistificação do diagnóstico formal. Informações sobre neurologista,
+            fonoaudióloga e psicóloga, e sobre os direitos que o laudo garante.</div>
+        </div>
+        <div class="cap rev rev-d2">
+          <div class="cap-n">4</div>
+          <div>
+            <div class="cap-titulo">Capítulo 4</div>
+            <div class="cap-nome">"Um Novo Olhar, Novos Passos"</div>
+            <div class="cap-desc">Início das terapias e reorganização da rotina. A família adapta o ambiente e aprende
+              estratégias de comunicação em parceria com a escola.</div>
+          </div>
+          <div class="cap-foco">Foco: adaptações práticas para o cotidiano. Informações sobre terapias especializadas
+            disponíveis pela rede pública em São Paulo.</div>
+        </div>
+        <div class="cap rev rev-d1">
+          <div class="cap-n">5</div>
+          <div>
+            <div class="cap-titulo">Capítulo 5</div>
+            <div class="cap-nome">"Celebrando Cada Conquista"</div>
+            <div class="cap-desc">As pequenas vitórias diárias e a construção de uma rede de apoio. O capítulo fecha com
+              uma perspectiva de autonomia e de transformação familiar positiva.</div>
+          </div>
+          <div class="cap-foco">Foco: reconhecimento do progresso e preparação para transições. A narrativa termina com
+            esperança ancorada em realidade, não em idealização.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ESPECIALISTA ══ -->
+  <section class="sec sec-violeta rev">
+    <div class="sec-max">
+      <span class="sec-label sec-label-claro">A voz do projeto</span>
+      <h2 class="sec-titulo sec-titulo-claro">A pessoa que<br><em>viveu essa jornada</em></h2>
+      <p class="sec-corpo sec-corpo-claro" style="max-width:620px; margin-top:1.2rem;">A escolha de quem conduziria o
+        conteúdo foi uma decisão pedagógica e ética. Não bastava conhecimento técnico sobre TEA: era preciso alguém que
+        soubesse o que é estar do outro lado do diagnóstico.</p>
+
+      <div class="esp-destaque" style="background:rgba(242,239,234,.07); border-left-color:var(--ambar);">
+        <div class="esp-inicial" style="color:var(--ambar);">F.</div>
+        <div>
+          <div class="esp-nome">Francine Boldan · Mãe e pesquisadora em TEA</div>
+          <p class="esp-bio" style="color:rgba(242,239,234,.65);">Francine Boldan é pesquisadora na área de TEA e mãe de
+            uma criança autista. Essa combinação de conhecimento técnico com experiência vivida conferiu ao material uma
+            autenticidade que nenhum roteiro puramente acadêmico alcançaria. Os 11 vídeos integrados ao guia carregam a
+            clareza de quem estudou o tema e a humanidade de quem conhece a jornada por dentro.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ RECURSOS EDUCACIONAIS ══ -->
+  <section class="sec rev">
+    <div class="sec-max">
+      <span class="sec-label">O que foi produzido</span>
+      <h2 class="sec-titulo">Recursos que ampliam<br>a <em>narrativa</em></h2>
+      <p class="sec-corpo" style="max-width:620px; margin-top:1.2rem;">A história de Clara e Lucas é o fio condutor. Em
+        pontos estratégicos da narrativa, elementos interativos e vídeos aprofundam o conteúdo sem interromper o fluxo
+        emocional.</p>
+
+      <div class="recursos-grid">
+        <div class="recurso rev rev-d1">
+          <div class="rec-titulo">11 Vídeos Educacionais</div>
+          <div class="rec-val">≈ 66 min</div>
+          <div class="rec-desc">Gravados com Francine Boldan, os vídeos aprofundam temas específicos de cada capítulo.
+            Com duração média de 6 minutos, cada vídeo aparece no momento da narrativa em que a família já está pronta
+            emocionalmente para receber a informação.</div>
+        </div>
+        <div class="recurso rev rev-d2">
+          <div class="rec-titulo">Interatividade contextual</div>
+          <div class="rec-val">Cliques que revelam</div>
+          <div class="rec-desc">Ícones, frases e imagens ao longo da narrativa expandem informações complementares:
+            desmistificação de mitos, dicas práticas, validação emocional e links diretos para a rede de apoio pública
+            em São Paulo. Cada detalhe aparece apenas quando relevante, evitando sobrecarga.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:2px; background:#1E1E1C; padding:2.5rem 3rem;">
+        <p style="font-family:var(--titulo); font-size:1.1rem; font-style:italic; color: #A89BD5; line-height:1.6;">
+          A estrutura interativa aprofunda a narrativa sem competir com ela. O usuário navega no próprio ritmo, sem
+          pressão de tempo, sem avaliação, sem obrigação de percurso linear.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ACESSIBILIDADE ══ -->
+  <section class="sec sec-alt rev">
+    <div class="sec-max">
+      <span class="sec-label">Acessibilidade integral</span>
+      <h2 class="sec-titulo">Projetado para<br><em>todas as pessoas</em></h2>
+      <p class="sec-corpo" style="max-width:620px; margin-top:1.2rem;">O guia foi desenvolvido com recursos completos de
+        acessibilidade. Em um material destinado a famílias de pessoas com deficiência, essa consistência não era
+        opcional: era parte do compromisso ético do projeto.</p>
+
+      <div class="acessib-grade">
+        <div class="acessib rev rev-d1">
+          <div class="ac-icone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+          </div>
+          <div class="ac-titulo">Legendas em Português</div>
+          <div class="ac-desc">Todos os 11 vídeos têm legendas sincronizadas em português, garantindo acesso a pessoas
+            surdas, com baixa audição, em ambientes sem som ou com dificuldades de compreensão auditiva.</div>
+        </div>
+        <div class="acessib rev rev-d2">
+          <div class="ac-icone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+              <line x1="6" y1="1" x2="6" y2="4" />
+              <line x1="10" y1="1" x2="10" y2="4" />
+              <line x1="14" y1="1" x2="14" y2="4" />
+            </svg>
+          </div>
+          <div class="ac-titulo">Interpretação em LIBRAS</div>
+          <div class="ac-desc">Profissional intérprete qualificado em todos os vídeos. A presença de LIBRAS garante que
+            famílias surdas, que muitas vezes têm filhos com TEA, acessem o conteúdo plenamente.</div>
+        </div>
+        <div class="acessib rev rev-d3">
+          <div class="ac-icone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="10" r="3" />
+              <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" />
+            </svg>
+          </div>
+          <div class="ac-titulo">Audiodescrição</div>
+          <div class="ac-desc">Descrição em áudio dos elementos visuais presentes nos vídeos, tornando o conteúdo
+            acessível a pessoas cegas ou com baixa visão. A interface web é compatível com tecnologias assistivas de
+            leitura de tela.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PROCESSO ══ -->
+  <section class="sec rev">
+    <div class="sec-max">
+      <span class="sec-label">Processo de design instrucional</span>
+      <h2 class="sec-titulo">As decisões que<br><em>sustentam o projeto</em></h2>
+      <p class="sec-corpo" style="max-width:660px; margin-top:1.2rem;">Um guia sobre TEA destinado a famílias em
+        situação de vulnerabilidade exige mais do que organização de conteúdo. Cada escolha estrutural foi precedida de
+        escuta, análise e definição pedagógica precisa.</p>
+
+      <div class="parceria-lista" style="margin-top:4rem;">
+        <div class="parceria-item">
+          <div class="parceria-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+          </div>
+          <div>
+            <div class="parceria-titulo">Diagnóstico da demanda</div>
+            <div class="parceria-desc">Análise do contexto real das famílias atendidas pela SEDPcD: público de baixa
+              renda, acesso desigual a informação, sobrecarga emocional no momento do diagnóstico. O levantamento
+              definiu o tom, a linguagem e o formato antes de qualquer decisão de conteúdo.</div>
+          </div>
+        </div>
+        <div class="parceria-item">
+          <div class="parceria-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+            </svg>
+          </div>
+          <div>
+            <div class="parceria-titulo">Estrutura narrativa como decisão pedagógica</div>
+            <div class="parceria-desc">A escolha pelo storytelling em vez do formato manual ou curso foi a principal
+              ruptura do projeto. Os 5 capítulos foram mapeados para momentos emocionais específicos da jornada
+              familiar: da primeira intuição até a celebração das conquistas. A sequência narrativa determina quando
+              cada informação técnica aparece.</div>
+          </div>
+        </div>
+        <div class="parceria-item">
+          <div class="parceria-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <div>
+            <div class="parceria-titulo">Roteiro dos 11 vídeos</div>
+            <div class="parceria-desc">Cada vídeo foi roteirizado para um ponto específico da narrativa, respeitando o
+              estado emocional do leitor naquele momento. Os roteiros equilibram linguagem acessível com precisão
+              informativa, e foram desenvolvidos em parceria com Francine Boldan.</div>
+          </div>
+        </div>
+        <div class="parceria-item">
+          <div class="parceria-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <line x1="3" y1="9" x2="21" y2="9" />
+              <line x1="9" y1="21" x2="9" y2="9" />
+            </svg>
+          </div>
+          <div>
+            <div class="parceria-titulo">Especificação de acessibilidade e interface</div>
+            <div class="parceria-desc">Legendas, LIBRAS e audiodescrição foram especificadas desde o planejamento,
+              integradas à estrutura de produção dos vídeos. A interatividade contextual foi projetada para reduzir
+              sobrecarga cognitiva: informações complementares aparecem por demanda, sem interromper o fluxo da leitura.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ RESULTADOS ══ -->
+  <section class="sec sec-escura rev">
+    <div class="sec-max">
+      <span class="sec-label sec-label-claro">Impacto e aprendizados</span>
+      <h2 class="sec-titulo sec-titulo-claro">O que este projeto<br><em>demonstrou</em></h2>
+
+      <div class="resultados-qualitativos" style="margin-top:4rem;">
+        <div class="res-qual">
+          <div class="res-qual-titulo">Ruptura no formato</div>
+          <div class="res-qual-desc">O guia foi o primeiro material sobre TEA em storytelling interativo produzido pela
+            SEDPcD. Substituir o manual por narrativa foi uma escolha pedagógica, não estética: o formato acolhe antes
+            de informar, o que muda a disposição do leitor para receber conteúdo técnico.</div>
+        </div>
+        <div class="res-qual">
+          <div class="res-qual-titulo">Publicação institucional</div>
+          <div class="res-qual-desc">O guia está disponível no site da Secretaria dos Direitos da Pessoa com Deficiência
+            e na plataforma da Univesp, acessível gratuitamente para toda a rede pública paulista.</div>
+        </div>
+        <div class="res-qual">
+          <div class="res-qual-titulo">Expertise e experiência vivida</div>
+          <div class="res-qual-desc">A combinação entre conhecimento técnico e experiência materna de Francine Boldan
+            resultou em vídeos com uma qualidade raramente encontrada em materiais educativos de saúde pública: precisão
+            informativa sem distância emocional.</div>
+        </div>
+        <div class="res-qual">
+          <div class="res-qual-titulo">Acessibilidade desde o início</div>
+          <div class="res-qual-desc">Legendas, LIBRAS e audiodescrição foram especificadas no planejamento, não
+            acrescentadas ao fim. Em um material para famílias de pessoas com deficiência, tratar acessibilidade como
+            etapa final seria uma contradição estrutural.</div>
+        </div>
+      </div>
+
+      <!-- LINK AO VIVO -->
+      <div class="live-banner">
+        <div>
+          <div class="live-texto">Acesse o guia completo<br>no repositório da Univesp</div>
+          <div class="live-sub">apps.univesp.br/repositorio/jornada-de-clara-e-lucas</div>
+        </div>
+        <a class="live-btn" href="https://apps.univesp.br/repositorio/jornada-de-clara-e-lucas/" target="_blank"
+          rel="noopener">
+          Abrir o projeto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FAIXA DE IMPACTO ══ -->
+  <div style="background:var(--violeta); padding:6rem 4.5rem; text-align:center;">
+    <p style="font-size:.65rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(242,239,234,.35); margin-bottom:2rem;"
+      class="rev">Síntese do projeto</p>
+    <p style="font-family:var(--titulo); font-size:clamp(1.6rem,2.8vw,2.6rem); font-style:italic; color:var(--creme); line-height:1.45; max-width:820px; margin:0 auto;"
+      class="rev rev-d1">
+      Um guia sobre TEA não começa pela lista de sintomas. Começa por <em style="color:var(--ambar);">reconhecer o que a
+        família já sente</em> antes de saber o nome do que está vivendo.
+    </p>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="footer-case">
+    <div class="footer-case-inner">
+      <div class="footer-case-volta">Voltar ao portfólio</div>
+      <nav class="footer-case-nav">
+        <a href="index.html">Portfólio</a>
+        <a href="index.html#cases">Outros projetos</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Barra de progresso
+    window.addEventListener('scroll', () => {
+      const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      document.getElementById('prog').style.width = (p * 100) + '%';
+    });
+
+    // Revelar ao scroll
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('vis'), i * 60);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+  </script>
+</body>
+
+</html>

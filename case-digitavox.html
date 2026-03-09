@@ -1,0 +1,1075 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0058)file:///C:/Users/lacca/Downloads/case-digitavox%20(1).html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigitaVox USP Crianças · Claudia Mori</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link  rel="stylesheet">
+<style>
+:root {
+  --preto:     #0F1117;
+  --teal:      #1A4A52;
+  --teal-vivo: #1E6070;
+  --coral:     #E8734A;
+  --coral-pale:#F0A070;
+  --areia:     #D6C6B4;
+  --creme:     #F0EBE3;
+  --fundo:    #141414;
+  --fundo-alt:#1E1E1C;
+  --texto:    #EFE9E1;
+  --t60:      rgba(239,233,225,.65);
+  --t35:      rgba(239,233,225,.35);
+  --t12:      rgba(239,233,225,.1);
+  --titulo:    'Playfair Display', Georgia, serif;
+  --corpo:     'Jost', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--corpo);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ANIMAÇÕES */
+.rev {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.rev.vis { opacity: 1; transform: none; }
+.rev-d1 { transition-delay: .1s; }
+.rev-d2 { transition-delay: .2s; }
+.rev-d3 { transition-delay: .3s; }
+.rev-d4 { transition-delay: .4s; }
+
+/* PROGRESSO */
+#prog {
+  position: fixed; top: 0; left: 0; z-index: 999;
+  height: 3px; width: 0;
+  background: var(--coral);
+  transition: width .1s linear;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3.5rem;
+  background: rgba(20,20,20,.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--t12);
+}
+.nav-back {
+  display: flex; align-items: center; gap: .7rem;
+  text-decoration: none; color: var(--t60);
+  font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+  transition: color .2s;
+}
+.nav-back:hover { color: var(--creme); }
+.nav-back svg { width: 14px; height: 14px; }
+.nav-projeto {
+  font-family: var(--titulo);
+  font-size: 1rem; font-style: italic;
+  color: var(--creme);
+}
+.nav-cta {
+  font-size: .65rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: var(--preto);
+  padding: .55rem 1.5rem;
+  text-decoration: none;
+  transition: background .2s;
+}
+.nav-cta:hover { background: var(--teal); }
+
+/* ══ HERO ══ */
+.hero-case {
+  padding-top: 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 88vh;
+}
+.hero-esq {
+  background: var(--teal);
+  padding: 6rem 4.5rem;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.hero-esq::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 420px; height: 420px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(26,74,82,.5) 0%, transparent 70%);
+  pointer-events: none;
+}
+/* estrelas decorativas */
+.hero-esq::after {
+  content: '✦ ✦ ✦';
+  position: absolute; bottom: 6rem; right: 3rem;
+  font-size: .55rem; letter-spacing: .5rem;
+  color: rgba(240,160,112,.25);
+  pointer-events: none;
+}
+.hero-num {
+  font-family: var(--titulo);
+  font-size: 10rem; font-weight: 400; font-style: italic;
+  color: rgba(240,235,227,.05);
+  line-height: 1; position: absolute; top: 3rem; right: 2.5rem;
+}
+.hero-cat {
+  font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--coral-pale); font-weight: 500; margin-bottom: 2rem;
+}
+.hero-titulo-case {
+  font-family: var(--titulo);
+  font-size: clamp(2.8rem, 4.5vw, 5rem);
+  font-weight: 400; line-height: .95;
+  color: var(--creme); margin-bottom: 1.8rem;
+}
+.hero-titulo-case em {
+  font-style: italic; display: block;
+  color: var(--coral-pale);
+}
+.hero-sub {
+  font-size: .95rem; font-weight: 300;
+  color: rgba(240,235,227,.82);
+  line-height: 1.9; max-width: 380px;
+}
+.hero-meta {
+  display: flex; gap: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(240,235,227,.1);
+}
+.meta-item { display: flex; flex-direction: column; gap: .3rem; }
+.meta-label {
+  font-size: .58rem; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(240,235,227,.62);
+}
+.meta-valor { font-size: .8rem; color: rgba(240,235,227,.7); font-weight: 400; }
+
+/* badge em andamento */
+.badge-andamento {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: rgba(240,160,112,.15);
+  border: 1px solid rgba(240,160,112,.4);
+  padding: .35rem 1rem;
+  font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--coral-pale);
+  margin-bottom: 1.8rem;
+}
+.badge-andamento::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--coral-pale);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .3; }
+}
+
+.hero-dir {
+  background: #1A1A18;
+  padding: 6rem 4.5rem;
+  display: flex; flex-direction: column; justify-content: center; gap: 2.5rem;
+}
+.resumo-label {
+  font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--coral); font-weight: 500;
+  margin-bottom: 1rem; display: block;
+}
+.resumo-frase {
+  font-family: var(--titulo);
+  font-size: 1.85rem; font-weight: 400; font-style: italic;
+  color: var(--creme); line-height: 1.45;
+  border-left: 3px solid var(--coral-pale);
+  padding-left: 1.8rem;
+}
+.hero-nums {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border: 1px solid var(--t12);
+}
+.hero-n {
+  padding: 1.8rem 2rem;
+  border-right: 1px solid var(--t12);
+  border-bottom: 1px solid var(--t12);
+}
+.hero-n:nth-child(even) { border-right: none; }
+.hero-n:nth-child(3), .hero-n:nth-child(4) { border-bottom: none; }
+.n-val {
+  font-family: var(--titulo);
+  font-size: 2.6rem; font-style: italic;
+  color: var(--coral); line-height: 1;
+}
+.n-desc { font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color: rgba(239,233,225,.45); margin-top: .4rem;
+}
+
+/* ══ SEÇÕES COMUNS ══ */
+.sec { padding: 7rem 4.5rem; }
+.sec-alt { background: var(--fundo-alt); }
+.sec-escura { background: var(--teal); }
+.sec-max { max-width: 1200px; margin: 0 auto; }
+
+.sec-label {
+  font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--coral); font-weight: 500;
+  display: block; margin-bottom: .8rem;
+}
+.sec-label-claro { color: rgba(240,235,227,.7); }
+.sec-titulo {
+  font-family: var(--titulo);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 400; line-height: 1.1; color: var(--creme);
+}
+.sec-titulo em { font-style: italic; color: #4CA8B8; }
+.sec-titulo-claro { color: var(--creme); }
+.sec-titulo-claro em { color: var(--areia); }
+
+.corpo-texto {
+  font-size: .95rem; font-weight: 300;
+  line-height: 1.9; color: var(--t60);
+  max-width: 640px;
+}
+.corpo-texto-claro { color: rgba(240,235,227,.85); }
+
+/* ══ CONTEXTO ══ */
+.contexto-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: start;
+  margin-top: 4rem;
+}
+.portaria-bloco {
+  background: var(--teal);
+  padding: 2.5rem;
+  position: relative;
+}
+.portaria-bloco::before {
+  content: '◈';
+  position: absolute; top: 1.5rem; right: 2rem;
+  font-family: var(--titulo); font-size: 3.5rem;
+  color: rgba(240,160,112,.2); line-height: 1;
+}
+.portaria-titulo {
+  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--coral-pale); margin-bottom: 1.2rem;
+}
+.portaria-texto {
+  font-size: .9rem; color: rgba(240,235,227,.75);
+  line-height: 1.8;
+}
+.portaria-cod {
+  display: inline-block; margin-top: 1.2rem;
+  font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--coral-pale); border-top: 1px solid rgba(240,160,112,.3);
+  padding-top: .6rem;
+}
+
+.obj-lista { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
+.obj-item { display: flex; gap: 1.2rem; align-items: flex-start; }
+.obj-num {
+  font-family: var(--titulo); font-size: 1.5rem; font-style: italic;
+  color: var(--coral-pale); line-height: 1; flex-shrink: 0;
+  min-width: 2rem;
+}
+.obj-desc { font-size: .9rem; color: var(--t60); line-height: 1.7; }
+.obj-titulo { font-weight: 500; color: var(--creme); display: block; margin-bottom: .3rem; }
+
+/* ══ DESTAQUE DARK ══ */
+.escola-destaque {
+  background: var(--preto);
+  padding: 5rem 4.5rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+}
+.escola-frase {
+  font-family: var(--titulo);
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+  font-weight: 400; font-style: italic;
+  color: var(--creme); line-height: 1.4;
+  margin-bottom: 1.8rem;
+}
+.escola-frase span { color: var(--coral-pale); }
+.escola-p {
+  font-size: .9rem; color: rgba(240,235,227,.85);
+  line-height: 1.85; margin-bottom: 1.2rem;
+}
+.escola-nome {
+  font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--coral-pale);
+}
+.escola-placeholder {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  height: 340px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 1rem; padding: 2rem;
+}
+.escola-icon {
+  width: 48px; height: 48px;
+  border: 1.5px solid rgba(240,160,112,.5);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.escola-icon svg { width: 20px; height: 20px; stroke: var(--coral-pale); fill: none; stroke-width: 1.5; }
+.escola-placeholder-txt {
+  font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(240,235,227,.6); text-align: center;
+}
+
+/* ══ ESTRATÉGIAS / CONTRIBUIÇÕES ══ */
+.estrategias-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-top: 4rem;
+}
+.estrategia { background: var(--fundo);
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--t12);
+  position: relative;
+  transition: background .2s;
+}
+.estrategia:hover { background: var(--fundo-alt); }
+.est-num {
+  font-family: var(--titulo); font-size: 3rem;
+  font-style: italic; color: rgba(212,148,91,.45);
+  line-height: 1; margin-bottom: 1rem;
+}
+.est-titulo {
+  font-family: var(--titulo); font-size: 1.1rem;
+  font-weight: 500; color: #4CA8B8;
+  margin-bottom: .8rem; line-height: 1.3;
+}
+.est-desc {
+  font-size: .85rem; color: var(--t60); line-height: 1.75;
+}
+.est-tag {
+  display: inline-block; margin-top: 1.2rem;
+  font-size: .58rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--coral);
+  border: 1px solid rgba(232,115,74,.3);
+  padding: .25rem .7rem;
+}
+
+/* ══ STELLA · STORYTELLING ══ */
+.marina-sec {
+  background: var(--teal);
+  padding: 7rem 4.5rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6rem; align-items: center;
+}
+.marina-quote {
+  position: relative; padding-left: 2rem;
+}
+.marina-quote::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: var(--coral-pale);
+}
+.marina-q-txt {
+  font-family: var(--titulo);
+  font-size: clamp(1.5rem, 2.2vw, 2.1rem);
+  font-weight: 400; font-style: italic;
+  color: var(--creme); line-height: 1.5;
+}
+.marina-q-txt span { color: var(--coral-pale); }
+.marina-q-fonte {
+  display: block; margin-top: 1.5rem;
+  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(240,235,227,.65);
+}
+.marina-titulo {
+  font-family: var(--titulo);
+  font-size: 2rem; font-weight: 400;
+  color: var(--creme); margin-bottom: 1.2rem; line-height: 1.2;
+}
+.marina-titulo em { font-style: italic; color: var(--coral-pale); }
+.marina-p {
+  font-size: .9rem; color: rgba(240,235,227,.85);
+  line-height: 1.85; margin-bottom: 1.4rem;
+}
+.marina-tags {
+  display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.8rem;
+}
+.m-tag {
+  font-size: .6rem; letter-spacing: .12em; text-transform: uppercase;
+  padding: .4rem 1rem;
+  border: 1px solid rgba(240,160,112,.4);
+  color: var(--coral-pale);
+}
+
+/* ══ PUBLICAÇÕES ══ */
+.pub-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 3rem; margin-top: 4rem;
+}
+.pub-card {
+  border: 1px solid var(--t12);
+  position: relative;
+  transition: border-color .2s;
+}
+.pub-card:hover { border-color: var(--coral-pale); }
+.pub-topo {
+  background: var(--teal);
+  padding: 2rem 2.5rem;
+  position: relative;
+}
+.pub-tipo {
+  font-size: .58rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--coral-pale); margin-bottom: .8rem;
+}
+.pub-evento {
+  font-family: var(--titulo);
+  font-size: 1rem; font-weight: 400;
+  color: var(--creme); line-height: 1.4;
+}
+.pub-corpo {
+  padding: 2rem 2.5rem;
+}
+.pub-titulo-trabalho {
+  font-family: var(--titulo);
+  font-size: 1.05rem; font-weight: 500;
+  color: var(--creme); margin-bottom: 1rem; line-height: 1.4;
+  font-style: italic;
+}
+.pub-autores {
+  font-size: .78rem; color: var(--t60); line-height: 1.7;
+  margin-bottom: 1.2rem;
+}
+.pub-autores strong { color: var(--coral); }
+.pub-meta {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+}
+.pub-meta-item {
+  font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--t35);
+  padding: .3rem .8rem;
+  border: 1px solid var(--t12);
+}
+.pub-aprovado {
+  display: inline-block;
+  font-size: .6rem; letter-spacing: .12em; text-transform: uppercase;
+  color: #2a7a3a;
+  background: rgba(42,122,58,.08);
+  border: 1px solid rgba(42,122,58,.25);
+  padding: .3rem .9rem;
+}
+
+/* ══ FUNDAMENTOS ══ */
+.dados-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; margin-top: 3.5rem;
+}
+.dado {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid var(--t12);
+  border-bottom: 1px solid var(--t12);
+  position: relative;
+}
+.dado:nth-child(4n) { border-right: none; }
+.dado-val {
+  font-family: var(--titulo);
+  font-size: 3.8rem; font-style: italic;
+  color: #4CA8B8; line-height: 1;
+}
+.dado-un {
+  font-size: 1.4rem; color: var(--coral);
+}
+.dado-label {
+  font-size: .65rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--t35); margin-top: .8rem; line-height: 1.5;
+}
+.dado-sub {
+  font-size: .78rem; color: var(--t60);
+  margin-top: .5rem; line-height: 1.5;
+}
+
+/* ══ APRENDIZADOS ══ */
+.aprend-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2rem; margin-top: 4rem;
+}
+.aprend {
+  padding: 2.5rem;
+  background: var(--fundo);
+  border-top: 3px solid var(--teal);
+}
+.aprend-cat {
+  font-size: .6rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--coral); margin-bottom: .8rem;
+}
+.aprend-titulo {
+  font-family: var(--titulo); font-size: 1rem;
+  font-weight: 500; color: var(--creme);
+  margin-bottom: .8rem; line-height: 1.35;
+}
+.aprend-desc {
+  font-size: .85rem; color: var(--t60); line-height: 1.75;
+}
+
+/* ══ IMPACTO FINAL ══ */
+.impacto-faixa {
+  background: var(--preto);
+  padding: 6rem 4.5rem;
+  text-align: center;
+}
+.impacto-subtitulo {
+  font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--coral-pale); margin-bottom: 1.2rem;
+}
+.impacto-frase {
+  font-family: var(--titulo);
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-weight: 400; font-style: italic;
+  color: var(--creme); line-height: 1.3;
+  max-width: 820px; margin: 0 auto;
+}
+.impacto-frase span { color: var(--coral-pale); }
+
+/* ══ FOOTER ══ */
+.footer-case {
+  background: var(--teal);
+  padding: 3rem 4.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-volta {
+  font-size: .65rem; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(240,235,227,.4);
+}
+.footer-nav { display: flex; gap: 2.5rem; }
+.footer-nav a {
+  font-size: .65rem; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(240,235,227,.55); text-decoration: none;
+  transition: color .2s;
+}
+.footer-nav a:hover { color: var(--coral-pale); }
+
+/* ══ RESPONSIVO ══ */
+@media (max-width: 900px) {
+  .hero-case, .contexto-grid, .escola-destaque,
+  .marina-sec, .pub-grid { grid-template-columns: 1fr; }
+  .estrategias-grid, .dados-grid, .aprend-grid { grid-template-columns: 1fr; }
+  .sec { padding: 4rem 2rem; }
+  nav { padding: 0 1.5rem; }
+  .nav-projeto { display: none; }
+}
+</style>
+<style type="text/css" id="operaUserStyle"></style></head>
+<body>
+
+<div id="prog" style="width: 56.1018%;"></div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-back" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+    Portfólio
+  </a>
+  <span class="nav-projeto">DigitaVox USP Crianças</span>
+  <a class="nav-cta" href="index.html#contato">Contato</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero-case">
+  <div class="hero-esq">
+    <span class="hero-num">03</span>
+    <div>
+      <div class="badge-andamento">Projeto em andamento</div>
+      <p class="hero-cat">Design Instrucional · Tecnologia Assistiva · Gamificação</p>
+      <h1 class="hero-titulo-case">
+        DigitaVox
+        <em>Exploradores Espaciais</em>
+      </h1>
+      <p class="hero-sub">
+        Software gamificado de digitação para crianças de 8 a 12 anos com deficiência visual, com fundamentação teórica rigorosa em neurociência, linguística e pedagogia.
+      </p>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span class="meta-label">Instituição</span>
+        <span class="meta-valor">USP · CpodV</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Período</span>
+        <span class="meta-valor">2024 – presente</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Natureza</span>
+        <span class="meta-valor">Pesquisa Aplicada</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-dir">
+    <div>
+      <span class="resumo-label">Questão central do projeto</span>
+      <p class="resumo-frase">
+        Como desenvolver digitação para crianças cegas ou com baixa visão, de forma eficaz, motivadora e adequada ao seu desenvolvimento?
+      </p>
+    </div>
+    <div class="hero-nums">
+      <div class="hero-n">
+        <div class="n-val">5</div>
+        <div class="n-desc">Módulos pedagógicos</div>
+      </div>
+      <div class="hero-n">
+        <div class="n-val">27<span style="font-size:1.4rem">+</span></div>
+        <div class="n-desc">Lições projetadas</div>
+      </div>
+      <div class="hero-n">
+        <div class="n-val">2</div>
+        <div class="n-desc">Publicações científicas</div>
+      </div>
+      <div class="hero-n">
+        <div class="n-val">8–12</div>
+        <div class="n-desc">Anos: faixa etária do público</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTEXTO ══ -->
+<section class="sec">
+  <div class="sec-max">
+    <span class="sec-label rev">O ponto de partida</span>
+    <h2 class="sec-titulo rev rev-d1">
+      Uma tecnologia que <em>democratizou</em> o acesso<br>e precisava alcançar as crianças
+    </h2>
+    <div class="contexto-grid">
+      <div class="rev rev-d2">
+        <div class="portaria-bloco">
+          <p class="portaria-titulo">O DigitaVox USP</p>
+          <p class="portaria-texto">
+            O DigitaVox foi criado por Neno Albernaz e aprimorado pelo Prof. Dr. Paulo Eduardo Capel Cardoso na Universidade de São Paulo. O DigitaVox USP é um software gratuito de digitação para pessoas com deficiência visual que, em 2024, substituiu soluções que custavam até R$ 16.000 por uma alternativa que funciona em Android, iOS, PC e Mac com um investimento de R$ 30 em hardware. Lançado no Conselho Universitário da USP, tornou-se referência em democratização de tecnologia assistiva no Brasil.
+          </p>
+          <span class="portaria-cod">CRAI ACESSA · USP · Lançado em abril de 2024</span>
+        </div>
+      </div>
+      <div class="rev rev-d3">
+        <p class="corpo-texto" style="margin-bottom:2rem;">
+          A pergunta que deu origem ao projeto DigitaVox USP Crianças era direta: crianças com deficiência visual precisam dominar a digitação para ter autonomia digital. Os programas existentes são técnicos, áridos e não foram projetados pensando no desenvolvimento infantil.
+        </p>
+        <p class="corpo-texto">
+          A proposta foi criar uma versão adaptada do DigitaVox USP para crianças de 8 a 12 anos cegas ou com baixa visão, fundamentada em pesquisa científica e desenvolvida em equipe multidisciplinar que reúne linguistas, fonoaudiólogos, engenheiros e designers instrucionais da USP.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MEU PAPEL ══ -->
+<section class="sec sec-alt">
+  <div class="sec-max">
+    <span class="sec-label rev">Contribuições como DI</span>
+    <h2 class="sec-titulo rev rev-d1">Três frentes de <em>trabalho integrado</em></h2>
+    <div class="contexto-grid" style="margin-top:3rem;">
+      <ul class="obj-lista rev rev-d2">
+        <li class="obj-item">
+          <span class="obj-num">01</span>
+          <div class="obj-desc">
+            <span class="obj-titulo">Corpus linguístico infantil</span>
+            Análise de dados textuais de materiais didáticos do ensino fundamental para identificar o vocabulário mais frequente e produtivo no universo das crianças de 8 a 12 anos. O corpus fundamenta a seleção de palavras usadas nos exercícios de digitação, garantindo que cada palavra praticada seja familiar, geradora de imagem mental e conectada à experiência real das crianças.
+          </div>
+        </li>
+        <li class="obj-item">
+          <span class="obj-num">02</span>
+          <div class="obj-desc">
+            <span class="obj-titulo">Gamificação com fundamentação teórica</span>
+            Design do sistema de gamificação baseado na Teoria do Flow (Csikszentmihalyi) e nas teorias de desenvolvimento cognitivo de Piaget e Vygotsky. Estrutura de progressão em 5 módulos com sistema de recompensas: Poeira Estelar como moeda de pontuação, 15 aliens colecionáveis, 4 minijogos e sessões de 5 a 10 minutos calibradas à capacidade de atenção infantil.
+          </div>
+        </li>
+        <li class="obj-item">
+          <span class="obj-num">03</span>
+          <div class="obj-desc">
+            <span class="obj-titulo">Storytelling e design narrativo</span>
+            Criação da narrativa "Exploradores Espaciais" e desenvolvimento dos personagens mediadores que estruturam toda a experiência. A metáfora espacial foi escolhida por permitir representações mentais sem dependência de referência visual: cada tecla dominada é um planeta explorado, cada módulo concluído é uma missão galáctica cumprida.
+          </div>
+        </li>
+      </ul>
+      <div class="rev rev-d3">
+        <p class="corpo-texto" style="margin-bottom: 1.5rem;">
+          O projeto adota a metodologia Design Science Research (DSR), que orienta o desenvolvimento de artefatos educacionais em ciclos iterativos de análise, design, prototipagem, teste e refinamento, garantindo coerência entre fundamento teórico e produto final.
+        </p>
+        <p class="corpo-texto" style="margin-bottom: 1.5rem;">
+          A equipe é coordenada pelo Prof. Dr. Paulo Eduardo Capel Cardoso (USP/CpodV) e reúne a Profa. Dra. Maria Célia Lima-Hernandes (linguística), Amanda de Oliveira Labigalini, Ana Paula Zerbato e outros colaboradores especializados.
+        </p>
+        <p class="corpo-texto">
+          Pesquisas com usuários no Lar das Moças Cegas informam as decisões de design, garantindo que o produto seja desenvolvido <em>com</em> o público.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ METODOLOGIA APROFUNDADA ══ -->
+<div style="background:var(--preto); padding:6rem 4.5rem;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <span style="font-size:.65rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(240,160,112,.8); display:block; margin-bottom:1rem;" class="rev">Metodologia</span>
+    <h2 style="font-family:var(--titulo); font-size:clamp(1.8rem,2.8vw,2.6rem); font-weight:400; font-style:italic; color:var(--creme); line-height:1.3; margin-bottom:.8rem;" class="rev rev-d1">
+      Cinco camadas metodológicas que <span style="color:rgba(240,160,112,.9);">sustentam cada decisão de design</span>
+    </h2>
+    <p style="font-size:.85rem; color:rgba(240,235,227,.45); margin-bottom:3.5rem; max-width:620px;" class="rev rev-d2">A metodologia não é decorativa. Cada escolha, qual palavra, qual som, qual progressão, tem resposta explícita numa das cinco camadas abaixo.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-bottom:2px;">
+      <div style="background:rgba(255,255,255,.04); padding:2.5rem;" class="rev rev-d1">
+        <p style="font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(240,160,112,.7); margin-bottom:.8rem;">01</p>
+        <p style="font-family:var(--titulo); font-size:1.05rem; color:var(--creme); margin-bottom:1rem; font-weight:500; line-height:1.3;">Pedagogia Audio-First</p>
+        <p style="font-size:.82rem; color:rgba(240,235,227,.55); line-height:1.75;">O objetivo central não é velocidade, mas a construção de um mapa mental do teclado. Para uma criança com deficiência visual, conhecer a localização precisa de cada tecla é pré-requisito para usar qualquer tecnologia assistiva. Todo feedback é sonoro, acertos, erros e progresso chegam pelo áudio, em quatro camadas simultâneas: instrução, confirmação, emoção e narrativa.</p>
+      </div>
+      <div style="background:rgba(255,255,255,.04); padding:2.5rem;" class="rev rev-d2">
+        <p style="font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(240,160,112,.7); margin-bottom:.8rem;">02</p>
+        <p style="font-family:var(--titulo); font-size:1.05rem; color:var(--creme); margin-bottom:1rem; font-weight:500; line-height:1.3;">Neuroplasticidade e Aprendizagem</p>
+        <p style="font-size:.82rem; color:rgba(240,235,227,.55); line-height:1.75;">O córtex visual de pessoas cegas se reorganiza para funções táteis e auditivas (Lomber e Eggermont, 2006). Os exercícios exploram memória espacial e motora, começando pelas referências táteis das teclas F e J e expandindo em camadas progressivas. A progressão respeita a consolidação de cada nível antes de avançar, por isso o sistema avança por competência, não por tempo.</p>
+      </div>
+      <div style="background:rgba(255,255,255,.04); padding:2.5rem;" class="rev rev-d3">
+        <p style="font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(240,160,112,.7); margin-bottom:.8rem;">03</p>
+        <p style="font-family:var(--titulo); font-size:1.05rem; color:var(--creme); margin-bottom:1rem; font-weight:500; line-height:1.3;">Corpus Linguístico Infantil</p>
+        <p style="font-size:.82rem; color:rgba(240,235,227,.55); line-height:1.75;">As palavras dos exercícios foram selecionadas por pipeline de processamento linguístico computacional (Python + spaCy), a partir de textos didáticos do ensino fundamental. Critérios como estrutura silábica, presença de encontros consonantais e frequência no universo infantil definem quando cada palavra entra na sequência. As 150 palavras mais frequentes foram classificadas e distribuídas nos 5 módulos do currículo.</p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;" class="rev rev-d2">
+      <div style="background:rgba(255,255,255,.04); padding:2.5rem;">
+        <p style="font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(240,160,112,.7); margin-bottom:.8rem;">04</p>
+        <p style="font-family:var(--titulo); font-size:1.05rem; color:var(--creme); margin-bottom:1rem; font-weight:500; line-height:1.3;">Fluência Verbal e Desenvolvimento Infantil</p>
+        <p style="font-size:.82rem; color:rgba(240,235,227,.55); line-height:1.75;">Crianças têm melhor desempenho em fluência semântica do que fonológica (Fumagalli et al., 2017). Crianças com baixa visão apresentam processos fonológicos persistentes até os 9 anos (Nunes e Lima, 2015). Esses dados informam a ordem das lições: estruturas silábicas complexas aparecem apenas nas etapas avançadas, quando a base motora já está consolidada. A sequência não é arbitrária, é linguisticamente fundamentada.</p>
+      </div>
+      <div style="background:rgba(255,255,255,.04); padding:2.5rem;">
+        <p style="font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(240,160,112,.7); margin-bottom:.8rem;">05</p>
+        <p style="font-family:var(--titulo); font-size:1.05rem; color:var(--creme); margin-bottom:1rem; font-weight:500; line-height:1.3;">Design Science Research</p>
+        <p style="font-size:.82rem; color:rgba(240,235,227,.55); line-height:1.75;">A metodologia DSR organiza o projeto em ciclos iterativos: análise teórica, especificação técnica, prototipagem e validação com usuários reais. O estudo piloto prevê 30 crianças e 30 adolescentes cegos em instituições parceiras do CpodV, aguardando aprovação do Comitê de Ética (submetido em dezembro de 2025). Cada ciclo alimenta o seguinte com dados empíricos, garantindo que o produto final seja resultado de pesquisa, não de suposição.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,.07);" class="rev">
+      <p style="font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(240,160,112,.4);">DSR · Neurociência · Linguística Computacional · Desenvolvimento Infantil · Audio-First</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONTRIBUIÇÕES DETALHADAS ══ -->
+<section class="sec">
+  <div class="sec-max">
+    <span class="sec-label rev">Decisões de design instrucional</span>
+    <h2 class="sec-titulo rev rev-d1">O que a teoria <em>justifica na prática</em></h2>
+    <div class="estrategias-grid">
+      <div class="estrategia rev">
+        <div class="est-num">01</div>
+        <div class="est-titulo">Método Linha Base</div>
+        <p class="est-desc">O curso segue o Método Linha Base desenvolvido por Neno Albernaz (2011), começando pelas teclas F e J (com marcação tátil de fábrica), dominando a linha central e expandindo progressivamente para as demais. A progressão respeita a consolidação de memória motora tátil antes de avançar.</p>
+        <span class="est-tag">Neuroplasticidade · Memória tátil</span>
+      </div>
+      <div class="estrategia rev rev-d1">
+        <div class="est-num">02</div>
+        <div class="est-titulo">Áudio multicamadas</div>
+        <p class="est-desc">Cada momento do jogo opera com 4 camadas sonoras simultâneas: feedback técnico (confirmação de tecla), feedback narrativo (reação dos personagens), feedback emocional (trilha que responde ao desempenho) e informação instrucional. O áudio substitui a interface visual sem sobrecarregar a memória de trabalho.</p>
+        <span class="est-tag">Processamento sensorial · Flow</span>
+      </div>
+      <div class="estrategia rev rev-d2">
+        <div class="est-num">03</div>
+        <div class="est-titulo">Vocabulário do corpus</div>
+        <p class="est-desc">As palavras usadas nos exercícios foram extraídas de análise de corpus de textos didáticos do ensino fundamental: palavras de alta frequência e produtividade no universo infantil. Palavras como "planeta", "estrela" e "nave" têm dupla função: são familiares à criança e integram naturalmente a narrativa espacial.</p>
+        <span class="est-tag">Corpus linguístico · Imagem mental</span>
+      </div>
+      <div class="estrategia rev rev-d3">
+        <div class="est-num">04</div>
+        <div class="est-titulo">Sistema de progressão</div>
+        <p class="est-desc">A jornada de Cadete a Capitão Espacial cria uma estrutura de identidade: a criança aprende a digitar e constrói uma trajetória. A progressão entre módulos é mediada por conquistas, não por tempo: o sistema avança quando a competência está consolidada, respeitando o ritmo individual.</p>
+        <span class="est-tag">Vygotsky · Zona de desenvolvimento proximal</span>
+      </div>
+      <div class="estrategia rev">
+        <div class="est-num">05</div>
+        <div class="est-titulo">Metáforas sem dependência visual</div>
+        <p class="est-desc">O espaço sideral foi escolhido por uma razão pedagógica específica: permite criar metáforas orientacionais e espaciais sem depender de referências visuais que crianças cegas não possuem. "Planetas" e "sistemas solares" são conceitos amplamente difundidos por audiodescrições, livros e experiências auditivas.</p>
+        <span class="est-tag">Deficiência visual · Cognição espacial</span>
+      </div>
+      <div class="estrategia rev rev-d1">
+        <div class="est-num">06</div>
+        <div class="est-titulo">Sessões curtas e cadenciadas</div>
+        <p class="est-desc">As lições foram projetadas para durar entre 5 e 10 minutos, calibradas à janela de atenção sustentada de crianças de 8 a 12 anos. A estrutura de minijogos intercalados com exercícios técnicos alterna a carga cognitiva e mantém o engajamento sem fadiga perceptual.</p>
+        <span class="est-tag">Desenvolvimento cognitivo · Piaget</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PERSONAGENS · STORYTELLING ══ -->
+<section style="display:block; padding:7rem 4.5rem; background:var(--teal);">
+  <div style="max-width:1200px; margin:0 auto;">
+
+    <div style="margin-bottom:5rem;" class="rev">
+      <span class="sec-label" style="color:rgba(240,160,112,.8);">Design narrativo</span>
+      <h2 class="marina-titulo" style="font-size:clamp(2rem,3.2vw,3rem); margin-bottom:1rem;">
+        Os personagens que <em>tornam o invisível navegável</em>
+      </h2>
+      <p class="marina-p" style="max-width:660px;">
+        Cada personagem tem função pedagógica precisa. A separação entre mediação emocional, instrução técnica e autoridade narrativa é uma decisão de design, não uma escolha estética.
+      </p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:3rem; align-items:end;">
+
+      <!-- 01 · Stella -->
+      <div class="rev rev-d1" style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+        <div style="
+          width:100%; max-width:240px; margin:0 auto 0;
+          background: linear-gradient(180deg, rgba(26,74,82,0.6) 0%, rgba(212,148,91,0.08) 100%);
+          border: 1px solid rgba(212,148,91,0.3);
+          border-radius:4px 4px 0 0;
+          border-bottom:none;
+          padding: 2rem 1.5rem 0;
+          position:relative;
+          overflow:hidden;
+        ">
+          <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, rgba(212,148,91,0.7), transparent);"></div>
+          <img src="assets/case-digitavox-img1.webp" alt="Stella, personagem principal do DigitaVox USP Crianças"
+            style="width:100%; height:auto; display:block; mix-blend-mode:normal;">
+        </div>
+        <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(212,148,91,0.3); border-top:2px solid rgba(212,148,91,0.5); padding:1.5rem; width:100%; max-width:240px;">
+          <p style="font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(240,160,112,.9); margin-bottom:.4rem;">Personagem principal</p>
+          <p class="marina-titulo" style="font-size:1.2rem; margin-bottom:.7rem;">Stella</p>
+          <p class="marina-p" style="font-size:.8rem; margin-bottom:.8rem;">Guia encorajadora que inicia as missões e celebra cada conquista. Sustenta o vínculo afetivo da criança com o processo de aprendizagem.</p>
+          <div class="marina-tags" style="justify-content:center;">
+            <span class="m-tag">Vygotsky</span>
+            <span class="m-tag">Mediação emocional</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 · ZERO-1 — maior -->
+      <div class="rev rev-d2" style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+        <div style="
+          width:100%; max-width:300px; margin:0 auto 0;
+          background: linear-gradient(180deg, rgba(26,74,82,0.6) 0%, rgba(212,148,91,0.06) 100%);
+          border: 1px solid rgba(212,148,91,0.22);
+          border-radius:4px 4px 0 0;
+          border-bottom:none;
+          padding: 1.5rem 1rem 0;
+          position:relative;
+          overflow:hidden;
+        ">
+          <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, rgba(212,148,91,0.5), transparent);"></div>
+          <img src="assets/case-digitavox-img2.webp" alt="ZERO-1, robô assistente do DigitaVox USP Crianças"
+            style="width:100%; height:auto; display:block; mix-blend-mode:normal;">
+        </div>
+        <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(212,148,91,0.22); border-top:2px solid rgba(212,148,91,0.4); padding:1.5rem; width:100%; max-width:300px;">
+          <p style="font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(240,160,112,.7); margin-bottom:.4rem;">Assistente técnico</p>
+          <p class="marina-titulo" style="font-size:1.2rem; margin-bottom:.7rem;">ZERO-1</p>
+          <p class="marina-p" style="font-size:.8rem; margin-bottom:.8rem;">Computador de bordo com voz robótica. Cuida das instruções técnicas, separando emoção de instrução para reduzir a sobrecarga cognitiva.</p>
+          <div class="marina-tags" style="justify-content:center;">
+            <span class="m-tag">Carga cognitiva</span>
+            <span class="m-tag">Audio-First</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 · Comandante -->
+      <div class="rev rev-d3" style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+        <div style="
+          width:100%; max-width:240px; margin:0 auto 0;
+          background: linear-gradient(180deg, rgba(26,74,82,0.6) 0%, rgba(212,148,91,0.05) 100%);
+          border: 1px solid rgba(212,148,91,0.15);
+          border-radius:4px 4px 0 0;
+          border-bottom:none;
+          padding: 2rem 1.5rem 0;
+          position:relative;
+          overflow:hidden;
+        ">
+          <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, rgba(212,148,91,0.35), transparent);"></div>
+          <img src="assets/case-digitavox-img3.webp" alt="Comandante do DigitaVox USP Crianças"
+            style="width:100%; height:auto; display:block; mix-blend-mode:normal;">
+        </div>
+        <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(212,148,91,0.15); border-top:2px solid rgba(212,148,91,0.25); padding:1.5rem; width:100%; max-width:240px;">
+          <p style="font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(240,160,112,.5); margin-bottom:.4rem;">Autoridade máxima</p>
+          <p class="marina-titulo" style="font-size:1.2rem; margin-bottom:.7rem;">Comandante</p>
+          <p class="marina-p" style="font-size:.8rem; margin-bottom:.8rem;">Presença reservada para a formatura. Aparece apenas quando a criança conclui um módulo, ampliando o valor simbólico da conquista.</p>
+          <div class="marina-tags" style="justify-content:center;">
+            <span class="m-tag">Jornada do herói</span>
+            <span class="m-tag">Reforço simbólico</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="rev" style="margin-top:5rem; padding-top:3rem; border-top:1px solid rgba(255,255,255,.08); text-align:center;">
+      <p class="marina-q-txt" style="font-size:clamp(1.2rem,1.8vw,1.7rem); max-width:720px; margin:0 auto;">
+        "Cadete, sua missão começa agora. Cada tecla dominada é um <span>planeta conquistado</span>."
+      </p>
+      <span class="marina-q-fonte" style="margin-top:1rem;">Stella · personagem principal do DigitaVox USP Crianças</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ PUBLICAÇÕES ══ -->
+<section class="sec sec-alt">
+  <div class="sec-max">
+    <span class="sec-label rev">Produção científica</span>
+    <h2 class="sec-titulo rev rev-d1">Dois trabalhos <em>publicados</em></h2>
+    <p class="corpo-texto rev rev-d2" style="margin-top:1.2rem;">
+      Um projeto em andamento com pesquisa já reconhecida em dois eventos científicos de referência: um de âmbito internacional, outro organizado pela própria USP no contexto dos estudos sobre deficiência.
+    </p>
+
+    <div class="pub-grid">
+
+      <!-- Publicação 1 -->
+      <div class="pub-card rev rev-d2">
+        <div class="pub-topo">
+          <p class="pub-tipo">Comunicação oral</p>
+          <p class="pub-evento">II Congresso Internacional da Associação dos Programas de Português, Columbia University, City College (CUNY), Cornell University, NYU e Stony Brook University</p>
+        </div>
+        <div class="pub-corpo">
+          <p class="pub-titulo-trabalho">"Gamificando as estratégias de aprendizagem do processo de alfabetização"</p>
+          <p class="pub-autores">
+            <strong>Cláudia Mori</strong> · Maria Célia Lima-Hernandes · Paulo Capel Cardoso<br>
+            Universidade Virtual do Estado de São Paulo · Universidade de São Paulo / CpodV
+          </p>
+          <div class="pub-meta">
+            <span class="pub-meta-item">New York · EUA</span>
+            <span class="pub-meta-item">Congresso Internacional</span>
+          </div>
+          <p class="pub-aprovado" style="margin-top:1rem;">Trabalho aprovado</p>
+        </div>
+      </div>
+
+      <!-- Publicação 2 -->
+      <div class="pub-card rev rev-d3">
+        <div class="pub-topo">
+          <p class="pub-tipo">Pôster · Resumo simples</p>
+          <p class="pub-evento">I Congresso Internacional sobre Deficiência da USP, Diversidade, Direitos e Corpos: Participação Social e Barreiras no Mundo Contemporâneo</p>
+        </div>
+        <div class="pub-corpo">
+          <p class="pub-titulo-trabalho">"DIGITAVOX USP PARA CRIANÇAS"</p>
+          <p class="pub-autores">
+            Amanda de Oliveira Labigalini · Paulo Eduardo Capel Cardoso · Maria Célia Lima-Hernandes · Ana Paula Zerbato · <strong>Cláudia Mori</strong>
+          </p>
+          <div class="pub-meta">
+            <span class="pub-meta-item">Eixo 04, Tecnologias Assistivas</span>
+            <span class="pub-meta-item">Submissão 08/09/2025</span>
+            <span class="pub-aprovado">✓ Aprovado</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ FUNDAMENTOS NUMÉRICOS ══ -->
+<section class="sec">
+  <div class="sec-max">
+    <span class="sec-label rev">Arquitetura do curso</span>
+    <h2 class="sec-titulo rev rev-d1">Uma estrutura <em>projetada para crescer</em></h2>
+    <div class="dados-grid rev rev-d2">
+      <div class="dado">
+        <div class="dado-val">5</div>
+        <div class="dado-label">Módulos pedagógicos</div>
+        <div class="dado-sub">Do Sistema Alfa à integração completa do teclado</div>
+      </div>
+      <div class="dado">
+        <div class="dado-val">27<span class="dado-un">+</span></div>
+        <div class="dado-label">Lições projetadas</div>
+        <div class="dado-sub">Cada lição: 5–10 minutos de duração</div>
+      </div>
+      <div class="dado">
+        <div class="dado-val">4</div>
+        <div class="dado-label">Minijogos interativos</div>
+        <div class="dado-sub">Alternando exercício técnico e engajamento lúdico</div>
+      </div>
+      <div class="dado">
+        <div class="dado-val">15</div>
+        <div class="dado-label">Aliens colecionáveis</div>
+        <div class="dado-sub">Sistema de recompensa e motivação progressiva</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ APRENDIZADOS ══ -->
+<section class="sec sec-alt">
+  <div class="sec-max">
+    <span class="sec-label rev">Reflexões do processo</span>
+    <h2 class="sec-titulo rev rev-d1">O que esse projeto <em>revela sobre design inclusivo</em></h2>
+    <div class="aprend-grid">
+      <div class="aprend rev">
+        <div class="aprend-cat">Acessibilidade</div>
+        <div class="aprend-titulo">Acessível desde a concepção, não como adaptação</div>
+        <p class="aprend-desc">O design instrucional foi construído inteiramente pela perspectiva de quem não enxerga, desde o início e não como adaptação de produto existente. Isso muda fundamentalmente as decisões de arquitetura, linguagem e feedback.</p>
+      </div>
+      <div class="aprend rev rev-d1">
+        <div class="aprend-cat">Corpus linguístico</div>
+        <div class="aprend-titulo">Vocabulário é fundamento</div>
+        <p class="aprend-desc">A análise de corpus revelou que a seleção de palavras para treino de digitação é uma decisão pedagógica e técnica ao mesmo tempo. Palavras familiares ativam imagens mentais que sustentam a motivação e a retenção, aspecto especialmente crítico quando não há suporte visual.</p>
+      </div>
+      <div class="aprend rev rev-d2">
+        <div class="aprend-cat">Narrativa</div>
+        <div class="aprend-titulo">Metáforas precisam funcionar sem imagens</div>
+        <p class="aprend-desc">O processo de criação do universo narrativo exigiu repensar cada metáfora para garantir que funcionasse auditivamente. O espaço sideral foi uma solução elegante: permite criar senso de escala, direção e conquista sem nenhuma referência que exija visão.</p>
+      </div>
+      <div class="aprend rev rev-d3">
+        <div class="aprend-cat">Colaboração interdisciplinar</div>
+        <div class="aprend-titulo">DI como articulador de saberes especializados</div>
+        <p class="aprend-desc">Trabalhar em equipe com linguistas, fonoaudiólogos e engenheiros exigiu desenvolver uma linguagem comum entre campos com vocabulários e lógicas distintas. O papel do DI foi o de traduzir cada expertise em decisão pedagógica coerente.</p>
+      </div>
+      <div class="aprend rev">
+        <div class="aprend-cat">Pesquisa aplicada</div>
+        <div class="aprend-titulo">Teoria e prática em ciclo, não em sequência</div>
+        <p class="aprend-desc">A metodologia DSR demonstrou que fundamentação teórica e design prático se retroalimentam. A teoria informa o design; o design, quando testado, questiona a teoria e exige revisão contínua.</p>
+      </div>
+      <div class="aprend rev rev-d1">
+        <div class="aprend-cat">Publicação científica</div>
+        <div class="aprend-titulo">Produção acadêmica como parte do processo</div>
+        <p class="aprend-desc">Com dois trabalhos publicados antes do produto final, o projeto confirma que design instrucional rigoroso gera contribuição científica. A pesquisa no processo valida escolhas e expande o campo da tecnologia assistiva educacional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAIXA IMPACTO ══ -->
+<div class="impacto-faixa">
+  <p class="impacto-subtitulo rev">Síntese do projeto</p>
+  <p class="impacto-frase rev rev-d1">
+    Uma criança com deficiência visual que aprende a digitar conquista uma habilidade técnica e <span>autonomia para escrever sua própria história</span>.
+  </p>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer-case">
+  <span class="footer-volta">Portfólio · Claudia Mori</span>
+  <nav class="footer-nav">
+    <a href="index.html">Início</a>
+    <a href="index.html#cases">Outros projetos</a>
+    <a href="index.html#contato">Contato</a>
+  </nav>
+</footer>
+
+<script>
+// Barra de progresso
+window.addEventListener('scroll', () => {
+  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  document.getElementById('prog').style.width = (p * 100) + '%';
+});
+
+// Revelar ao scroll
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+    }
+  });
+}, { threshold: 0.07 });
+
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+</script>
+
+
+</body></html>

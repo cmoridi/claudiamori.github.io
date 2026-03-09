@@ -1,0 +1,943 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Videoteca da Inclusão · Claudia Mori</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --preto:      #0C100E;
+  --verde:      #1A3D2A;
+  --verde2:     #235436;
+  --esmeralda:  #2F7A50;
+  --ambar:      #C49A2A;
+  --ambar-pale: #F2E0A8;
+  --areia:      #CEBFA8;
+  --creme:      #F0EBE1;
+  --fundo:    #141414;
+  --fundo-alt:#1E1E1C;
+  --texto:    #EFE9E1;
+  --t60:      rgba(239,233,225,.65);
+  --t35:      rgba(239,233,225,.35);
+  --t12:      rgba(239,233,225,.1);
+  --titulo:     'Playfair Display', Georgia, serif;
+  --corpo:      'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--corpo);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── ANIMAÇÕES ── */
+.rev { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+.rev.vis { opacity: 1; transform: none; }
+.rev-d1 { transition-delay: .1s; }
+.rev-d2 { transition-delay: .2s; }
+.rev-d3 { transition-delay: .3s; }
+.rev-d4 { transition-delay: .4s; }
+
+/* ── BARRA DE PROGRESSO ── */
+#prog {
+  position: fixed; top: 0; left: 0; z-index: 999;
+  height: 3px; width: 0;
+  background: var(--ambar);
+  transition: width .1s linear;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3.5rem;
+  background: rgba(20,20,20,.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--t12);
+}
+.nav-back {
+  display: flex; align-items: center; gap: .7rem;
+  text-decoration: none; color: var(--t60);
+  font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+  transition: color .2s;
+}
+.nav-back:hover { color: var(--creme); }
+.nav-back svg { width: 14px; height: 14px; }
+.nav-projeto { font-family: var(--titulo); font-size: 1rem; font-style: italic; color: var(--creme); }
+.nav-cta {
+  font-size: .65rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: var(--verde);
+  padding: .55rem 1.5rem;
+  text-decoration: none; transition: background .2s;
+}
+.nav-cta:hover { background: var(--esmeralda); }
+
+/* ── HERO ── */
+.hero-case {
+  padding-top: 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 88vh;
+}
+.hero-esq {
+  background: var(--verde);
+  padding: 6rem 4.5rem;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.hero-esq::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(47,122,80,.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-esq::after {
+  content: '';
+  position: absolute; bottom: -60px; left: -60px;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,154,42,.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-num {
+  font-family: var(--titulo);
+  font-size: 10rem; font-weight: 400; font-style: italic;
+  color: rgba(240,235,225,.04);
+  line-height: 1; position: absolute; top: 3rem; right: 2.5rem;
+}
+.hero-cat {
+  font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ambar); font-weight: 500; margin-bottom: 2rem;
+}
+.hero-titulo-case {
+  font-family: var(--titulo);
+  font-size: clamp(2.8rem, 4.5vw, 5rem);
+  font-weight: 400; line-height: .95;
+  color: var(--creme); margin-bottom: 1.8rem;
+}
+.hero-titulo-case em { font-style: italic; display: block; color: var(--ambar); }
+.hero-sub {
+  font-size: .95rem; font-weight: 300;
+  color: rgba(240,235,225,.5);
+  line-height: 1.9; max-width: 380px;
+}
+.hero-meta {
+  display: flex; gap: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(240,235,225,.1);
+}
+.meta-item { display: flex; flex-direction: column; gap: .3rem; }
+.meta-label { font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(240,235,225,.3); }
+.meta-valor { font-size: .8rem; color: rgba(240,235,225,.7); font-weight: 400; }
+
+.hero-dir {
+  background: #1A1A18;
+  padding: 6rem 4.5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 2.5rem;
+}
+.resumo-label {
+  font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ambar); font-weight: 500; margin-bottom: 1rem; display: block;
+}
+.resumo-frase {
+  font-family: var(--titulo);
+  font-size: 1.85rem; font-weight: 400; font-style: italic;
+  color: #5CB580;
+  line-height: 1.5;
+  border-left: 3px solid var(--ambar);
+  padding-left: 1.8rem;
+}
+.hero-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--t12); }
+.hero-n { padding: 1.8rem 2rem; border-right: 1px solid var(--t12); border-bottom: 1px solid var(--t12); }
+.hero-n:nth-child(even) { border-right: none; }
+.hero-n:nth-child(3), .hero-n:nth-child(4) { border-bottom: none; }
+.n-val { font-family: var(--titulo); font-size: 2.6rem; font-style: italic; color: var(--ambar); line-height: 1; }
+.n-desc { font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color: rgba(239,233,225,.45); margin-top: .4rem; }
+
+/* ── SEÇÕES COMUNS ── */
+.sec { padding: 7rem 4.5rem; }
+.sec-alt { background: var(--fundo-alt); }
+.sec-escura { background: var(--preto); }
+.sec-max { max-width: 1200px; margin: 0 auto; }
+
+.sec-label {
+  font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ambar); font-weight: 500; display: block; margin-bottom: .8rem;
+}
+.sec-label-claro { color: rgba(240,235,225,.4); }
+.sec-titulo {
+  font-family: var(--titulo);
+  font-size: clamp(2.2rem,3.8vw,3.4rem); font-weight: 400; line-height: 1.1; color: var(--creme);
+}
+.sec-titulo em { font-style: italic; color: #5CB580; }
+.sec-titulo-claro { color: var(--creme); }
+.sec-titulo-claro em { color: var(--ambar-pale); }
+.sec-corpo { font-size: 1.08rem; font-weight: 300; color: var(--t60); line-height: 1.95; }
+
+/* ── CONTEXTO ── */
+.contexto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; margin-top: 5rem; }
+.diag-item {
+  display: flex; align-items: flex-start; gap: 1.5rem;
+  padding: 1.8rem 0; border-bottom: 1px solid var(--t12);
+}
+.diag-item:first-child { border-top: 1px solid var(--t12); }
+.diag-icon { width: 36px; height: 36px; flex-shrink: 0; border: 1px solid var(--t12); display: flex; align-items: center; justify-content: center; }
+.diag-icon svg { width: 16px; height: 16px; }
+.diag-titulo { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--creme); font-weight: 600; margin-bottom: .4rem; }
+.diag-desc { font-size: .95rem; color: var(--t60); line-height: 1.75; }
+.contexto-destaque { margin-top: 4rem; padding: 2.5rem 3rem; background: var(--verde); color: var(--creme); }
+.contexto-destaque p { font-family: var(--titulo); font-size: 1.3rem; font-style: italic; line-height: 1.55; }
+.contexto-destaque strong { color: var(--ambar); font-style: normal; }
+
+/* ── TRÊS PILARES (visão das séries) ── */
+.tres-pilares { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; background: var(--t12); margin-top: 4rem; }
+.pilar { background: var(--fundo); padding: 3rem 2.5rem; }
+.pilar-num { font-family: var(--titulo); font-size: 3rem; font-weight: 400; font-style: italic; color: var(--areia); line-height: 1; margin-bottom: 1rem; }
+.pilar-titulo { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--creme); font-weight: 600; margin-bottom: .5rem; }
+.pilar-nome { font-family: var(--titulo); font-size: 1.1rem; font-style: italic; color: #5CB580; margin-bottom: 1.2rem; line-height: 1.3; }
+.pilar-lista { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+.pilar-lista li { font-size: .95rem; color: var(--t60); padding-left: 1.2rem; position: relative; line-height: 1.7; }
+.pilar-lista li::before { content: ''; position: absolute; left: 0; top: .65em; width: 5px; height: 5px; border-radius: 50%; background: var(--ambar); }
+.pilar-status {
+  margin-top: 1.5rem; font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; font-weight: 600; padding: .4rem .9rem; display: inline-block;
+}
+.status-ok   { background: rgba(47,122,80,.12); color: var(--verde2); }
+.status-edit { background: rgba(196,154,42,.15); color: #7a5a10; }
+.status-prod { background: rgba(43,87,160,.12); color: #1B3A70; }
+
+/* ── EPISÓDIOS (cap) ── */
+.capitulos-lista { margin-top: 4rem; display: flex; flex-direction: column; gap: 2px; }
+.cap {
+  display: grid; grid-template-columns: 80px 1fr 1fr;
+  align-items: center; background: var(--fundo);
+  padding: 2.5rem 3rem; gap: 4rem;
+  transition: background .2s;
+}
+.cap:hover { background: var(--fundo-alt); }
+.cap-n { font-family: var(--titulo); font-size: 3.5rem; font-style: italic; color: var(--areia); line-height: 1; }
+.cap-titulo { font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: var(--creme); margin-bottom: .5rem; }
+.cap-nome { font-family: var(--titulo); font-size: 1.2rem; font-style: italic; color: #5CB580; margin-bottom: .3rem; }
+.cap-desc { font-size: .97rem; color: var(--t60); line-height: 1.75; }
+.cap-foco { font-size: .93rem; color: var(--t60); font-style: italic; line-height: 1.7; padding-left: 2rem; border-left: 2px solid var(--ambar-pale); }
+
+/* ── RECURSOS/DADOS ── */
+.recursos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--t12); margin-top: 4rem; }
+.recurso { background: var(--preto); padding: 3rem; }
+.rec-titulo { font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ambar); font-weight: 600; margin-bottom: 1.2rem; }
+.rec-val { font-family: var(--titulo); font-size: 2.2rem; font-style: italic; color: var(--creme); line-height: 1; margin-bottom: .5rem; }
+.rec-desc { font-size: 1rem; color: rgba(240,235,225,.55); line-height: 1.85; }
+
+/* ── ESPECIALISTA ── */
+.esp-destaque {
+  margin-top: 4rem; padding: 3rem 4rem;
+  background: #1A1A18;
+  display: grid; grid-template-columns: 80px 1fr; gap: 2.5rem; align-items: center;
+  border-left: 4px solid var(--ambar);
+}
+.esp-inicial { font-family: var(--titulo); font-size: 4rem; font-style: italic; color: var(--ambar); line-height: 1; }
+.esp-nome { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ambar); margin-bottom: .5rem; }
+.esp-bio { font-size: .97rem; color: var(--t60); line-height: 1.8; }
+
+/* ── ACESSIBILIDADE ── */
+.acessib-grade { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--t12); margin-top: 4rem; }
+.acessib { background: var(--fundo-alt); padding: 2.5rem 2rem; }
+.ac-icone { width: 44px; height: 44px; background: var(--verde); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+.ac-icone svg { width: 20px; height: 20px; color: var(--creme); }
+.ac-titulo { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--creme); margin-bottom: .7rem; }
+.ac-desc { font-size: .9rem; color: var(--t60); line-height: 1.75; }
+
+/* ── MEU PAPEL ── */
+.papel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; margin-top: 4rem; align-items: start; }
+.papel-texto-wrap { padding: 3rem; background: rgba(92, 181, 128, .1); }
+.papel-label { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ambar); margin-bottom: 1.2rem; display: block; }
+.papel-quote { font-family: var(--titulo); font-size: 1.4rem; font-style: italic; color: #5CB580; line-height: 1.6; margin-bottom: 1.5rem; }
+.papel-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+.missao-tag { font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; padding: .35rem .9rem; border: 1px solid rgba(12,16,14,.2); color: var(--t60); }
+.parceria-lista { display: flex; flex-direction: column; gap: 0; }
+.parceria-item { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.8rem 0; border-bottom: 1px solid var(--t12); }
+.parceria-item:first-child { border-top: 1px solid var(--t12); }
+.parceria-icon { width: 36px; height: 36px; flex-shrink: 0; background: var(--verde); display: flex; align-items: center; justify-content: center; }
+.parceria-icon svg { width: 14px; height: 14px; color: var(--creme); }
+.parceria-titulo { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--creme); font-weight: 600; margin-bottom: .4rem; }
+.parceria-desc { font-size: .95rem; color: var(--t60); line-height: 1.75; }
+
+/* ── RESULTADOS ── */
+.resultados-big { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: rgba(240,235,225,.08); margin-top: 4rem; }
+.res-stat { padding: 2.5rem; }
+.res-val { font-family: var(--titulo); font-size: 3rem; font-style: italic; color: var(--creme); line-height: 1; margin-bottom: .4rem; }
+.res-desc { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(240,235,225,.4); }
+.resultados-qualitativos { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--t12); margin-top: 2px; }
+.res-qual { background: var(--fundo); padding: 2.5rem 3rem; }
+.res-qual-titulo { font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: #5CB580; margin-bottom: .8rem; }
+.res-qual-desc { font-size: .97rem; color: var(--t60); line-height: 1.8; }
+
+/* ── LIVE BANNERS ── */
+.live-banner {
+  margin-top: 4rem; padding: 2.5rem 4rem;
+  background: var(--verde2);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.live-banner + .live-banner { margin-top: 2px; }
+.live-texto { font-family: var(--titulo); font-size: 1.3rem; font-style: italic; color: var(--creme); line-height: 1.4; }
+.live-sub { font-size: .78rem; color: rgba(240,235,225,.45); margin-top: .35rem; }
+.live-btn {
+  font-size: .65rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--verde); background: var(--ambar); padding: .9rem 2.2rem;
+  text-decoration: none; transition: background .2s; flex-shrink: 0;
+  display: flex; align-items: center; gap: .7rem;
+}
+.live-btn:hover { background: var(--ambar-pale); }
+.live-btn svg { width: 14px; height: 14px; }
+
+/* ── FOOTER ── */
+.footer-case { background: var(--preto); padding: 3.5rem 4.5rem; border-top: 1px solid rgba(240,235,225,.06); }
+.footer-case-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.footer-case-volta { font-family: var(--titulo); font-style: italic; font-size: 1rem; color: rgba(240,235,225,.3); }
+.footer-case-nav { display: flex; gap: 2.5rem; }
+.footer-case-nav a { font-size: .65rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(240,235,225,.4); text-decoration: none; transition: color .2s; }
+.footer-case-nav a:hover { color: var(--creme); }
+
+/* ── RESPONSIVO ── */
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .nav-projeto { display: none; }
+  .hero-case { grid-template-columns: 1fr; }
+  .hero-esq, .hero-dir { padding: 4rem 1.5rem; }
+  .hero-esq { min-height: 60vh; }
+  .sec { padding: 4rem 1.5rem; }
+  .contexto-grid, .papel-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .tres-pilares, .acessib-grade { grid-template-columns: 1fr; }
+  .cap { grid-template-columns: 50px 1fr; gap: 1.5rem; }
+  .cap-foco { display: none; }
+  .resultados-big { grid-template-columns: 1fr 1fr; }
+  .resultados-qualitativos, .recursos-grid { grid-template-columns: 1fr; }
+  .live-banner { flex-direction: column; gap: 2rem; }
+  .footer-case-inner { flex-direction: column; gap: 1.5rem; }
+  .esp-destaque { padding: 2rem; grid-template-columns: 1fr; }
+  .esp-inicial { font-size: 3rem; }
+}
+</style>
+</head>
+
+<body>
+<div id="prog"></div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-back" href="portfolio_v3.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    Portfólio
+  </a>
+  <span class="nav-projeto">Videoteca da Inclusão</span>
+  <a class="nav-cta" href="https://apps.univesp.br/repositorio/turismo%20inclusivo/index.html" target="_blank" rel="noopener">Ver projeto →</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero-case">
+  <div class="hero-esq">
+    <div class="hero-num">04</div>
+    <div>
+      <div class="hero-cat">Vídeos Educacionais · Acessibilidade · SEDPcD · Univesp</div>
+      <h1 class="hero-titulo-case">
+        Videoteca da
+        <em>Inclusão</em>
+      </h1>
+      <p class="hero-sub">Três séries de vídeos educacionais que documentam turismo acessível, moda inclusiva e inovação em tecnologia assistiva, produzidas em parceria com a TV Cultura para a videoteca oficial da Secretaria dos Direitos da Pessoa com Deficiência.</p>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span class="meta-label">Cliente</span>
+        <span class="meta-valor">SEDPcD · Escola de Inclusão</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Parceria</span>
+        <span class="meta-valor">Univesp · TV Cultura</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Entrega</span>
+        <span class="meta-valor">2025</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-dir">
+    <div>
+      <span class="resumo-label">O projeto</span>
+      <p class="resumo-frase">"Transformar conhecimento especializado em conteúdo audiovisual acessível: para quem enxerga, para quem não enxerga, para quem ouve em Libras."</p>
+    </div>
+    <div class="hero-nums">
+      <div class="hero-n">
+        <div class="n-val">13</div>
+        <div class="n-desc">Vídeos produzidos</div>
+      </div>
+      <div class="hero-n">
+        <div class="n-val">3</div>
+        <div class="n-desc">Séries temáticas</div>
+      </div>
+      <div class="hero-n">
+        <div class="n-val">3</div>
+        <div class="n-desc">Recursos de acessibilidade</div>
+      </div>
+      <div class="hero-n">
+        <div class="n-val">USP</div>
+        <div class="n-desc">Especialistas das três séries</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTEXTO ══ -->
+<section class="sec rev">
+  <div class="sec-max">
+    <span class="sec-label">O projeto</span>
+    <h2 class="sec-titulo">Conteúdo audiovisual<br>como <em>instrumento de inclusão</em></h2>
+
+    <div class="contexto-grid">
+      <div>
+        <p class="sec-corpo" style="margin-bottom:2rem;">
+          A Videoteca da Inclusão reúne séries educacionais produzidas no âmbito do convênio entre a Univesp e a Secretaria dos Direitos da Pessoa com Deficiência do Estado de São Paulo. Cada série aborda um tema da pauta de inclusão: turismo, moda e tecnologia assistiva. O conteúdo foi coordenado por especialistas da USP e a produção técnica ficou a cargo da TV Cultura.
+        </p>
+        <p class="sec-corpo">
+          Todos os vídeos são desenvolvidos com recursos completos de acessibilidade: legendas em português, interpretação em Libras e audiodescrição. O próprio material é uma demonstração prática dos princípios que ensina.
+        </p>
+      </div>
+
+      <div>
+        <div class="diag-item rev rev-d1">
+          <div class="diag-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div>
+            <div class="diag-titulo">Especialistas com experiência dual</div>
+            <div class="diag-desc">Pesquisadores que combinam rigor acadêmico e vivência prática: pessoas com deficiência, profissionais da área e empreendedores do campo da inclusão.</div>
+          </div>
+        </div>
+        <div class="diag-item rev rev-d2">
+          <div class="diag-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <path d="M8 21h8M12 17v4"/>
+            </svg>
+          </div>
+          <div>
+            <div class="diag-titulo">Produção TV Cultura</div>
+            <div class="diag-desc">Padrão televisivo de qualidade técnica, com equipe especializada em conteúdo educacional e implementação dos três recursos de acessibilidade audiovisual.</div>
+          </div>
+        </div>
+        <div class="diag-item rev rev-d3">
+          <div class="diag-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="diag-titulo">Política pública em formato didático</div>
+            <div class="diag-desc">Conteúdo que traduz direitos, inovações e boas práticas em linguagem acessível para profissionais, educadores e famílias.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contexto-destaque rev rev-d2">
+      <p>O convênio entre Univesp e SEDPcD produziu conteúdo técnico de alto impacto: <strong>gratuito, acessível e disponível para toda a rede pública paulista.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AS TRÊS SÉRIES ══ -->
+<section class="sec sec-alt rev">
+  <div class="sec-max">
+    <span class="sec-label">Visão geral</span>
+    <h2 class="sec-titulo">As <em>três séries</em> da videoteca</h2>
+
+    <div class="tres-pilares">
+      <div class="pilar rev rev-d1">
+        <div class="pilar-num">01</div>
+        <div class="pilar-titulo">Série Documental · 4 vídeos</div>
+        <div class="pilar-nome">Turismo Inclusivo:<br>Um Mercado de 1 Bilhão</div>
+        <ul class="pilar-lista">
+          <li>Especialistas: Prof. Glauber Santos, Ricardo Shimosakai e Marina Monteiro</li>
+          <li>Dados econômicos, barreiras invisíveis e cases nacionais e internacionais</li>
+          <li>5–6 minutos por episódio, com recursos de acessibilidade</li>
+        </ul>
+        <span class="pilar-status status-ok">Finalizado</span>
+      </div>
+      <div class="pilar rev rev-d2">
+        <div class="pilar-num">02</div>
+        <div class="pilar-titulo">Série Educacional · 5 vídeos</div>
+        <div class="pilar-nome">Moda Inclusiva:<br>Vestindo a Diversidade</div>
+        <ul class="pilar-lista">
+          <li>Conteudista: Profa. Isabel Italiano (EACH-USP)</li>
+          <li>Acessibilidade completa: legendas, Libras e audiodescrição</li>
+          <li>Série finalizada e publicada na videoteca da SEDPcD</li>
+        </ul>
+        <span class="pilar-status status-ok">Finalizado</span>
+      </div>
+      <div class="pilar rev rev-d3">
+        <div class="pilar-num">03</div>
+        <div class="pilar-titulo">Série Documental · 4 vídeos</div>
+        <div class="pilar-nome">DigitaVox USP:<br>Democratizando a Inclusão Digital</div>
+        <ul class="pilar-lista">
+          <li>Conteudista: Prof. Dr. Paulo Capel Cardoso (USP)</li>
+          <li>Documentação audiovisual de inovação em tecnologia assistiva</li>
+          <li>8–10 minutos por episódio, com recursos de acessibilidade</li>
+        </ul>
+        <span class="pilar-status status-ok">Finalizado</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SÉRIE 01 — TURISMO INCLUSIVO ══ -->
+<section class="sec rev">
+  <div class="sec-max">
+    <span class="sec-label">Série 01 · Turismo Acessível</span>
+    <h2 class="sec-titulo">Turismo Inclusivo:<br><em>Um Mercado de 1 Bilhão de Pessoas</em></h2>
+    <p class="sec-corpo" style="max-width:660px; margin-top:1.2rem;">Série de 4 vídeos finalizada em parceria com a TV Cultura. O processo de design instrucional envolveu pesquisa de campo sobre acessibilidade no setor turístico, entrevistas de levantamento com os três especialistas e a construção de roteiros que articulam dados econômicos, relatos pessoais e análise de casos concretos para um público não especialista.</p>
+
+    <div class="capitulos-lista">
+      <div class="cap rev rev-d1">
+        <div class="cap-n">E1</div>
+        <div>
+          <div class="cap-titulo">Episódio 1</div>
+          <div class="cap-nome">Um Mercado de 1 Bilhão de Pessoas</div>
+          <div class="cap-desc">Contextualização econômica, dados demográficos (18,6 milhões de PcD no Brasil) e o efeito multiplicador gerado por familiares e acompanhantes de viagem.</div>
+        </div>
+        <div class="cap-foco">O setor turístico movimenta R$ 752,3 bilhões anuais no Brasil, com espaço concreto de ampliação por meio da inclusão.</div>
+      </div>
+      <div class="cap rev rev-d2">
+        <div class="cap-n">E2</div>
+        <div>
+          <div class="cap-titulo">Episódio 2</div>
+          <div class="cap-nome">As Barreiras Invisíveis do Turismo</div>
+          <div class="cap-desc">Barreiras informacionais, comunicacionais e atitudinais. Por que 53% dos turistas com deficiência já desistiram de viajar por falta de acessibilidade adequada.</div>
+        </div>
+        <div class="cap-foco">Entrevistado: Ricardo Shimosakai, consultor especializado em turismo acessível e usuário de cadeira de rodas.</div>
+      </div>
+      <div class="cap rev rev-d1">
+        <div class="cap-n">E3</div>
+        <div>
+          <div class="cap-titulo">Episódio 3</div>
+          <div class="cap-nome">Soluções que Funcionam</div>
+          <div class="cap-desc">Cases nacionais e internacionais: Alemanha e França como referências globais, Porto de Galinhas e Metrô de SP como experiências brasileiras bem-sucedidas.</div>
+        </div>
+        <div class="cap-foco">O roteiro articula iniciativas concretas: do treinamento de equipes à adaptação de infraestrutura e ao uso de tecnologia assistiva no atendimento ao turista.</div>
+      </div>
+      <div class="cap rev rev-d2">
+        <div class="cap-n">E4</div>
+        <div>
+          <div class="cap-titulo">Episódio 4</div>
+          <div class="cap-nome">O Futuro do Turismo é Universal</div>
+          <div class="cap-desc">Envelhecimento populacional, mudança geracional e inovações tecnológicas. O posicionamento competitivo do Brasil no cenário do turismo inclusivo.</div>
+        </div>
+        <div class="cap-foco">Entrevistado: Prof. Glauber Santos, com análise econômica sobre envelhecimento populacional e tendências de mercado no setor.</div>
+      </div>
+    </div>
+
+    <div class="recursos-grid rev rev-d2">
+      <div class="recurso">
+        <div class="rec-titulo">Dado central da série</div>
+        <div class="rec-val">53%</div>
+        <div class="rec-desc">dos turistas com deficiência já desistiram de viajar por falta de acessibilidade, dado que estruturou a abordagem do episódio 2.</div>
+      </div>
+      <div class="recurso">
+        <div class="rec-titulo">Impacto econômico global</div>
+        <div class="rec-val">US$ 17,3bi</div>
+        <div class="rec-desc">movimentados anualmente só nos EUA pelo turismo de pessoas com deficiência, base da argumentação econômica da série.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SÉRIE 02 — MODA INCLUSIVA ══ -->
+<section class="sec sec-alt rev">
+  <div class="sec-max">
+    <span class="sec-label">Série 02 · Moda e Design Universal</span>
+    <h2 class="sec-titulo">Moda Inclusiva:<br><em>Vestindo a Diversidade</em></h2>
+    <p class="sec-corpo" style="max-width:660px; margin-top:1.2rem;">Série finalizada com 5 episódios, acessibilidade completa e publicada na videoteca da SEDPcD. O trabalho de design instrucional incluiu análise da produção acadêmica da Profa. Isabel Italiano, entrevistas de levantamento de conteúdo e a construção de roteiros que tornam o debate sobre design universal acessível a diferentes públicos, com foco em profissionais da área de moda, educadores e gestores públicos.</p>
+
+    <div class="capitulos-lista">
+      <div class="cap rev rev-d1">
+        <div class="cap-n">E1</div>
+        <div>
+          <div class="cap-titulo">Episódio 1</div>
+          <div class="cap-nome">O Que é e Por Que Importa?</div>
+          <div class="cap-desc">Conceitos de design universal, dados sobre exclusão (15% da população mundial com deficiência) e o mercado global de moda inclusiva: US$ 289 bilhões em 2019.</div>
+        </div>
+        <div class="cap-foco">Projeção: mercado de moda inclusiva chegará a US$ 400 bilhões até 2026.</div>
+      </div>
+      <div class="cap rev rev-d2">
+        <div class="cap-n">E2</div>
+        <div>
+          <div class="cap-titulo">Episódio 2</div>
+          <div class="cap-nome">Os Desafios Invisíveis do Vestir</div>
+          <div class="cap-desc">Barreiras físicas (botões, zíperes, tecidos), impacto psicológico e necessidades específicas de pessoas que usam próteses, órteses ou têm sensibilidades sensoriais.</div>
+        </div>
+        <div class="cap-foco">Pessoas com deficiência podem levar até 2,5 horas para se vestir sozinhas com roupas convencionais.</div>
+      </div>
+      <div class="cap rev rev-d1">
+        <div class="cap-n">E3</div>
+        <div>
+          <div class="cap-titulo">Episódio 3</div>
+          <div class="cap-nome">Representatividade e Identidade na Moda</div>
+          <div class="cap-desc">Marco histórico: Danielle Sheypuk na New York Fashion Week 2014. Cases brasileiros: Reserva, Riachuelo, Equal Moda Inclusiva e o papel dos influenciadores digitais.</div>
+        </div>
+        <div class="cap-foco">A presença de pessoas com deficiência em desfiles e campanhas publicitárias é analisada como fator de transformação tanto do mercado quanto da percepção social sobre corpos e funcionalidades.</div>
+      </div>
+      <div class="cap rev rev-d2">
+        <div class="cap-n">E4</div>
+        <div>
+          <div class="cap-titulo">Episódio 4</div>
+          <div class="cap-nome">Moda e Autonomia: Empreendedores com Deficiência</div>
+          <div class="cap-desc">Silvana Louro e a Equal Moda Inclusiva: criadora do primeiro uniforme paralímpico adaptado do mundo. O impacto em crianças com paralisia cerebral e a quebra de preconceitos na cadeia produtiva.</div>
+        </div>
+        <div class="cap-foco">O roteiro acompanha o percurso de Silvana Louro desde o desenvolvimento do produto até a construção de um modelo de negócio replicável no campo da moda adaptada.</div>
+      </div>
+      <div class="cap rev rev-d1">
+        <div class="cap-n">E5</div>
+        <div>
+          <div class="cap-titulo">Episódio 5</div>
+          <div class="cap-nome">Formação Acadêmica e Parcerias Institucionais</div>
+          <div class="cap-desc">Curso de Têxtil e Moda da EACH-USP, disciplinas de ergonomia e modelagem inclusiva, e o Concurso Moda Inclusiva (parceria EACH-USP/SEDPcD) com reconhecimento nacional.</div>
+        </div>
+        <div class="cap-foco">O episódio documenta como a produção acadêmica e as políticas públicas podem atuar de forma articulada na formação de profissionais da moda com perspectiva inclusiva.</div>
+      </div>
+    </div>
+
+    <div class="esp-destaque rev rev-d2">
+      <div class="esp-inicial">I.</div>
+      <div>
+        <div class="esp-nome">Isabel Italiano · EACH-USP · Conteudista principal</div>
+        <p class="esp-bio">Docente e pesquisadora da Escola de Artes, Ciências e Humanidades da Universidade de São Paulo (EACH-USP), especialista em moda inclusiva e design universal. Coordenou o conteúdo dos cinco episódios, articulando pesquisa acadêmica, parcerias empresariais e política pública de inclusão.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SÉRIE 03 — DIGITAVOX USP ══ -->
+<section class="sec rev">
+  <div class="sec-max">
+    <span class="sec-label">Série 03 · Tecnologia Assistiva</span>
+    <h2 class="sec-titulo">DigitaVox USP:<br><em>Democratizando a Inclusão Digital</em></h2>
+    <p class="sec-corpo" style="max-width:660px; margin-top:1.2rem;">Série documental finalizada em 4 episódios. O DigitaVox USP é uma nova versão do software original DigitaVox, criado por Neno Henrique da Cunha Albernaz em sua pesquisa de mestrado na UFRJ em 2011. A versão USP foi desenvolvida pela Superintendência de Tecnologia da Informação (STI/USP), com tecnologias atualizadas de vocalização e compatibilidade multiplataforma, tornando o aplicativo disponível gratuitamente em Android e iOS. O processo de design instrucional envolveu estudo aprofundado sobre o projeto e seu contexto, entrevistas de levantamento com Paulo Capel Cardoso para identificar os pontos centrais da narrativa, e a construção de roteiros que articulam a trajetória pessoal do idealizador ao desenvolvimento técnico e ao alcance social da ferramenta.</p>
+
+    <div class="capitulos-lista">
+      <div class="cap rev rev-d1">
+        <div class="cap-n">E1</div>
+        <div>
+          <div class="cap-titulo">Episódio 1</div>
+          <div class="cap-nome">O Despertar da Consciência</div>
+          <div class="cap-desc">A trajetória pessoal de Paulo Capel Cardoso com a deficiência visual adquirida, o processo de reabilitação e a percepção das barreiras digitais enfrentadas por pessoas cegas ou com baixa visão.</div>
+        </div>
+        <div class="cap-foco">O roteiro parte da experiência pessoal do pesquisador para contextualizar o problema que motivou a criação da tecnologia assistiva.</div>
+      </div>
+      <div class="cap rev rev-d2">
+        <div class="cap-n">E2</div>
+        <div>
+          <div class="cap-titulo">Episódio 2</div>
+          <div class="cap-nome">A Batalha pela Autonomia</div>
+          <div class="cap-desc">As limitações do DigitaVox original para uso em dispositivos móveis, a pesquisa de campo em instituições de apoio a pessoas com deficiência visual e o dado que orientou o projeto: a maioria das pessoas não tem computador, mas tem celular.</div>
+        </div>
+        <div class="cap-foco">O contraste entre o custo de R$ 30 (teclado + cabo) e o de R$ 16.000 do software JAWS é apresentado como dado central para compreender o alcance social da inovação.</div>
+      </div>
+      <div class="cap rev rev-d1">
+        <div class="cap-n">E3</div>
+        <div>
+          <div class="cap-titulo">Episódio 3</div>
+          <div class="cap-nome">A Expedição DigitaVox: uma Causa Coletiva</div>
+          <div class="cap-desc">Mobilização da USP, equipe multidisciplinar e 20 especialistas testadores. Seis meses dedicados ao mapeamento do teclado físico no Android, documentado como processo de inovação colaborativa.</div>
+        </div>
+        <div class="cap-foco">O episódio apresenta a equipe de computação móvel da STI, coordenada pelo professor Jun Okamoto (Escola Politécnica/USP), responsável pelo desenvolvimento técnico da nova versão, e o superintendente João Eduardo Ferreira, que articulou as parcerias institucionais.</div>
+      </div>
+      <div class="cap rev rev-d2">
+        <div class="cap-n">E4</div>
+        <div>
+          <div class="cap-titulo">Episódio 4</div>
+          <div class="cap-nome">Design Universal: o Futuro da Inclusão</div>
+          <div class="cap-desc">CRAI ACESSA como braço de acessibilidade, Projeto Segmenta com modelos 3D e a filosofia do design universal como direito. O DigitaVox USP no Conselho Universitário em abril de 2024.</div>
+        </div>
+        <div class="cap-foco">Parceria com SENAI para capacitação profissional e planos para o DigitaVox voltado a crianças.</div>
+      </div>
+    </div>
+
+    <div class="recursos-grid rev rev-d2">
+      <div class="recurso">
+        <div class="rec-titulo">Inovação econômica</div>
+        <div class="rec-val">R$ 30</div>
+        <div class="rec-desc">Custo aproximado do hardware necessário (teclado + cabo OTG), frente a R$ 16.000 de soluções de mercado equivalentes. O aplicativo é gratuito, disponível em Android, iOS, PC e Mac.</div>
+      </div>
+      <div class="recurso">
+        <div class="rec-titulo">Inovação técnica</div>
+        <div class="rec-val">1º</div>
+        <div class="rec-desc">A versão USP tornou o aplicativo disponível em Android, iOS, PC e Mac, com tecnologias de vocalização atualizadas e validação junto a instituições de apoio a pessoas com deficiência visual em todo o Brasil.</div>
+      </div>
+    </div>
+
+    <div class="esp-destaque rev rev-d3">
+      <div class="esp-inicial">P.</div>
+      <div>
+        <div class="esp-nome">Paulo Eduardo Capel Cardoso · USP · Conteudista principal</div>
+        <p class="esp-bio">Doutor em Odontologia pela USP e fundador do CRAI ACESSA (FO-USP). Idealizou e coordenou o projeto DigitaVox USP: foi responsável pela especificação, validação e articulação institucional da nova versão do software, desenvolvida pela STI/USP. A série documenta esse percurso desde a vivência com a deficiência visual até o lançamento da ferramenta no Conselho Universitário da USP, em abril de 2024.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ACESSIBILIDADE ══ -->
+<section class="sec sec-alt rev">
+  <div class="sec-max">
+    <span class="sec-label">Princípio transversal</span>
+    <h2 class="sec-titulo">Acessibilidade como<br><em>ponto de partida</em></h2>
+    <p class="sec-corpo" style="max-width:660px; margin-top:1.2rem;">Em vídeos sobre inclusão, a coerência entre conteúdo e forma é parte do projeto. Os três recursos foram especificados desde o planejamento e integrados ao processo de produção junto à equipe da TV Cultura.</p>
+
+    <div class="acessib-grade">
+      <div class="acessib rev rev-d1">
+        <div class="ac-icone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"/>
+            <polyline points="17 2 12 7 7 2"/>
+          </svg>
+        </div>
+        <div class="ac-titulo">Legendas em Português</div>
+        <div class="ac-desc">Legendas sincronizadas e revisadas em todos os vídeos. Garantem acesso em ambientes silenciosos, para pessoas surdas ou com baixa audição e para aprendizes de leitura.</div>
+      </div>
+      <div class="acessib rev rev-d2">
+        <div class="ac-icone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+            <line x1="6" y1="1" x2="6" y2="4"/>
+            <line x1="10" y1="1" x2="10" y2="4"/>
+            <line x1="14" y1="1" x2="14" y2="4"/>
+          </svg>
+        </div>
+        <div class="ac-titulo">Interpretação em Libras</div>
+        <div class="ac-desc">Profissional intérprete qualificado em todos os vídeos. O recurso garante acesso ao público surdo, incluindo famílias que têm membros com deficiência auditiva e buscam informação sobre inclusão.</div>
+      </div>
+      <div class="acessib rev rev-d3">
+        <div class="ac-icone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/>
+          </svg>
+        </div>
+        <div class="ac-titulo">Audiodescrição</div>
+        <div class="ac-desc">Narração descritiva dos elementos visuais, tornando o conteúdo acessível a pessoas cegas ou com baixa visão. O recurso é especialmente significativo na série DigitaVox, cujo público-alvo inclui pessoas com deficiência visual.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESSO DE DESIGN INSTRUCIONAL ══ -->
+<section class="sec rev">
+  <div class="sec-max">
+    <span class="sec-label">Metodologia</span>
+    <h2 class="sec-titulo">Processo de<br><em>design instrucional</em></h2>
+
+    <div class="parceria-lista" style="margin-top:3rem;">
+      <div class="parceria-item rev rev-d1">
+        <div class="parceria-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <div>
+          <div class="parceria-titulo">Análise de conteúdo e pesquisa temática</div>
+          <div class="parceria-desc">Cada série foi precedida por um processo de estudo: leitura da produção acadêmica dos especialistas, levantamento de dados sobre o tema e identificação dos conceitos centrais para garantir rigor e relevância no roteiro.</div>
+        </div>
+      </div>
+      <div class="parceria-item rev rev-d2">
+        <div class="parceria-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div>
+          <div class="parceria-titulo">Entrevistas de levantamento com especialistas</div>
+          <div class="parceria-desc">Antes da redação dos roteiros, foram realizadas entrevistas com cada especialista para mapear como organizam e comunicam o conhecimento, identificar os pontos centrais para o público-alvo e definir o fio narrativo de cada episódio.</div>
+        </div>
+      </div>
+      <div class="parceria-item rev rev-d3">
+        <div class="parceria-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </div>
+        <div>
+          <div class="parceria-titulo">Roteirização para público não especialista</div>
+          <div class="parceria-desc">Os roteiros foram desenvolvidos para traduzir conteúdo técnico e acadêmico em linguagem acessível, sem perda de precisão. Cada episódio tem estrutura narrativa própria, com dados, exemplos concretos e depoimentos do especialista entrevistado.</div>
+        </div>
+      </div>
+      <div class="parceria-item rev rev-d4">
+        <div class="parceria-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 21h8M12 17v4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="parceria-titulo">Coordenação de gravação e pós-produção</div>
+          <div class="parceria-desc">Com os roteiros aprovados, o processo avançou para a coordenação entre a equipe pedagógica da Univesp e a equipe técnica da TV Cultura. Na pós-produção, foram acompanhadas a implementação das legendas, da interpretação em Libras e da audiodescrição em todos os vídeos.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESULTADOS ══ -->
+<section class="sec sec-escura rev">
+  <div class="sec-max">
+    <span class="sec-label sec-label-claro">Entregáveis e impacto</span>
+    <h2 class="sec-titulo sec-titulo-claro">Resultados e<br><em>impacto</em></h2>
+
+    <div class="resultados-big">
+      <div class="res-stat">
+        <div class="res-val">13</div>
+        <div class="res-desc">Vídeos produzidos</div>
+      </div>
+      <div class="res-stat">
+        <div class="res-val">3</div>
+        <div class="res-desc">Séries temáticas</div>
+      </div>
+      <div class="res-stat">
+        <div class="res-val">3</div>
+        <div class="res-desc">Modalidades de acessibilidade</div>
+      </div>
+      <div class="res-stat">
+        <div class="res-val">USP</div>
+        <div class="res-desc">Especialistas das três séries</div>
+      </div>
+    </div>
+
+    <div class="resultados-qualitativos">
+      <div class="res-qual">
+        <div class="res-qual-titulo">Roteiros para público geral</div>
+        <div class="res-qual-desc">Os 13 roteiros das três séries foram escritos para comunicar temas técnicos e acadêmicos a espectadores sem formação específica na área. Cada episódio articula dados de pesquisa, exemplos concretos e a perspectiva dos especialistas entrevistados.</div>
+      </div>
+      <div class="res-qual">
+        <div class="res-qual-titulo">Coerência entre conteúdo e forma</div>
+        <div class="res-qual-desc">Vídeos sobre inclusão produzidos com acessibilidade completa desde o início do projeto. Legendas, Libras e audiodescrição foram especificadas na fase de planejamento e acompanhadas ao longo de toda a pós-produção.</div>
+      </div>
+      <div class="res-qual">
+        <div class="res-qual-titulo">Documentação de inovação pública</div>
+        <div class="res-qual-desc">A série DigitaVox USP registra em formato audiovisual o processo de desenvolvimento da versão universitária de uma tecnologia assistiva de uso gratuito. O aplicativo funciona com um teclado padrão ABNT2 e um cabo OTG de cerca de R$ 30, frente a R$ 16.000 de soluções equivalentes disponíveis no mercado.</div>
+      </div>
+      <div class="res-qual">
+        <div class="res-qual-titulo">Alcance institucional</div>
+        <div class="res-qual-desc">As séries estão hospedadas no repositório oficial da Univesp e na videoteca da SEDPcD, com acesso gratuito para toda a rede pública paulista, garantido por política institucional.</div>
+      </div>
+    </div>
+
+    <div class="live-banner">
+      <div>
+        <div class="live-texto">Série 01 · Turismo Inclusivo<br>no repositório da Univesp</div>
+        <div class="live-sub">apps.univesp.br/repositorio/turismo inclusivo</div>
+      </div>
+      <a class="live-btn" href="https://apps.univesp.br/repositorio/turismo%20inclusivo/index.html" target="_blank" rel="noopener">
+        Abrir a série
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+      </a>
+    </div>
+    <div class="live-banner">
+      <div>
+        <div class="live-texto">Série 02 · Moda Inclusiva<br>no repositório da Univesp</div>
+        <div class="live-sub">apps.univesp.br/repositorio/moda-inclusiva</div>
+      </div>
+      <a class="live-btn" href="https://apps.univesp.br/repositorio/digitavox/index.html" target="_blank" rel="noopener">
+        Abrir a série
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+      </a>
+    </div>
+    <div class="live-banner">
+      <div>
+        <div class="live-texto">Série 03 · DigitaVox USP<br>no repositório da Univesp</div>
+        <div class="live-sub">apps.univesp.br/repositorio/digitavox</div>
+      </div>
+      <a class="live-btn" href="https://apps.univesp.br/repositorio/digitavox/index.html" target="_blank" rel="noopener">
+        Abrir a série
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAIXA IMPACTO ══ -->
+<section style="background:var(--verde2); padding:5rem 4.5rem; text-align:center;">
+  <div style="max-width:720px; margin:0 auto;">
+    <p style="font-family:var(--titulo); font-size:clamp(1.5rem,2.8vw,2.2rem); font-style:italic; color:var(--creme); line-height:1.5;">
+      Treze vídeos, três séries, acessibilidade integral desde o planejamento. Conhecimento produzido em universidade pública, disponível gratuitamente para toda a rede paulista.
+    </p>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer-case">
+  <div class="footer-case-inner">
+    <div class="footer-case-volta">Voltar ao portfólio</div>
+    <nav class="footer-case-nav">
+      <a href="portfolio_v3.html">Portfólio</a>
+      <a href="portfolio_v3.html#cases">Outros projetos</a>
+      <a href="portfolio_v3.html#contato">Contato</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+// Barra de progresso
+window.addEventListener('scroll', () => {
+  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  document.getElementById('prog').style.width = (p * 100) + '%';
+});
+
+// Revelar ao scroll
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('vis');
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

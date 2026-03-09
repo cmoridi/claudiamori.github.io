@@ -1,0 +1,2171 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O Legado de Nova Esperança · Claudia Mori</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --preto: #11100F;
+      --borgonha: #5D1C34;
+      --ouro: #A67D44;
+      --salvia: #899481;
+      --areia: #CDBCAB;
+      --creme: #EFE9E1;
+      --fundo: #141414;
+      --fundo-alt: #1E1E1C;
+      --texto: #EFE9E1;
+      --t60: rgba(239, 233, 225, .65);
+      --t35: rgba(239, 233, 225, .35);
+      --t12: rgba(239, 233, 225, .1);
+      --titulo: 'Playfair Display', Georgia, serif;
+      --corpo: 'Jost', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--fundo);
+      color: var(--texto);
+      font-family: var(--corpo);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* PROGRESSO */
+    #prog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      height: 3px;
+      width: 0;
+      background: var(--ouro);
+      transition: width .1s linear;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3.5rem;
+      background: rgba(20, 20, 20, .96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--t12);
+    }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      text-decoration: none;
+      color: var(--t60);
+      font-size: .68rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+
+    .nav-back:hover {
+      color: var(--creme);
+    }
+
+    .nav-back svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .nav-projeto {
+      font-family: var(--titulo);
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--creme);
+    }
+
+    .nav-cta {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--preto);
+      padding: .55rem 1.5rem;
+      text-decoration: none;
+      transition: background .2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--borgonha);
+    }
+
+    /* HERO DO CASE */
+    .hero-case {
+      padding-top: 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 88vh;
+    }
+
+    .hero-case-esq {
+      background: var(--preto);
+      padding: 6rem 4.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-case-esq::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(93, 28, 52, .4) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-num {
+      font-family: var(--titulo);
+      font-size: 8rem;
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(239, 233, 225, .06);
+      line-height: 1;
+      position: absolute;
+      top: 3.5rem;
+      right: 3.5rem;
+    }
+
+    .hero-cat {
+      font-size: .65rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ouro);
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+
+    .hero-titulo-case {
+      font-family: var(--titulo);
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 400;
+      line-height: .95;
+      color: var(--creme);
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-titulo-case em {
+      font-style: italic;
+      display: block;
+      color: var(--ouro);
+    }
+
+    .hero-subtitulo {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(239, 233, 225, .75);
+      line-height: 1.9;
+      max-width: 380px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(239, 233, 225, .1);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+    }
+
+    .meta-label {
+      font-size: .58rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(239, 233, 225, .55);
+    }
+
+    .meta-valor {
+      font-size: .8rem;
+      color: rgba(239, 233, 225, .7);
+      font-weight: 400;
+    }
+
+    .hero-case-dir {
+      background: #1A1A18;
+      padding: 6rem 4.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .resumo-label {
+      font-size: .65rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ouro);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .resumo-frase {
+      font-family: var(--titulo);
+      font-size: 1.9rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--creme);
+      line-height: 1.45;
+      border-left: 3px solid var(--ouro);
+      padding-left: 1.8rem;
+    }
+
+    .hero-nums {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid rgba(239, 233, 225, .1);
+    }
+
+    .hero-n {
+      padding: 1.8rem 2rem;
+      border-right: 1px solid rgba(239, 233, 225, .1);
+      border-bottom: 1px solid rgba(239, 233, 225, .1);
+    }
+
+    .hero-n:nth-child(even) {
+      border-right: none;
+    }
+
+    .hero-n:nth-child(3),
+    .hero-n:nth-child(4) {
+      border-bottom: none;
+    }
+
+    .n-val {
+      font-family: var(--titulo);
+      font-size: 2.6rem;
+      font-style: italic;
+      color: var(--ouro);
+      line-height: 1;
+    }
+
+    .n-desc {
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--t35);
+      margin-top: .4rem;
+    }
+
+    /* SEÇÕES COMUNS */
+    .sec {
+      padding: 7rem 4.5rem;
+    }
+
+    .sec-alt {
+      background: var(--fundo-alt);
+    }
+
+    .sec-escura {
+      background: var(--preto);
+    }
+
+    .sec-borgonha {
+      background: var(--borgonha);
+    }
+
+    .sec-max {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .sec-label {
+      font-size: .65rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ouro);
+      font-weight: 500;
+      display: block;
+      margin-bottom: .8rem;
+    }
+
+    .sec-label-claro {
+      color: rgba(239, 233, 225, .65);
+    }
+
+    .sec-titulo-claro {
+      color: var(--creme);
+    }
+
+    .sec-titulo-claro em {
+      color: var(--areia);
+    }
+
+    .sec-corpo-claro {
+      color: rgba(239, 233, 225, .8);
+    }
+
+    .sec-titulo {
+      font-family: var(--titulo);
+      font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--creme);
+    }
+
+    .sec-titulo em {
+      font-style: italic;
+      color: #C47A8E;
+    }
+
+    .sec-corpo {
+      font-size: 1.08rem;
+      font-weight: 300;
+      color: var(--t60);
+      line-height: 1.95;
+    }
+
+    /* ── PROBLEMA ── */
+    .problema-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+      margin-top: 5rem;
+    }
+
+    .diagnostico-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .diag-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--t12);
+    }
+
+    .diag-item:first-child {
+      border-top: 1px solid var(--t12);
+    }
+
+    .diag-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border: 1px solid var(--t12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .diag-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .diag-titulo {
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--creme);
+      font-weight: 600;
+      margin-bottom: .4rem;
+    }
+
+    .diag-desc {
+      font-size: .95rem;
+      color: var(--t60);
+      line-height: 1.75;
+    }
+
+    .semanas-vis {
+      display: grid;
+      gap: 0;
+    }
+
+    .sem-linha {
+      display: grid;
+      grid-template-columns: 80px 1fr 120px;
+      align-items: center;
+      gap: 1.5rem;
+      padding: .9rem 0;
+      border-bottom: 1px solid var(--t12);
+    }
+
+    .sem-nome {
+      font-size: .62rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--t35);
+    }
+
+    .sem-barra-wrap {
+      height: 6px;
+      background: rgba(17, 16, 15, .06);
+      position: relative;
+    }
+
+    .sem-barra {
+      height: 100%;
+      background: var(--ouro);
+    }
+
+    .sem-barra.critica {
+      background: var(--borgonha);
+    }
+
+    .sem-barra.baixa {
+      background: var(--areia);
+    }
+
+    .sem-val {
+      font-family: var(--titulo);
+      font-size: .9rem;
+      font-style: italic;
+      color: var(--t60);
+      text-align: right;
+    }
+
+    .problema-conclusao {
+      margin-top: 4rem;
+      padding: 2.5rem 3rem;
+      background: var(--preto);
+      color: var(--creme);
+    }
+
+    .problema-conclusao p {
+      font-family: var(--titulo);
+      font-size: 1.3rem;
+      font-style: italic;
+      line-height: 1.55;
+    }
+
+    .problema-conclusao strong {
+      color: var(--ouro);
+      font-style: normal;
+    }
+
+    /* ── DECISÃO PEDAGÓGICA ── */
+    .tres-pilares {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      background: var(--t12);
+      margin-top: 4rem;
+    }
+
+    .pilar {
+      background: var(--fundo);
+      padding: 3rem 2.5rem;
+    }
+
+    .pilar-num {
+      font-family: var(--titulo);
+      font-size: 3rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--areia);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .pilar-titulo {
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--creme);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+
+    .pilar-lista {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+    }
+
+    .pilar-lista li {
+      font-size: .95rem;
+      color: var(--t60);
+      padding-left: 1.2rem;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .pilar-lista li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: .65em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--ouro);
+    }
+
+    .decisao-destaque {
+      margin-top: 2px;
+      background: var(--borgonha);
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .decisao-destaque p {
+      font-size: 1rem;
+      color: rgba(239, 233, 225, .8);
+      line-height: 1.85;
+    }
+
+    .decisao-destaque strong {
+      color: var(--creme);
+      font-weight: 500;
+    }
+
+    /* ── NARRATIVA ── */
+    .narrativa-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+      margin-top: 4rem;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .tl-item {
+      display: flex;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(239, 233, 225, .08);
+    }
+
+    .tl-ano {
+      flex-shrink: 0;
+      width: 60px;
+      font-family: var(--titulo);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--ouro);
+    }
+
+    .tl-conteudo-titulo {
+      font-size: .68rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(239, 233, 225, .7);
+      font-weight: 500;
+      margin-bottom: .5rem;
+    }
+
+    .tl-conteudo-desc {
+      font-size: .97rem;
+      color: rgba(239, 233, 225, .78);
+      line-height: 1.8;
+    }
+
+    .narrativa-papel {
+      padding: 3rem;
+      background: rgba(93, 28, 52, .5);
+    }
+
+    .papel-titulo {
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--ouro);
+      margin-bottom: 1.2rem;
+    }
+
+    .papel-texto {
+      font-family: var(--titulo);
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--creme);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .papel-missoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    .missao-tag {
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .35rem .9rem;
+      border: 1px solid rgba(239, 233, 225, .35);
+      color: rgba(239, 233, 225, .75);
+    }
+
+    /* ── 7 SEMANAS ── */
+    .semanas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--t12);
+      margin-top: 4rem;
+    }
+
+    .sem-card {
+      background: var(--fundo-alt);
+      padding: 2.2rem 2.5rem;
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      transition: background .2s;
+    }
+
+    .sem-card:hover {
+      background: var(--fundo);
+    }
+
+    .sem-n {
+      font-family: var(--titulo);
+      font-size: 2.2rem;
+      font-style: italic;
+      color: var(--areia);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 44px;
+    }
+
+    .sem-tema {
+      font-size: .6rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ouro);
+      margin-bottom: .4rem;
+    }
+
+    .sem-missao {
+      font-family: var(--titulo);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--preto);
+      margin-bottom: .4rem;
+    }
+
+    .sem-comp {
+      font-size: .88rem;
+      color: var(--t60);
+      line-height: 1.7;
+    }
+
+    /* ── 5 FASES ── */
+    .fases-lista {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .fase {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr;
+      align-items: center;
+      background: var(--fundo);
+      padding: 2.5rem 3rem;
+      gap: 4rem;
+      transition: background .2s;
+    }
+
+    .fase:hover {
+      background: var(--fundo-alt);
+    }
+
+    .fase-n {
+      font-family: var(--titulo);
+      font-size: 3.5rem;
+      font-style: italic;
+      color: var(--areia);
+      line-height: 1;
+    }
+
+    .fase-titulo {
+      font-size: .7rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--creme);
+      margin-bottom: .5rem;
+    }
+
+    .fase-desc {
+      font-size: .97rem;
+      color: var(--t60);
+      line-height: 1.75;
+    }
+
+    .fase-significado {
+      font-size: .93rem;
+      color: #C47A8E;
+      font-style: italic;
+      line-height: 1.7;
+      padding-left: 2rem;
+      border-left: 2px solid var(--areia);
+    }
+
+    /* ── MECÂNICAS ── */
+    .mecanicas-grade {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--t12);
+      margin-top: 4rem;
+    }
+
+    .mecanica {
+      background: var(--preto);
+      padding: 3rem;
+    }
+
+    .mec-titulo {
+      font-size: .7rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ouro);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+
+    .mec-desc {
+      font-size: 1rem;
+      color: rgba(239, 233, 225, .8);
+      line-height: 1.85;
+    }
+
+    /* ── METODOLOGIA DE CONSTRUÇÃO ── */
+    .metodologia-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--t12);
+      margin-top: 4rem;
+    }
+
+    .etapa {
+      background: var(--fundo-alt);
+      padding: 2.5rem 2rem;
+    }
+
+    .etapa-n {
+      font-family: var(--titulo);
+      font-size: 2.5rem;
+      font-style: italic;
+      color: var(--ouro);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .etapa-titulo {
+      font-size: .65rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--creme);
+      margin-bottom: .7rem;
+    }
+
+    .etapa-desc {
+      font-size: .9rem;
+      color: var(--t60);
+      line-height: 1.75;
+    }
+
+    /* ── PONTUAÇÃO ── */
+    .pontuacao-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      margin-top: 4rem;
+    }
+
+    .pont-tabela {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .pont-titulo-tabela {
+      font-size: .65rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--borgonha);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      padding-bottom: .8rem;
+      border-bottom: 1px solid var(--t12);
+    }
+
+    .pont-linha {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      padding: .9rem 0;
+      border-bottom: 1px solid var(--t12);
+    }
+
+    .pont-tentativa {
+      font-size: .88rem;
+      color: var(--t60);
+    }
+
+    .pont-pts {
+      font-family: var(--titulo);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--ouro);
+    }
+
+    .pont-faixas {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .faixa {
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faixa.insuf {
+      background: rgba(93, 28, 52, .08);
+      border-left: 3px solid var(--borgonha);
+    }
+
+    .faixa.bom {
+      background: rgba(166, 125, 68, .08);
+      border-left: 3px solid var(--ouro);
+    }
+
+    .faixa.exce {
+      background: rgba(137, 148, 129, .08);
+      border-left: 3px solid var(--salvia);
+    }
+
+    .faixa-nivel {
+      font-size: .6rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--t35);
+      margin-bottom: .3rem;
+    }
+
+    .faixa-pts {
+      font-family: var(--titulo);
+      font-size: 1.1rem;
+      font-style: italic;
+    }
+
+    .faixa-nota {
+      font-size: .8rem;
+      color: var(--t60);
+    }
+
+    /* ── RESULTADOS ── */
+    .resultados-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      margin-bottom: 4rem;
+      align-items: start;
+    }
+
+    .big-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: rgba(239, 233, 225, .08);
+    }
+
+    .big-stat {
+      padding: 2.5rem;
+    }
+
+    .big-val {
+      font-family: var(--titulo);
+      font-size: 3.5rem;
+      font-style: italic;
+      color: var(--ouro);
+      line-height: 1;
+    }
+
+    .big-label {
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(239, 233, 225, .6);
+      margin-top: .4rem;
+    }
+
+    .distribuicao {
+      margin-top: 4rem;
+    }
+
+    .dist-titulo {
+      font-size: .65rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(239, 233, 225, .65);
+      margin-bottom: 1.5rem;
+    }
+
+    .dist-barras {
+      display: flex;
+      align-items: flex-end;
+      gap: .5rem;
+      height: 100px;
+    }
+
+    .dist-barra-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .dist-barra {
+      width: 100%;
+      background: rgba(166, 125, 68, .3);
+      position: relative;
+      transition: background .2s;
+    }
+
+    .dist-barra:hover {
+      background: var(--ouro);
+    }
+
+    .dist-barra-val {
+      font-family: var(--titulo);
+      font-size: .75rem;
+      font-style: italic;
+      color: rgba(239, 233, 225, .65);
+    }
+
+    .dist-range {
+      font-size: .55rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(239, 233, 225, .5);
+    }
+
+    .areas-dificil {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+
+    .area-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      background: rgba(93, 28, 52, .3);
+    }
+
+    .area-nome {
+      font-size: .8rem;
+      color: rgba(239, 233, 225, .6);
+    }
+
+    .area-badge {
+      font-size: .58rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--areia);
+      background: rgba(239, 233, 225, .08);
+      padding: .25rem .7rem;
+    }
+
+    /* Segunda rodada */
+    .segunda-rodada {
+      margin-top: 5rem;
+      padding-top: 5rem;
+      border-top: 1px solid rgba(239, 233, 225, .08);
+    }
+
+    .rodada-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+    }
+
+    .dimensoes {
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+
+    .dim-linha {
+      display: grid;
+      grid-template-columns: 140px 1fr 60px;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .dim-nome {
+      font-size: .72rem;
+      color: rgba(239, 233, 225, .75);
+    }
+
+    .dim-barra-wrap {
+      height: 4px;
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .dim-barra {
+      height: 100%;
+      background: var(--ouro);
+    }
+
+    .dim-val {
+      font-family: var(--titulo);
+      font-size: .85rem;
+      font-style: italic;
+      color: var(--ouro);
+      text-align: right;
+    }
+
+    .pontos-forte {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .ponto {
+      padding: 1.2rem 1.5rem;
+    }
+
+    .ponto.forte {
+      background: rgba(137, 148, 129, .2);
+      border-left: 3px solid var(--salvia);
+    }
+
+    .ponto.atencao {
+      background: rgba(93, 28, 52, .3);
+      border-left: 3px solid var(--borgonha);
+    }
+
+    .ponto-titulo {
+      font-size: .65rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(239, 233, 225, .75);
+      margin-bottom: .3rem;
+    }
+
+    .ponto-pct {
+      font-family: var(--titulo);
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--creme);
+    }
+
+    /* ── VOZES ── */
+    .vozes-grade {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      background: var(--t12);
+      margin-top: 4rem;
+    }
+
+    .voz {
+      background: var(--fundo-alt);
+      padding: 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .voz-aspas {
+      font-family: var(--titulo);
+      font-size: 2.5rem;
+      color: var(--areia);
+      line-height: .8;
+    }
+
+    .voz-texto {
+      font-size: .97rem;
+      font-style: italic;
+      color: var(--t60);
+      line-height: 1.85;
+    }
+
+    .voz-fonte {
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--t35);
+    }
+
+    /* ── APRENDIZADOS / MELHORIAS ── */
+    .melhorias-grade {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--t12);
+      margin-top: 4rem;
+    }
+
+    .melhoria {
+      background: var(--fundo);
+      padding: 3rem;
+    }
+
+    .melhoria-icone {
+      width: 36px;
+      height: 2px;
+      background: var(--ouro);
+      margin-bottom: 2rem;
+    }
+
+    .melhoria-titulo {
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--creme);
+      margin-bottom: .8rem;
+    }
+
+    .melhoria-desc {
+      font-size: .97rem;
+      color: var(--t60);
+      line-height: 1.8;
+    }
+
+    .lacunas {
+      margin-top: 2px;
+      background: var(--borgonha);
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .lacuna-titulo {
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(239, 233, 225, .7);
+      margin-bottom: 1rem;
+    }
+
+    .lacuna-lista {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+
+    .lacuna-lista li {
+      font-size: .95rem;
+      color: rgba(239, 233, 225, .85);
+      padding-left: 1.2rem;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .lacuna-lista li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: .65em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(239, 233, 225, .3);
+    }
+
+    /* FOOTER DO CASE */
+    .footer-case {
+      background: var(--preto);
+      padding: 5rem 4.5rem 3rem;
+      border-top: 1px solid rgba(239, 233, 225, .06);
+    }
+
+    .footer-case-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+    }
+
+    .footer-case-volta {
+      font-family: var(--titulo);
+      font-size: 2rem;
+      font-style: italic;
+      color: rgba(239, 233, 225, .45);
+    }
+
+    .footer-case-nav {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .footer-case-nav a {
+      font-size: .65rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(239, 233, 225, .55);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-case-nav a:hover {
+      color: var(--creme);
+    }
+
+    /* ANIMAÇÕES */
+    .rev {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+
+    .rev.vis {
+      opacity: 1;
+      transform: none;
+    }
+
+    .rev-d1 {
+      transition-delay: .1s;
+    }
+
+    .rev-d2 {
+      transition-delay: .2s;
+    }
+
+    .rev-d3 {
+      transition-delay: .3s;
+    }
+
+    /* NOTA DE EDIÇÃO */
+    .nota-editor {
+      background: rgba(166, 125, 68, .1);
+      border: 1px dashed var(--ouro);
+      padding: .8rem 1.2rem;
+      font-size: .75rem;
+      color: var(--ouro);
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    /* RESPONSIVO */
+    @media(max-width:1024px) {
+      nav {
+        padding: 0 1.5rem;
+      }
+
+      .hero-case {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-case-esq {
+        padding: 5rem 2.5rem;
+        min-height: 50vh;
+      }
+
+      .hero-case-dir {
+        padding: 4rem 2.5rem;
+      }
+
+      .sec {
+        padding: 5rem 2rem;
+      }
+
+      .problema-grid,
+      .narrativa-wrap,
+      .resultados-header,
+      .rodada-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .tres-pilares,
+      .metodologia-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .semanas-grid,
+      .mecanicas-grade,
+      .melhorias-grade,
+      .vozes-grade {
+        grid-template-columns: 1fr;
+      }
+
+      .fase {
+        grid-template-columns: 60px 1fr;
+      }
+
+      .fase-significado {
+        grid-column: 2;
+      }
+
+      .pontuacao-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .lacunas {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-case-inner {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="prog"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 5l-7 7 7 7" />
+      </svg>
+      Voltar ao portfólio
+    </a>
+    <span class="nav-projeto">O Legado de Nova Esperança</span>
+    <a href="index.html#contato" class="nav-cta">Conversar</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero-case">
+    <div class="hero-case-esq">
+      <div class="hero-num">01</div>
+      <div>
+        <div class="hero-cat">UNIVESP · Ciências do Ambiente · Engenharia de Produção</div>
+        <h1 class="hero-titulo-case">O Legado de<br><em>Nova Esperança</em></h1>
+        <p class="hero-subtitulo">Uma atividade avaliativa projetada para ir além do conhecimento declarativo: avaliação
+          formativa, raciocínio auditável e melhoria contínua informada por dados.</p>
+      </div>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Instituição</span>
+          <span class="meta-valor">UNIVESP</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Disciplina</span>
+          <span class="meta-valor">Ciências do Ambiente</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Piloto</span>
+          <span class="meta-valor">2025</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Formato</span>
+          <span class="meta-valor">Jogo digital · Unity</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-case-dir">
+      <div>
+        <span class="resumo-label">Em uma frase</span>
+        <p class="resumo-frase">Transformar a avaliação semanal em uma experiência investigativa onde o raciocínio é o
+          objeto avaliado, não a resposta final.</p>
+      </div>
+      <div class="hero-nums">
+        <div class="hero-n">
+          <div class="n-val">~2.000</div>
+          <div class="n-desc">Alunos no piloto em larga escala</div>
+        </div>
+        <div class="hero-n">
+          <div class="n-val">1.749</div>
+          <div class="n-desc">Participantes na análise da prova final</div>
+        </div>
+        <div class="hero-n">
+          <div class="n-val">7,81</div>
+          <div class="n-desc">Média na prova final (mediana 8,0)</div>
+        </div>
+        <div class="hero-n">
+          <div class="n-val">4,04</div>
+          <div class="n-desc">Média de satisfação Likert (escala de 5)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ O PROBLEMA ══════════════════════ -->
+  <section class="sec rev">
+    <div class="sec-max">
+      <span class="sec-label">O ponto de partida</span>
+      <h2 class="sec-titulo">Uma questão de design<br>de <em>avaliação</em></h2>
+
+      <div class="problema-grid">
+        <div>
+          <p class="sec-corpo" style="margin-bottom:2.5rem;">A disciplina de Ciências do Ambiente, na UNIVESP, opera em
+            formato 100% EaD assíncrono com turmas de até 2.000 alunos. Como em boa parte das disciplinas EaD nessa
+            escala, o padrão de acesso reflete um desafio estrutural do modelo: concentração nas primeiras semanas e
+            queda progressiva de engajamento ao longo do semestre. O tempo efetivo de estudo ficava bem abaixo do
+            esperado para uma disciplina de 80 horas.</p>
+          <p class="sec-corpo">O diagnóstico apontou para uma oportunidade de redesign. Atividades avaliativas com pouco
+            contexto e baseadas em múltipla escolha isolada não exigem raciocínio situado — e não deixam rastro do
+            processo de aprendizagem. Sem reconfigurar o formato avaliativo, seria difícil promover engajamento real ou
+            coletar dados que permitissem melhorias fundamentadas.</p>
+          <div class="problema-conclusao rev">
+            <p>A questão central: <strong>como criar uma avaliação formativa</strong>, em larga escala, que torne o
+              raciocínio do aluno visível e permita <strong>decisões de melhoria baseadas em dados</strong>?</p>
+          </div>
+        </div>
+        <div>
+          <p class="sec-corpo"
+            style="margin-bottom:1.5rem; font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; color:var(--t35);">
+            Padrão típico de acesso em EaD assíncrona por semana</p>
+          <div class="semanas-vis">
+            <div class="sem-linha">
+              <span class="sem-nome">Sem 1</span>
+              <div class="sem-barra-wrap">
+                <div class="sem-barra critica" style="width:100%"></div>
+              </div>
+              <span class="sem-val">~100%</span>
+            </div>
+            <div class="sem-linha">
+              <span class="sem-nome">Sem 2</span>
+              <div class="sem-barra-wrap">
+                <div class="sem-barra baixa" style="width:30%"></div>
+              </div>
+              <span class="sem-val">~30%</span>
+            </div>
+            <div class="sem-linha">
+              <span class="sem-nome">Sem 3</span>
+              <div class="sem-barra-wrap">
+                <div class="sem-barra baixa" style="width:22%"></div>
+              </div>
+              <span class="sem-val">~22%</span>
+            </div>
+            <div class="sem-linha">
+              <span class="sem-nome">Sem 4</span>
+              <div class="sem-barra-wrap">
+                <div class="sem-barra baixa" style="width:18%"></div>
+              </div>
+              <span class="sem-val">~18%</span>
+            </div>
+            <div class="sem-linha">
+              <span class="sem-nome">Sem 5</span>
+              <div class="sem-barra-wrap">
+                <div class="sem-barra baixa" style="width:20%"></div>
+              </div>
+              <span class="sem-val">~20%</span>
+            </div>
+            <div class="sem-linha">
+              <span class="sem-nome">Sem 7-8</span>
+              <div class="sem-barra-wrap">
+                <div class="sem-barra critica" style="width:65%"></div>
+              </div>
+              <span class="sem-val">~65%</span>
+            </div>
+          </div>
+          <div class="diagnostico-lista" style="margin-top:2.5rem;">
+            <div class="diag-item">
+              <div class="diag-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--borgonha)" stroke-width="1.5">
+                  <path
+                    d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                </svg>
+              </div>
+              <div>
+                <div class="diag-titulo">Avaliação sem contexto situado</div>
+                <div class="diag-desc">Questões de múltipla escolha com pouco contexto não exigem análise, tampouco
+                  revelam o raciocínio por trás da resposta.</div>
+              </div>
+            </div>
+            <div class="diag-item">
+              <div class="diag-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--borgonha)" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <div>
+                <div class="diag-titulo">Pouca geração de dados de aprendizagem</div>
+                <div class="diag-desc">Sem rastro do processo, é difícil identificar onde o aluno tem dificuldade e
+                  tomar decisões pedagógicas fundamentadas.</div>
+              </div>
+            </div>
+            <div class="diag-item">
+              <div class="diag-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--borgonha)" stroke-width="1.5">
+                  <line x1="18" y1="20" x2="18" y2="10" />
+                  <line x1="12" y1="20" x2="12" y2="4" />
+                  <line x1="6" y1="20" x2="6" y2="14" />
+                </svg>
+              </div>
+              <div>
+                <div class="diag-titulo">Pressão institucional por qualidade</div>
+                <div class="diag-desc">Novas diretrizes do MEC para EaD e demandas do mercado exigem egressos com
+                  competências aplicadas, não apenas conhecimento declarativo.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ DECISÃO PEDAGÓGICA ══════════════════════ -->
+  <section class="sec sec-alt rev">
+    <div class="sec-max">
+      <span class="sec-label">A decisão central</span>
+      <h2 class="sec-titulo">Por que um jogo<br>e não outra <em>atividade</em>?</h2>
+      <p class="sec-corpo" style="max-width:680px; margin-top:1.2rem;">A questão não era criar algo "diferente". Era
+        criar uma atividade onde o raciocínio fosse incontornável: onde o processo de análise ficasse registrado, onde
+        cada decisão do aluno gerasse dado pedagógico utilizável. O jogo foi a resposta para três desafios simultâneos.
+      </p>
+
+      <div class="tres-pilares">
+        <div class="pilar rev rev-d1">
+          <div class="pilar-num">1</div>
+          <div class="pilar-titulo">Avaliação formativa em escala</div>
+          <ul class="pilar-lista">
+            <li>O processo investigativo, não apenas a resposta final, é o objeto avaliado</li>
+            <li>Múltiplas tentativas com decréscimo progressivo: erro como aprendizado</li>
+            <li>Feedback imediato integrado à experiência, sem depender do professor</li>
+          </ul>
+        </div>
+        <div class="pilar rev rev-d2">
+          <div class="pilar-num">2</div>
+          <div class="pilar-titulo">Raciocínio auditável por dados</div>
+          <ul class="pilar-lista">
+            <li>Cada pista coletada e cada hipótese construída ficam registradas</li>
+            <li>O Quadro de Hipóteses é o rastro visível do pensamento do aluno</li>
+            <li>Dados granulares permitem identificar onde a aprendizagem falha</li>
+          </ul>
+        </div>
+        <div class="pilar rev rev-d3">
+          <div class="pilar-num">3</div>
+          <div class="pilar-titulo">Engajamento como consequência</div>
+          <ul class="pilar-lista">
+            <li>Narrativa imersiva que cria motivação intrínseca ao longo de 7 semanas</li>
+            <li>Aluno como protagonista investigador, não espectador passivo</li>
+            <li>Contexto situado que conecta teoria e prática ambiental</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="decisao-destaque rev">
+        <div style="flex-shrink:0;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+              stroke="rgba(239,233,225,.3)" stroke-width="1.5" />
+          </svg>
+        </div>
+        <p>O diferencial: <strong>avaliação formativa integrada à narrativa</strong> + rastro auditável do raciocínio +
+          dados que informam melhorias contínuas + alinhamento com as novas exigências de qualidade na EaD.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ METODOLOGIA DE CONSTRUÇÃO ══════════════════════ -->
+  <section class="sec rev">
+    <div class="sec-max">
+      <span class="sec-label">Como o jogo foi construído</span>
+      <h2 class="sec-titulo">4 etapas antes de<br>escrever uma linha <em>de código</em></h2>
+      <p class="sec-corpo" style="max-width:620px; margin-top:1.2rem;">O design instrucional precedeu o desenvolvimento
+        técnico. Cada decisão narrativa e mecânica do jogo foi derivada de decisões pedagógicas documentadas.</p>
+
+      <div class="metodologia-grid">
+        <div class="etapa rev rev-d1">
+          <div class="etapa-n">1</div>
+          <div class="etapa-titulo">Análise do perfil do egresso</div>
+          <div class="etapa-desc">Estudo das competências esperadas do engenheiro de produção. As missões precisariam
+            espelhar o que o mercado exige.</div>
+        </div>
+        <div class="etapa rev rev-d2">
+          <div class="etapa-n">2</div>
+          <div class="etapa-titulo">Mapeamento da ementa</div>
+          <div class="etapa-desc">Estruturação dos 7 temas semanais de conteúdo. Cada semana virou uma missão com nome e
+            objetivo específico.</div>
+        </div>
+        <div class="etapa rev rev-d3">
+          <div class="etapa-n">3</div>
+          <div class="etapa-titulo">Objetivos de aprendizagem</div>
+          <div class="etapa-desc">Definição de competências específicas por tema, com base na Taxonomia de Bloom,
+            priorizando análise e avaliação.</div>
+        </div>
+        <div class="etapa rev rev-d3" style="transition-delay:.4s">
+          <div class="etapa-n">4</div>
+          <div class="etapa-titulo">Desenho de missões</div>
+          <div class="etapa-desc">Criação de cenários investigativos alinhados a cada competência. A narrativa como
+            mecanismo pedagógico, não como decoração.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ A NARRATIVA ══════════════════════ -->
+  <section class="sec sec-escura rev">
+    <div class="sec-max">
+      <span class="sec-label sec-label-claro">A narrativa</span>
+      <h2 class="sec-titulo sec-titulo-claro">Uma ponte entre<br><em>2024 e 2080</em></h2>
+      <p class="sec-corpo sec-corpo-claro" style="max-width:620px; margin-top:1.2rem;">A narrativa não é apenas um
+        recurso estético. Ela é o mecanismo pedagógico que torna visível a relação causa-efeito em questões ambientais:
+        suas decisões técnicas de hoje geram consequências mensuráveis no futuro.</p>
+
+      <div class="narrativa-wrap">
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-ano">2024</div>
+            <div>
+              <div class="tl-conteudo-titulo">O presente do aluno</div>
+              <div class="tl-conteudo-desc">O aluno atua como consultor ambiental contratado para analisar o Complexo
+                Industrial Nova Esperança, um empreendimento fictício com situações reais de gestão: licenciamento,
+                recursos hídricos, resíduos, preservação de ecossistemas. Contexto brasileiro com biomas e legislação
+                aplicáveis.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-ano">2080</div>
+            <div>
+              <div class="tl-conteudo-titulo">Os e-mails do futuro</div>
+              <div class="tl-conteudo-desc">Cada semana começa com uma comunicação de um gestor ambiental do ano 2080,
+                descrevendo crises graves que estão ocorrendo. Crise hídrica severa. Colapso de ecossistemas.
+                Contaminação de solo e água. O aluno precisa encontrar a causa-raiz no passado.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-ano" style="color:var(--salvia);">Missão</div>
+            <div>
+              <div class="tl-conteudo-titulo">O papel do aluno</div>
+              <div class="tl-conteudo-desc">Analisar documentos técnicos do presente e do futuro, identificar
+                negligências ou decisões equivocadas que causaram os problemas futuros, construir o quadro de hipóteses
+                e propor soluções. O raciocínio inteiro fica registrado e auditável.</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="narrativa-papel">
+            <div class="papel-titulo">As missões da disciplina</div>
+            <p class="papel-texto">"Florum Vitalis", "Bolha Tóxica", "Córrego Morto", "Resíduos Tóxicos", "Expansão
+              Desordenada", "Falha de Licenciamento"</p>
+            <p style="font-size:.9rem; color:rgba(239,233,225,.75); line-height:1.8; margin-bottom:1.5rem;">Cada nome de
+              missão é uma decisão pedagógica: cria urgência, antecipa o tema da semana e ativa a curiosidade antes
+              mesmo de o aluno abrir o primeiro documento.</p>
+            <div class="papel-missoes">
+              <span class="missao-tag">Ecologia</span>
+              <span class="missao-tag">Ciclos Biogeoquímicos</span>
+              <span class="missao-tag">Recursos Hídricos</span>
+              <span class="missao-tag">Resíduos Sólidos</span>
+              <span class="missao-tag">Poluição do Ar</span>
+              <span class="missao-tag">Licenciamento</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ TUTORIAL INTERATIVO ══════════════════════ -->
+  <section class="sec sec-alt rev">
+    <div class="sec-max">
+      <span class="sec-label">A experiência na prática</span>
+      <h2 class="sec-titulo">Explore o tutorial<br><em>interativo</em></h2>
+      <p class="sec-corpo" style="max-width:620px; margin-top:1.2rem;">O tutorial a seguir percorre as telas do jogo e
+        explica as mecânicas em funcionamento — da tela inicial ao Quadro de Hipóteses. É o mesmo material que os alunos
+        recebem antes de começar a primeira missão.</p>
+
+      <div
+        style="margin-top:3rem; position:relative; width:100%; padding-bottom:56.25%; border:1px solid var(--t12); background:var(--preto);">
+        <iframe src="https://view.genially.com/679e36339910ba88c5ad7c6f"
+          style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allowfullscreen loading="lazy"
+          title="Tutorial interativo — O Legado de Nova Esperança">
+        </iframe>
+      </div>
+      <p style="font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; color:var(--t35); margin-top:1rem;">
+        Tutorial desenvolvido em Genially · Navegar pelas setas ou clicar nos elementos interativos</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ 5 FASES ══════════════════════ -->
+  <section class="sec rev">
+    <div class="sec-max">
+      <span class="sec-label">A estrutura de cada missão</span>
+      <h2 class="sec-titulo">5 fases que espelham<br>o raciocínio <em>científico</em></h2>
+      <p class="sec-corpo" style="max-width:660px; margin-top:1.2rem;">O avanço entre fases é condicionado: o aluno só
+        prossegue após demonstrar compreensão real. Não há atalho. Cada fase foi desenhada para ativar um nível
+        específico da Taxonomia de Bloom.</p>
+
+      <div class="fases-lista">
+        <div class="fase rev">
+          <div class="fase-n">1</div>
+          <div>
+            <div class="fase-titulo">Contextualização</div>
+            <div class="fase-desc">E-mail do futuro apresenta o problema de forma dramática, sem dar as respostas.
+              Documentos de sensibilização aprofundam o contexto. Quiz inicial de reflexão bloqueia o avanço.</div>
+          </div>
+          <div class="fase-significado">Ativa conhecimento prévio e curiosidade antes de qualquer resposta.</div>
+        </div>
+        <div class="fase rev" style="background:var(--fundo-alt);">
+          <div class="fase-n">2</div>
+          <div>
+            <div class="fase-titulo">Investigação</div>
+            <div class="fase-desc">Acesso a documentos do presente e do futuro. Pistas marcadas com ícone de tesoura. Ao
+              selecionar uma pista, o aluno deve associá-la à hipótese correta entre as três em disputa.</div>
+          </div>
+          <div class="fase-significado">Treina análise de evidências e conexão entre dados dispersos.</div>
+        </div>
+        <div class="fase rev">
+          <div class="fase-n">3</div>
+          <div>
+            <div class="fase-titulo">Reflexão</div>
+            <div class="fase-desc">Quizzes por hipótese validam a compreensão construída na fase anterior. Cada hipótese
+              exige 6 pistas alocadas corretamente no Quadro de Hipóteses.</div>
+          </div>
+          <div class="fase-significado">O quadro é o rastro visual e auditável do raciocínio do aluno.</div>
+        </div>
+        <div class="fase rev" style="background:var(--fundo-alt);">
+          <div class="fase-n">4</div>
+          <div>
+            <div class="fase-titulo">Revelação</div>
+            <div class="fase-desc">Identificação da causa-raiz com base no conjunto de evidências coletadas. O aluno
+              confronta suas hipóteses com a conclusão investigativa.</div>
+          </div>
+          <div class="fase-significado">Síntese do raciocínio em uma decisão fundamentada em dados.</div>
+        </div>
+        <div class="fase rev">
+          <div class="fase-n">5</div>
+          <div>
+            <div class="fase-titulo">Solução</div>
+            <div class="fase-desc">Proposta de intervenção para evitar o colapso futuro. A decisão do aluno considera
+              trade-offs reais: custo, viabilidade, impacto ambiental.</div>
+          </div>
+          <div class="fase-significado">Competência de avaliação e tomada de decisão em contexto complexo.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ MECÂNICAS ══════════════════════ -->
+  <section class="sec sec-escura rev">
+    <div class="sec-max">
+      <span class="sec-label sec-label-claro">Mecânicas de aprendizagem</span>
+      <h2 class="sec-titulo sec-titulo-claro">Cada elemento<br>foi uma <em>decisão</em></h2>
+      <p class="sec-corpo sec-corpo-claro" style="max-width:600px; margin-top:1.2rem;">Nenhuma mecânica foi incluída por
+        parecer interessante. Cada uma responde a um problema pedagógico específico identificado na etapa de
+        diagnóstico.</p>
+
+      <div class="mecanicas-grade">
+        <div class="mecanica rev rev-d1">
+          <div class="mec-titulo">Quadro de Hipóteses</div>
+          <div class="mec-desc">Sistema com 3 hipóteses investigadas simultaneamente. Para cada uma, o aluno coleta 6
+            pistas específicas que constroem o raciocínio investigativo. O painel é visível ao aluno e ao professor: é o
+            rastro do pensamento.</div>
+        </div>
+        <div class="mecanica rev rev-d2">
+          <div class="mec-titulo">Pistas Marcadas</div>
+          <div class="mec-desc">Ao explorar documentos, trechos relevantes aparecem destacados com ícone de tesoura. O
+            aluno decide quais são evidências e para qual hipótese pertencem. Essa associação é o objeto real de
+            avaliação.</div>
+        </div>
+        <div class="mecanica rev rev-d1">
+          <div class="mec-titulo">Gates por Quizzes</div>
+          <div class="mec-desc">O avanço entre fases é condicionado. Apenas após demonstrar compreensão mínima o aluno
+            prossegue. Esse bloqueio inviabiliza o avanço por gabarito: é preciso entender, não apenas clicar.</div>
+        </div>
+        <div class="mecanica rev rev-d2">
+          <div class="mec-titulo">Documentos Presente ↔ Futuro</div>
+          <div class="mec-desc">Conexão temporal única: laudos de 2024 dialogam com estudos epidemiológicos de 2080. A
+            relação causa-efeito, normalmente abstrata em sala de aula, torna-se concreta e narrativamente urgente.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ PONTUAÇÃO ══════════════════════ -->
+  <section class="sec sec-alt rev">
+    <div class="sec-max">
+      <span class="sec-label">Sistema de avaliação</span>
+      <h2 class="sec-titulo">O erro como parte<br>do <em>processo</em></h2>
+      <p class="sec-corpo" style="max-width:640px; margin-top:1.2rem;">O sistema de pontuação foi desenhado para não
+        punir o erro de forma definitiva. A ideia é que tentar, errar e tentar novamente seja pedagogicamente mais
+        valioso do que acertar sem pensar.</p>
+
+      <div class="pontuacao-wrap">
+        <div>
+          <div class="pont-tabela" style="margin-bottom:2.5rem;">
+            <div class="pont-titulo-tabela">Quiz Reflexivo</div>
+            <div class="pont-linha"><span class="pont-tentativa">1ª tentativa</span><span class="pont-pts">100
+                pts</span></div>
+            <div class="pont-linha"><span class="pont-tentativa">2ª tentativa</span><span class="pont-pts">75 pts</span>
+            </div>
+            <div class="pont-linha"><span class="pont-tentativa">3ª tentativa</span><span class="pont-pts">50 pts</span>
+            </div>
+            <div class="pont-linha"><span class="pont-tentativa">4ª tentativa+</span><span class="pont-pts">25
+                pts</span></div>
+          </div>
+          <div class="pont-tabela">
+            <div class="pont-titulo-tabela">Seleção de Pistas</div>
+            <div class="pont-linha"><span class="pont-tentativa">1ª tentativa</span><span class="pont-pts">100
+                pts</span></div>
+            <div class="pont-linha"><span class="pont-tentativa">2ª tentativa</span><span class="pont-pts">50 pts</span>
+            </div>
+            <div class="pont-linha"><span class="pont-tentativa">3ª tentativa</span><span class="pont-pts">25 pts</span>
+            </div>
+            <div class="pont-linha"><span class="pont-tentativa">4ª tentativa+</span><span class="pont-pts">10
+                pts</span></div>
+          </div>
+        </div>
+        <div>
+          <p
+            style="font-size:.65rem; letter-spacing:.16em; text-transform:uppercase; color:var(--t35); margin-bottom:1.5rem;">
+            Conversão para nota</p>
+          <div class="pont-faixas">
+            <div class="faixa insuf">
+              <div>
+                <div class="faixa-nivel">Insuficiente</div>
+                <div class="faixa-pts" style="color:var(--borgonha);">700 – 1.499 pts</div>
+              </div>
+              <div class="faixa-nota">Nota 5</div>
+            </div>
+            <div class="faixa bom">
+              <div>
+                <div class="faixa-nivel">Bom</div>
+                <div class="faixa-pts" style="color:var(--ouro);">1.500 – 2.199 pts</div>
+              </div>
+              <div class="faixa-nota">Nota 8</div>
+            </div>
+            <div class="faixa exce">
+              <div>
+                <div class="faixa-nivel">Excelente</div>
+                <div class="faixa-pts" style="color:var(--salvia);">2.200 – 2.800 pts</div>
+              </div>
+              <div class="faixa-nota">Nota 10</div>
+            </div>
+          </div>
+          <p
+            style="font-size:.9rem; color:var(--t60); line-height:1.85; margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--t12);">
+            88,6% dos alunos buscaram ativamente as dicas. 84,8% abriram o tutorial. Alta demanda por recursos de apoio
+            indica engajamento processual, não desistência.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ RESULTADOS ══════════════════════ -->
+  <section class="sec sec-escura rev">
+    <div class="sec-max">
+      <span class="sec-label sec-label-claro">Resultados documentados</span>
+      <h2 class="sec-titulo sec-titulo-claro">O que os dados<br><em>revelaram</em></h2>
+
+      <div class="resultados-header">
+        <div>
+          <div class="big-stats">
+            <div class="big-stat">
+              <div class="big-val">7,81</div>
+              <div class="big-label">Média prova final</div>
+            </div>
+            <div class="big-stat">
+              <div class="big-val">8,0</div>
+              <div class="big-label">Mediana</div>
+            </div>
+            <div class="big-stat">
+              <div class="big-val">28,9%</div>
+              <div class="big-label">Notas 10</div>
+            </div>
+            <div class="big-stat">
+              <div class="big-val">1.749</div>
+              <div class="big-label">Participantes analisados</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="sec-corpo sec-corpo-claro" style="margin-bottom:1.5rem;">O piloto foi conduzido em ambiente real de
+            produção com alunos regulares da UNIVESP. A análise combinou dados quantitativos de desempenho com
+            percepções qualitativas sobre a experiência.</p>
+          <p class="sec-corpo sec-corpo-claro">Correlação positiva fraca entre tempo de jogo e desempenho (~+0,21)
+            indica que a qualidade do raciocínio pesa mais do que o tempo dedicado: exatamente o objetivo pedagógico do
+            projeto.</p>
+          <div class="areas-dificil" style="margin-top:2rem;">
+            <p
+              style="font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(239,233,225,.65); margin-bottom:.5rem;">
+              Áreas com maior dificuldade (informam próximas missões)</p>
+            <div class="area-item"><span class="area-nome">Gestão de Resíduos Industriais</span><span
+                class="area-badge">Prioridade</span></div>
+            <div class="area-item"><span class="area-nome">Fundamentos de Ecossistemas</span><span
+                class="area-badge">Prioridade</span></div>
+            <div class="area-item"><span class="area-nome">Licenciamento Ambiental</span><span
+                class="area-badge">Prioridade</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Segunda rodada -->
+      <div class="segunda-rodada">
+        <span class="sec-label sec-label-claro">Segunda rodada</span>
+        <h3 class="sec-titulo sec-titulo-claro" style="font-size:2rem;">Confirmando a <em>qualidade pedagógica
+            percebida</em></h3>
+        <p class="sec-corpo sec-corpo-claro" style="max-width:580px; margin-top:.8rem;">Amostra menor (n=34),
+          instrumento Likert de 6 dimensões. Média geral 4,04/5,0. Tempo médio de resposta: 2,5 minutos.</p>
+
+        <div class="rodada-grid">
+          <div>
+            <div class="dimensoes">
+              <div class="dim-linha">
+                <span class="dim-nome">Análise Crítica</span>
+                <div class="dim-barra-wrap">
+                  <div class="dim-barra" style="width:84%"></div>
+                </div>
+                <span class="dim-val">4,21</span>
+              </div>
+              <div class="dim-linha">
+                <span class="dim-nome">Compreensão</span>
+                <div class="dim-barra-wrap">
+                  <div class="dim-barra" style="width:82%"></div>
+                </div>
+                <span class="dim-val">4,09</span>
+              </div>
+              <div class="dim-linha">
+                <span class="dim-nome">Interesse ESG</span>
+                <div class="dim-barra-wrap">
+                  <div class="dim-barra" style="width:79%"></div>
+                </div>
+                <span class="dim-val">3,97</span>
+              </div>
+              <div class="dim-linha">
+                <span class="dim-nome">Sem dif. técnicas</span>
+                <div class="dim-barra-wrap">
+                  <div class="dim-barra" style="width:83%"></div>
+                </div>
+                <span class="dim-val">4,15</span>
+              </div>
+              <div class="dim-linha">
+                <span class="dim-nome">Desafio adequado</span>
+                <div class="dim-barra-wrap">
+                  <div class="dim-barra" style="width:78%; background:var(--areia);"></div>
+                </div>
+                <span class="dim-val" style="color:var(--areia);">3,91</span>
+              </div>
+              <div class="dim-linha">
+                <span class="dim-nome">Engajamento</span>
+                <div class="dim-barra-wrap">
+                  <div class="dim-barra" style="width:78%; background:var(--areia);"></div>
+                </div>
+                <span class="dim-val" style="color:var(--areia);">3,91</span>
+              </div>
+            </div>
+          </div>
+          <div class="pontos-forte">
+            <div class="ponto forte">
+              <div class="ponto-titulo">Análise crítica e tomada de decisão</div>
+              <div class="ponto-pct">85,3% positivos</div>
+            </div>
+            <div class="ponto forte">
+              <div class="ponto-titulo">Compreensão dos conceitos</div>
+              <div class="ponto-pct">88,2% positivos</div>
+            </div>
+            <div class="ponto forte">
+              <div class="ponto-titulo">Interesse em ESG despertado</div>
+              <div class="ponto-pct">85,3% positivos</div>
+            </div>
+            <div class="ponto atencao">
+              <div class="ponto-titulo">Pacing e nível de desafio</div>
+              <div class="ponto-pct">76,5% — necessita ajuste</div>
+            </div>
+            <div class="ponto atencao">
+              <div class="ponto-titulo">Engajamento ao longo das semanas</div>
+              <div class="ponto-pct">79,4% — pode melhorar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ VOZES ══════════════════════ -->
+  <section class="sec rev">
+    <div class="sec-max">
+      <span class="sec-label">Vozes dos alunos</span>
+      <h2 class="sec-titulo">O que disseram<br>quem <em>jogou</em></h2>
+
+      <div class="vozes-grade">
+        <div class="voz rev rev-d1">
+          <div class="voz-aspas">"</div>
+          <div class="voz-texto">Esta forma de ensino é excelente, me identifiquei muito e o modo como a disciplina me
+            prende às questões é impressionante, me fazendo focar mais e aprender sem nem perceber.</div>
+          <div class="voz-fonte">Aluno · Segunda rodada (n=34)</div>
+        </div>
+        <div class="voz rev rev-d2">
+          <div class="voz-aspas">"</div>
+          <div class="voz-texto">A experiência foi interessante e dinâmica, proporcionando uma forma diferente de
+            aprender e aplicar conceitos. A forma como a atividade conectou teoria e prática, simulando situações reais
+            que exigem análise e tomada de decisão, tornou o aprendizado mais concreto e motivador.</div>
+          <div class="voz-fonte">Aluno · Segunda rodada (n=34)</div>
+        </div>
+        <div class="voz rev rev-d3">
+          <div class="voz-aspas">"</div>
+          <div class="voz-texto">A forma de disponibilizar os dados para avaliação foi fantástica. Nos faz sentir
+            verdadeiramente participando de uma avaliação técnica.</div>
+          <div class="voz-fonte">Aluno · Segunda rodada (n=34)</div>
+        </div>
+        <div class="voz rev rev-d1">
+          <div class="voz-aspas">"</div>
+          <div class="voz-texto">Jogos aumentam a competitividade, foi desafiador ficar atento a todos os detalhes,
+            porém, muito mais interessante aprender desta maneira.</div>
+          <div class="voz-fonte">Aluno · Segunda rodada (n=34)</div>
+        </div>
+        <div class="voz rev rev-d2">
+          <div class="voz-aspas">"</div>
+          <div class="voz-texto">Muito interessante, me acendeu uma luz para economia de água na minha casa, e o quanto
+            é importante analisar o ambiente como um todo.</div>
+          <div class="voz-fonte">Aluno · Segunda rodada (n=34)</div>
+        </div>
+        <div class="voz rev rev-d3">
+          <div class="voz-aspas">"</div>
+          <div class="voz-texto">Apesar de ter algumas dificuldades ainda, estou gostando muito, achei ótima a proposta,
+            uma forma de nos fazer pensar como engenheiros, de ver o quanto é importante saber analisar os dados para
+            ter um bom resultado.</div>
+          <div class="voz-fonte">Aluno · Segunda rodada (n=34)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ MELHORIAS E LACUNAS ══════════════════════ -->
+  <section class="sec sec-alt rev">
+    <div class="sec-max">
+      <span class="sec-label">O que foi aprendido</span>
+      <h2 class="sec-titulo">Melhorias implementadas<br>entre os <em>pilotos</em></h2>
+      <p class="sec-corpo" style="max-width:660px; margin-top:1.2rem;">O intervalo entre a primeira e a segunda rodada
+        foi usado para ajustes específicos derivados dos dados. A capacidade de resposta rápida a feedbacks é parte da
+        metodologia.</p>
+
+      <div class="melhorias-grade">
+        <div class="melhoria rev rev-d1">
+          <div class="melhoria-icone"></div>
+          <div class="melhoria-titulo">Guia Visual Conciso</div>
+          <div class="melhoria-desc">Reformulação completa do tutorial inicial, reduzindo texto e aumentando elementos
+            visuais. Feedback direto dos alunos sobre necessidade de clareza nas instruções da Semana 1.</div>
+        </div>
+        <div class="melhoria rev rev-d2">
+          <div class="melhoria-icone" style="background:var(--salvia);"></div>
+          <div class="melhoria-titulo">Sistema de Notas Unificado</div>
+          <div class="melhoria-desc">Padronização da comunicação sobre pontuação em todos os pontos de contato com o
+            aluno. Redução de confusão sobre critérios avaliativos.</div>
+        </div>
+        <div class="melhoria rev rev-d1">
+          <div class="melhoria-icone" style="background:var(--borgonha);"></div>
+          <div class="melhoria-titulo">Melhor Sinalização de Progresso</div>
+          <div class="melhoria-desc">Indicadores visuais claros de avanço nas fases. Alunos passam a saber exatamente
+            onde estão e o que falta para concluir cada missão.</div>
+        </div>
+        <div class="melhoria rev rev-d2">
+          <div class="melhoria-icone" style="background:var(--areia);"></div>
+          <div class="melhoria-titulo">Estabilidade Mobile</div>
+          <div class="melhoria-desc">Correções técnicas para garantir experiência fluida em dispositivos móveis.
+            Responsividade e performance otimizadas para uso fora do desktop.</div>
+        </div>
+      </div>
+
+      <div class="lacunas rev" style="margin-top:2px;">
+        <div>
+          <div class="lacuna-titulo">Próximos ajustes identificados</div>
+          <ul class="lacuna-lista">
+            <li>Ajustar curva de dificuldade ao longo das semanas (pacing)</li>
+            <li>Reforçar conteúdo de Resíduos, Ecossistemas e Licenciamento</li>
+            <li>Ampliar dados qualitativos sobre processos cognitivos</li>
+          </ul>
+        </div>
+        <div>
+          <div class="lacuna-titulo">Expansão proposta</div>
+          <ul class="lacuna-lista">
+            <li>Autorização para expansão a 2 disciplinas adicionais</li>
+            <li>Integração de Learning Analytics via xAPI</li>
+            <li>Motor de missão modular e replicável em 7 semanas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ FOOTER ══════════════════════ -->
+  <footer class="footer-case">
+    <div class="footer-case-inner">
+      <div class="footer-case-volta">Voltar ao portfólio</div>
+      <nav class="footer-case-nav">
+        <a href="index.html">Portfólio</a>
+        <a href="index.html#cases">Outros projetos</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Barra de progresso
+    window.addEventListener('scroll', () => {
+      const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      document.getElementById('prog').style.width = (p * 100) + '%';
+    });
+
+    // Revelar ao scroll
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('vis');
+      });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+  </script>
+</body>
+
+</html>

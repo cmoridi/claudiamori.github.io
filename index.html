@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claudia Mori — Designer Instrucional Sênior</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Epilogue:wght@300;400;500&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ── VARIÁVEIS ── */
+    :root {
+      --mostarda: #C9930A;
+      --mostarda-vivo: #E8AB12;
+      --mostarda-pale: #F5E9C8;
+      --preto: #0D0D0D;
+      --preto-mid: #1C1C1C;
+      --cinza-escuro: #3A3A3A;
+      --cinza-medio: #757575;
+      --off-white: #F4F1EB;
+      --off-white-2: #EAE6DC;
+      --branco: #FFFFFF;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Epilogue', sans-serif;
+      background: #0D0D0D;
+      background: var(--preto, #0D0D0D);
+      color: #F4F1EB;
+      color: var(--off-white, #F4F1EB);
+      overflow-x: hidden;
+    }
+
+    /* ── BARRA DE PROGRESSO ── */
+    .progresso {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: var(--mostarda);
+      z-index: 900;
+      width: 0;
+      transition: width 0.1s linear;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 800;
+      padding: 0 4rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1A1A18;
+      border-bottom: 1px solid rgba(244, 241, 235, 0.08);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--off-white);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--mostarda);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 235, 0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--mostarda);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--off-white);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding-top: 64px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      background: #0D0D0D;
+      background: var(--preto, #0D0D0D);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .hero-conteudo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 64px - 80px);
+    }
+
+    .hero-esq {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem 4rem 5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--mostarda);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fx-up 0.6s ease 0.1s forwards;
+    }
+
+    .hero-titulo {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 6.5vw, 7.5rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      color: var(--off-white);
+      margin-bottom: 0.08em;
+      opacity: 0;
+      animation: fx-up 0.8s ease 0.2s forwards;
+    }
+
+    .hero-titulo em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--mostarda);
+    }
+
+    .hero-cargo {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 235, 0.55);
+      margin-bottom: 3.5rem;
+      margin-top: 0.8rem;
+      opacity: 0;
+      animation: fx-up 0.6s ease 0.4s forwards;
+    }
+
+    .hero-descricao {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(244, 241, 235, 0.82);
+      max-width: 440px;
+      border-left: 2px solid var(--mostarda);
+      padding-left: 1.5rem;
+      opacity: 0;
+      animation: fx-up 0.7s ease 0.55s forwards;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mostarda);
+      text-decoration: none;
+      opacity: 0;
+      animation: fx-up 0.6s ease 0.7s forwards;
+      transition: gap 0.2s;
+    }
+
+    .hero-cta:hover {
+      gap: 1.2rem;
+    }
+
+    .hero-cta-linha {
+      width: 2.5rem;
+      height: 1px;
+      background: var(--mostarda);
+      transition: width 0.25s;
+    }
+
+    .hero-cta:hover .hero-cta-linha {
+      width: 3.5rem;
+    }
+
+    /* FOTO HERO — ilustração sketch */
+    .hero-foto {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-foto img {
+      max-width: 480px;
+      max-height: 600px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* BARRA INFERIOR HERO — palavras-chave */
+    .hero-barra {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid rgba(244, 241, 235, 0.08);
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-stat {
+      padding: 1.8rem 2.5rem;
+      border-right: 1px solid rgba(244, 241, 235, 0.08);
+    }
+
+    .hero-stat:last-child {
+      border-right: none;
+    }
+
+    .hero-stat-keyword {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--mostarda);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── SOBRE ── */
+    .sobre {
+      padding: 8rem 5rem;
+      background: #1C1C1C;
+      background: var(--preto-mid, #1C1C1C);
+    }
+
+    .sobre-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 8rem;
+    }
+
+    .sobre-lateral {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+
+    .secao-label {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--mostarda);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .secao-label::before {
+      content: '';
+      width: 1.5rem;
+      height: 1.5px;
+      background: var(--mostarda);
+    }
+
+    .secao-titulo {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--off-white);
+    }
+
+    .secao-titulo em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    /* Foto lateral sobre */
+    .sobre-foto-lateral {
+      margin-top: 2.5rem;
+      position: relative;
+    }
+
+    .sobre-foto-lateral-img {
+      width: 100%;
+      padding-bottom: 100%;
+      background: var(--preto);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sobre-foto-lateral-img img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(1.05);
+    }
+
+    .sobre-foto-lateral-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(13, 13, 13, 0.3) 100%);
+    }
+
+    .sobre-foto-lateral-caption {
+      margin-top: 0.8rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 235, 0.45);
+    }
+
+    /* placeholder lateral */
+    .foto-lat-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .foto-lat-placeholder p {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 235, 0.3);
+      text-align: center;
+      max-width: 140px;
+    }
+
+    .sobre-corpo p {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(244, 241, 235, 0.75);
+      margin-bottom: 1.5rem;
+    }
+
+    .sobre-corpo p strong {
+      font-weight: 500;
+      color: var(--off-white);
+    }
+
+    .sobre-corpo p:first-of-type {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--off-white);
+      margin-bottom: 2rem;
+    }
+
+    /* ── CASES ── */
+    .cases {
+      background: #0D0D0D;
+      background: var(--preto, #0D0D0D);
+      padding: 8rem 5rem 6rem;
+    }
+
+    .cases-max {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .cases-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 5rem;
+    }
+
+    .cases-header .secao-label {
+      color: var(--mostarda-vivo);
+    }
+
+    .cases-header .secao-label::before {
+      background: var(--mostarda-vivo);
+    }
+
+    .cases-header .secao-titulo {
+      color: var(--off-white);
+    }
+
+    .cases-intro {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(244, 241, 235, 0.6);
+    }
+
+    /* Lista editorial de cases */
+    .cases-lista {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case-item {
+      display: grid;
+      grid-template-columns: 5.5rem 1fr 3.5rem;
+      gap: 2.5rem;
+      align-items: start;
+      padding: 3rem 0;
+      border-top: 1px solid rgba(244, 241, 235, 0.08);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.4s;
+    }
+
+    .case-item:last-child {
+      border-bottom: 1px solid rgba(244, 241, 235, 0.08);
+    }
+
+    .case-item:hover {
+      border-color: rgba(201, 147, 10, 0.25);
+    }
+
+    /* Número do projeto */
+    .case-item-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1;
+      color: rgba(244, 241, 235, 0.22);
+      transition: color 0.4s;
+      padding-top: 0.15rem;
+    }
+
+    .case-item:hover .case-item-num {
+      color: var(--mostarda);
+    }
+
+    /* Destaque (case 1) */
+    .case-item.destaque {
+      padding: 3rem 0;
+    }
+
+    .case-item.destaque .case-item-desc {
+      max-width: 520px;
+    }
+
+    /* Header: instituição + tipo */
+    .case-item-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .case-item-inst {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mostarda);
+    }
+
+    .case-item-sep {
+      font-size: 0.65rem;
+      color: rgba(244, 241, 235, 0.15);
+    }
+
+    .case-item-tipo {
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 235, 0.4);
+    }
+
+    /* Título */
+    .case-item-titulo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--off-white);
+      margin-bottom: 1rem;
+      transition: color 0.3s;
+    }
+
+    .case-item:hover .case-item-titulo {
+      color: var(--mostarda-vivo);
+    }
+
+    /* Descrição */
+    .case-item-desc {
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(244, 241, 235, 0.55);
+      margin-bottom: 1.5rem;
+      max-width: 520px;
+    }
+
+    /* Tags / dados */
+    .case-item-dados {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .case-item-dado {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid rgba(244, 241, 235, 0.08);
+      color: rgba(244, 241, 235, 0.45);
+      transition: border-color 0.3s;
+    }
+
+    .case-item:hover .case-item-dado {
+      border-color: rgba(244, 241, 235, 0.15);
+    }
+
+    .case-item-dado.destaque-dado {
+      border-color: rgba(201, 147, 10, 0.25);
+      color: var(--mostarda);
+      background: rgba(201, 147, 10, 0.04);
+    }
+
+    /* Seta */
+    .case-item-acao {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-top: 0.5rem;
+    }
+
+    .case-item-seta {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-style: italic;
+      color: rgba(244, 241, 235, 0.25);
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .case-item:hover .case-item-seta {
+      color: var(--mostarda);
+      transform: translateX(4px);
+    }
+
+    /* ── FAIXA CITAÇÃO ── */
+    .faixa-citacao {
+      background: #C9930A;
+      background: var(--mostarda, #C9930A);
+      padding: 5rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .faixa-citacao::before {
+      content: '\201C';
+      font-family: 'Playfair Display', serif;
+      font-size: 22rem;
+      font-weight: 900;
+      color: rgba(13, 13, 13, 0.08);
+      position: absolute;
+      top: -4rem;
+      left: 3rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .faixa-citacao-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .faixa-citacao p {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--preto);
+      margin-bottom: 1.5rem;
+    }
+
+    .faixa-citacao-autor {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(13, 13, 13, 0.5);
+    }
+
+    /* ── MÉTODO ── */
+    .metodo {
+      padding: 8rem 5rem;
+      background: #151515;
+      border-top: 1px solid rgba(244, 241, 235, 0.06);
+    }
+
+    .metodo-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+      align-items: start;
+    }
+
+    .metodo-passos {
+      margin-top: 3rem;
+    }
+
+    .passo {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1.5rem;
+      padding: 1.8rem 0;
+      border-top: 1px solid rgba(244, 241, 235, 0.08);
+    }
+
+    .passo:last-child {
+      border-bottom: 1px solid rgba(244, 241, 235, 0.08);
+    }
+
+    .passo-n {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--mostarda);
+      line-height: 1;
+    }
+
+    .passo-titulo {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--off-white);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.02em;
+    }
+
+    .passo-desc {
+      font-size: 0.8rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(244, 241, 235, 0.6);
+    }
+
+    /* Foto método */
+    .metodo-foto-wrap {
+      position: sticky;
+      top: 100px;
+    }
+
+    .metodo-foto-titulo {
+      margin-bottom: 0;
+    }
+
+    .metodo-foto-titulo .secao-titulo {
+      margin-bottom: 0.5rem;
+    }
+
+    .metodo-foto {
+      margin-top: 2.5rem;
+      position: relative;
+    }
+
+    .metodo-foto-img {
+      width: 100%;
+      padding-bottom: 68%;
+      background: var(--preto);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metodo-foto-img img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(1.05);
+    }
+
+    .metodo-foto-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 70%, rgba(13, 13, 13, 0.2) 100%);
+    }
+
+    .metodo-foto-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .metodo-foto-placeholder p {
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 235, 0.25);
+      text-align: center;
+      max-width: 150px;
+    }
+
+    .metodo-foto-detalhe {
+      background: var(--mostarda);
+      padding: 1.2rem 1.8rem;
+      margin-top: 1.5px;
+    }
+
+    .metodo-foto-detalhe p {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #0D0D0D;
+      line-height: 1.6;
+    }
+
+    /* ── PARCEIROS ── */
+    .parceiros {
+      padding: 4rem 5rem;
+      background: #1C1C1C;
+      border-top: 1px solid rgba(244, 241, 235, 0.06);
+    }
+
+    .parceiros-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .parceiros-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 235, 0.4);
+      flex-shrink: 0;
+      min-width: 80px;
+    }
+
+    .parceiros-lista {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0;
+    }
+
+    .parceiro {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: rgba(244, 241, 235, 0.6);
+      padding: 0 1.5rem;
+      border-right: 1px solid rgba(244, 241, 235, 0.12);
+      transition: color 0.2s;
+    }
+
+    .parceiro:first-child {
+      padding-left: 0;
+    }
+
+    .parceiro:last-child {
+      border-right: none;
+    }
+
+    .parceiro:hover {
+      color: var(--mostarda);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0D0D0D;
+      background: var(--preto, #0D0D0D);
+      padding: 5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: end;
+    }
+
+    .footer-nome {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--off-white);
+    }
+
+    .footer-nome em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--mostarda);
+    }
+
+    .footer-sub {
+      margin-top: 1.2rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 235, 0.45);
+    }
+
+    .footer-dir {
+      text-align: right;
+    }
+
+    .footer-contato-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mostarda);
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-email {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--off-white);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201, 147, 10, 0.3);
+      padding-bottom: 0.2rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .footer-email:hover {
+      color: var(--mostarda-vivo);
+      border-color: var(--mostarda);
+    }
+
+    .footer-copy {
+      margin-top: 4rem;
+      grid-column: 1 / -1;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: rgba(244, 241, 235, 0.3);
+      border-top: 1px solid rgba(244, 241, 235, 0.06);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ── ANIMAÇÕES ── */
+    @keyframes fx-up {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .revelar {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .revelar.visivel {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVO ── */
+    @media (max-width: 960px) {
+      nav {
+        padding: 0 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-conteudo {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-esq {
+        padding: 3rem 2rem;
+      }
+
+      .hero-foto {
+        min-height: 300px;
+      }
+
+      .hero-foto img {
+        max-width: 280px;
+        max-height: 350px;
+      }
+
+      .hero-barra {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stat {
+        border-right: none;
+        border-top: 1px solid rgba(244, 241, 235, 0.08);
+      }
+
+      .sobre {
+        padding: 5rem 2rem;
+      }
+
+      .sobre-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .sobre-lateral {
+        position: static;
+      }
+
+      .cases {
+        padding: 5rem 2rem;
+      }
+
+      .cases-header {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .case-item {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 2.5rem 0;
+      }
+
+      .case-item-num {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .case-item-acao {
+        justify-content: flex-start;
+        padding-top: 1.5rem;
+      }
+
+      .faixa-citacao {
+        padding: 4rem 2rem;
+      }
+
+      .metodo {
+        padding: 5rem 2rem;
+      }
+
+      .metodo-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .metodo-foto-wrap {
+        position: static;
+      }
+
+      .parceiros {
+        padding: 3rem 2rem;
+      }
+
+      .parceiros-inner {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      footer {
+        grid-template-columns: 1fr;
+        padding: 4rem 2rem;
+      }
+
+      .footer-dir {
+        text-align: left;
+      }
+
+      .footer-copy {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="progresso" id="prog"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Claudia <span>Mori</span></a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#cases">Projetos</a></li>
+      <li><a href="#metodo">Método</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="topo">
+    <div class="hero-conteudo">
+      <div class="hero-esq">
+        <div class="hero-tag">São Paulo · Brasil</div>
+        <h1 class="hero-titulo">Claudia<br><em>Mori</em></h1>
+        <p class="hero-cargo">Designer Instrucional Sênior</p>
+        <p class="hero-descricao">
+          Disciplinas, objetos de aprendizagem, séries documentais, software educacional. Seis anos projetando educação
+          a distância que funcione para quem precisa dela.
+        </p>
+        <a href="#cases" class="hero-cta">
+          <span class="hero-cta-linha"></span>
+          Ver projetos
+        </a>
+      </div>
+
+      <!-- ILUSTRAÇÃO HERO -->
+      <div class="hero-foto">
+        <img src="assets/portfolio_final-img1.png" alt="Claudia Mori — ilustração">
+      </div>
+    </div>
+
+    <!-- BARRA DE PALAVRAS-CHAVE -->
+    <div class="hero-barra">
+      <div class="hero-stat">
+        <div class="hero-stat-keyword">Learner Experience</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-keyword">Learning Analytics</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-keyword">Acessibilidade</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="sobre" id="sobre">
+    <div class="sobre-inner">
+      <div class="sobre-lateral revelar">
+        <div class="secao-label">Trajetória</div>
+        <h2 class="secao-titulo">Os bastidores<br>da <em>aprendizagem</em></h2>
+
+        <div class="sobre-foto-lateral">
+          <div class="sobre-foto-lateral-img">
+            <img src="assets/portfolio_final-img2.png"
+              alt="Os bastidores da aprendizagem — processo de design instrucional">
+          </div>
+          <div class="sobre-foto-lateral-caption">Processo de trabalho · Design instrucional</div>
+        </div>
+      </div>
+
+      <div class="sobre-corpo revelar">
+        <p>Existe um trabalho que acontece antes de qualquer aula começar. Antes do vídeo ser gravado, antes da tela
+          carregar, antes do aluno clicar. É o trabalho de decidir o que ensinar, em que ordem, para quem, e o que
+          deixar de fora. Faço esse trabalho há seis anos.</p>
+        <p>Sou designer instrucional sênior. Desenvolvo projetos para a <strong>UNIVESP</strong>, a <strong>USP</strong>
+          e a <strong>Escola da Inclusão da Secretaria dos Direitos da Pessoa com Deficiência do Estado de São
+            Paulo</strong>. Disciplinas, REAs, objetos de aprendizagem, séries documentais, software educacional. Em
+          cada um desses contextos, o problema muda. A escala muda. O público muda. O que não muda é o compromisso com
+          material que funciona para quem precisa dele.</p>
+        <p>Minha especialização é a educação a distância. Meu trabalho é fazer com que ela não seja. Tori (2022) chamou
+          de <em>educação sem distância</em>: quando tecnologia e design estão bem resolvidos, a separação entre quem
+          ensina e quem aprende desaparece. Essa é a premissa que orienta tudo o que projeto.</p>
+        <p>Trabalho com as ferramentas que cada projeto exige: de H5P a roteiros audiovisuais, de especificação de games
+          educacionais a interfaces pedagógicas acessíveis. <strong>O que decide é o julgamento. O que executa é a
+            ferramenta.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASES -->
+  <section class="cases" id="cases">
+    <div class="cases-max">
+      <div class="cases-header revelar">
+        <div>
+          <div class="secao-label">Portfólio</div>
+          <h2 class="secao-titulo" style="color:var(--off-white)">Seis projetos,<br>seis
+            <em>competências</em><br>distintas
+          </h2>
+        </div>
+        <p class="cases-intro">
+          Cada projeto foi escolhido porque demonstra algo que os outros não demonstram. Lidos em conjunto, constroem um
+          argumento sobre o que é possível quando design instrucional é tratado como campo de pesquisa aplicada.
+        </p>
+      </div>
+
+      <div class="cases-lista revelar">
+
+        <!-- CASE 1 — DESTAQUE -->
+        <a href="case-nova-esperanca.html" class="case-item destaque">
+          <div class="case-item-num">01</div>
+          <div class="case-item-conteudo">
+            <div class="case-item-header">
+              <span class="case-item-inst">UNIVESP</span>
+              <span class="case-item-sep">·</span>
+              <span class="case-item-tipo">Game Educacional · Learning Analytics</span>
+            </div>
+            <h3 class="case-item-titulo">O Legado de Nova Esperança</h3>
+            <p class="case-item-desc">Jogo investigativo com dois pilotos documentados. Análise de 1.749 estudantes por
+              Taxonomia de Bloom. Ecossistema fictício com consistência ecológica real, construído por curadoria
+              científica. Sistema de Learning Analytics via xAPI.</p>
+            <div class="case-item-dados">
+              <span class="case-item-dado destaque-dado">1.749 estudantes analisados</span>
+              <span class="case-item-dado">PBL</span>
+              <span class="case-item-dado">xAPI</span>
+              <span class="case-item-dado">Taxonomia de Bloom</span>
+            </div>
+          </div>
+          <div class="case-item-acao">
+            <span class="case-item-seta">→</span>
+          </div>
+        </a>
+
+        <!-- CASE 2 -->
+        <a href="case-didatica.html" class="case-item">
+          <div class="case-item-num">02</div>
+          <div class="case-item-conteudo">
+            <div class="case-item-header">
+              <span class="case-item-inst">UNIVESP</span>
+              <span class="case-item-sep">·</span>
+              <span class="case-item-tipo">Disciplina Piloto · Licenciaturas</span>
+            </div>
+            <h3 class="case-item-titulo">Disciplina Didática — Redesign com Storytelling</h3>
+            <p class="case-item-desc">Dez inovações simultâneas, personagem Marina, avaliação com 707 respondentes.
+              Mediana 5 em satisfação. Reflexão crítica documentada.</p>
+            <div class="case-item-dados">
+              <span class="case-item-dado destaque-dado">707 respondentes</span>
+              <span class="case-item-dado">Storytelling</span>
+              <span class="case-item-dado">H5P</span>
+            </div>
+          </div>
+          <div class="case-item-acao">
+            <span class="case-item-seta">→</span>
+          </div>
+        </a>
+
+        <!-- CASE 3 -->
+        <a href="case-digitavox.html" class="case-item">
+          <div class="case-item-num">03</div>
+          <div class="case-item-conteudo">
+            <div class="case-item-header">
+              <span class="case-item-inst">USP</span>
+              <span class="case-item-sep">·</span>
+              <span class="case-item-tipo">Deficiência Visual · Tecnologia Assistiva</span>
+            </div>
+            <h3 class="case-item-titulo">DigitaVox Crianças — Exploradores Espaciais</h3>
+            <p class="case-item-desc">Design instrucional de software gamificado para crianças com DV. Fundamentado em
+              neuroplasticidade, Vygotsky, Piaget e Teoria do Flow. Metodologia DSR.</p>
+            <div class="case-item-dados">
+              <span class="case-item-dado destaque-dado">Deficiência Visual</span>
+              <span class="case-item-dado">Gamificação</span>
+              <span class="case-item-dado">DSR</span>
+            </div>
+          </div>
+          <div class="case-item-acao">
+            <span class="case-item-seta">→</span>
+          </div>
+        </a>
+
+        <!-- CASE 4 -->
+        <a href="case-jornada-tea.html" class="case-item">
+          <div class="case-item-num">04</div>
+          <div class="case-item-conteudo">
+            <div class="case-item-header">
+              <span class="case-item-inst">SEDPcD-SP</span>
+              <span class="case-item-sep">·</span>
+              <span class="case-item-tipo">Inclusão · TEA</span>
+            </div>
+            <h3 class="case-item-titulo">A Jornada de Clara e Lucas</h3>
+            <p class="case-item-desc">Publicado na SEDPcD. Cinco capítulos narrativos e onze vídeos acessíveis.
+              Storytelling para famílias da rede pública. Especialista: Dra. Francine Boldan.</p>
+            <div class="case-item-dados">
+              <span class="case-item-dado destaque-dado">Publicado · SEDPcD</span>
+              <span class="case-item-dado">TEA · Acessibilidade</span>
+            </div>
+          </div>
+          <div class="case-item-acao">
+            <span class="case-item-seta">→</span>
+          </div>
+        </a>
+
+        <!-- CASE 5 -->
+        <a href="case-cerimonial-inclusivo.html" class="case-item">
+          <div class="case-item-num">05</div>
+          <div class="case-item-conteudo">
+            <div class="case-item-header">
+              <span class="case-item-inst">SEDPcD-SP</span>
+              <span class="case-item-sep">·</span>
+              <span class="case-item-tipo">Acessibilidade · Produção Web</span>
+            </div>
+            <h3 class="case-item-titulo">Cerimonial Inclusivo e Acessível</h3>
+            <p class="case-item-desc">Guia web publicado e quatro vídeos. Libras, audiodescrição, closed caption, aro
+              magnético, piso tátil, Braille. Roteiro e produção completa.</p>
+            <div class="case-item-dados">
+              <span class="case-item-dado destaque-dado">Link público verificável</span>
+              <span class="case-item-dado">Libras · Audiodescrição</span>
+            </div>
+          </div>
+          <div class="case-item-acao">
+            <span class="case-item-seta">→</span>
+          </div>
+        </a>
+        <!-- CASE 6 -->
+        <a href="case-videoteca-inclusao.html" class="case-item">
+          <div class="case-item-num">06</div>
+          <div class="case-item-conteudo">
+            <div class="case-item-header">
+              <span class="case-item-inst">SEDPcD-SP</span>
+              <span class="case-item-sep">·</span>
+              <span class="case-item-tipo">Acessibilidade · Educação Inclusiva</span>
+            </div>
+            <h3 class="case-item-titulo">Videoteca da Inclusão</h3>
+            <p class="case-item-desc">Série de vídeos educativos sobre práticas inclusivas. Roteiro, produção e
+              coordenação de conteúdo especializado em acessibilidade e educação especial para profissionais da rede
+              pública.</p>
+            <div class="case-item-dados">
+              <span class="case-item-dado destaque-dado">Publicado · SEDPcD</span>
+              <span class="case-item-dado">Libras · Audiodescrição</span>
+              <span class="case-item-dado">Série Documental</span>
+            </div>
+          </div>
+          <div class="case-item-acao">
+            <span class="case-item-seta">→</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAIXA CITAÇÃO -->
+  <div class="faixa-citacao">
+    <div class="faixa-citacao-inner revelar">
+      <p>O bom design instrucional é aquele que ninguém percebe. O aprendiz sente que entendeu. Não vê a estrutura que
+        tornou isso possível.</p>
+    </div>
+  </div>
+
+  <!-- MÉTODO -->
+  <section class="metodo" id="metodo">
+    <div class="metodo-inner">
+      <div class="metodo-foto-wrap revelar">
+        <div class="metodo-foto-titulo">
+          <div class="secao-label">Como trabalho</div>
+          <h2 class="secao-titulo">Cinco etapas,<br>sem <em>atalhos</em></h2>
+        </div>
+        <div class="metodo-foto">
+          <div class="metodo-foto-img">
+            <img src="assets/portfolio_final-img3.png" alt="Metodologia — cinco etapas do design instrucional">
+          </div>
+          <div class="metodo-foto-detalhe">
+            <p>O design instrucional que funciona começa antes da tela e continua depois da aula.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="metodo-passos revelar">
+        <div class="passo">
+          <div class="passo-n">1</div>
+          <div>
+            <div class="passo-titulo">Diagnóstico do projeto</div>
+            <div class="passo-desc">O que precisa ser criado, para qual contexto, com quais restrições. Uma disciplina
+              de graduação e um objeto de aprendizagem pedem soluções diferentes. A análise começa antes de qualquer
+              decisão de design.</div>
+          </div>
+        </div>
+        <div class="passo">
+          <div class="passo-n">2</div>
+          <div>
+            <div class="passo-titulo">Estudo do público</div>
+            <div class="passo-desc">Quem vai aprender, em que condições, com quais barreiras. Um estudante de engenharia
+              às 23h e uma mãe buscando informações sobre autismo precisam de materiais radicalmente diferentes.</div>
+          </div>
+        </div>
+        <div class="passo">
+          <div class="passo-n">3</div>
+          <div>
+            <div class="passo-titulo">Imersão no conteúdo com o especialista</div>
+            <div class="passo-desc">Trabalho junto ao conteudista ou ao especialista da área para entender o que é
+              essencial, o que é complexo e o que o público ainda não sabe que precisa saber.</div>
+          </div>
+        </div>
+        <div class="passo">
+          <div class="passo-n">4</div>
+          <div>
+            <div class="passo-titulo">Transformação em experiência de aprendizagem</div>
+            <div class="passo-desc">Aqui o conteúdo vira material. Engajador, acessível, e que ensina de verdade. O
+              trabalho é conectar conceitos abstratos ao mundo real, escolher o formato certo, construir o percurso que
+              faz o aluno querer continuar.</div>
+          </div>
+        </div>
+        <div class="passo">
+          <div class="passo-n">5</div>
+          <div>
+            <div class="passo-titulo">Análise de dados e iteração</div>
+            <div class="passo-desc">Como os alunos receberam o material? Onde abandonaram? O que funcionou? Os dados
+              orientam as melhorias para as próximas ofertas. O processo não termina na publicação.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARCEIROS -->
+  <div class="parceiros revelar">
+    <div class="parceiros-inner">
+      <span class="parceiros-label"></span>
+      <div class="parceiros-lista">
+        <span class="parceiro">UNIVESP</span>
+        <span class="parceiro">USP</span>
+        <span class="parceiro">SEDPcD — Estado de São Paulo</span>
+        <span class="parceiro">Escola da Inclusão</span>
+        <span class="parceiro">TV Cultura</span>
+        <span class="parceiro">CPODV</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="contato">
+    <div class="footer-esq">
+      <div class="footer-nome">Claudia<br><em>Mori</em></div>
+      <div class="footer-sub">Designer Instrucional Sênior · São Paulo · Brasil</div>
+    </div>
+    <div class="footer-dir">
+      <div class="footer-contato-label">Contato</div>
+      <a href="mailto:claudia.mori.di@gmail.com" class="footer-email">claudia.mori.di@gmail.com</a>
+    </div>
+    <div class="footer-copy">
+      <span>© 2025 Claudia Mori. Todos os direitos reservados.</span>
+      <span>claudiamori.github.io</span>
+    </div>
+  </footer>
+
+  <script>
+    // Barra de progresso
+    window.addEventListener('scroll', () => {
+      const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      document.getElementById('prog').style.width = (p * 100) + '%';
+    });
+
+    // Revelar ao scroll
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visivel'), i * 60);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.revelar').forEach(el => obs.observe(el));
+  </script>
+</body>
+
+</html>

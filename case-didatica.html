@@ -1,0 +1,1060 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Didática · Claudia Mori</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --preto:     #0F1117;
+  --azul:      #1B3A5C;
+  --azul-vivo: #2257A0;
+  --terracota: #C05F3C;
+  --caramelo:  #D4945B;
+  --areia:     #D6C6B4;
+  --creme:     #F0EBE3;
+  --fundo:    #141414;
+  --fundo-alt:#1E1E1C;
+  --texto:    #EFE9E1;
+  --t60:      rgba(239,233,225,.65);
+  --t35:      rgba(239,233,225,.35);
+  --t12:      rgba(239,233,225,.1);
+  --titulo:    'Playfair Display', Georgia, serif;
+  --corpo:     'Jost', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--corpo);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ANIMAÇÕES */
+.rev {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.rev.vis { opacity: 1; transform: none; }
+.rev-d1 { transition-delay: .1s; }
+.rev-d2 { transition-delay: .2s; }
+.rev-d3 { transition-delay: .3s; }
+.rev-d4 { transition-delay: .4s; }
+
+/* PROGRESSO */
+#prog {
+  position: fixed; top: 0; left: 0; z-index: 999;
+  height: 3px; width: 0;
+  background: var(--terracota);
+  transition: width .1s linear;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3.5rem;
+  background: rgba(20,20,20,.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--t12);
+}
+.nav-back {
+  display: flex; align-items: center; gap: .7rem;
+  text-decoration: none; color: var(--t60);
+  font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+  transition: color .2s;
+}
+.nav-back:hover { color: var(--creme); }
+.nav-back svg { width: 14px; height: 14px; }
+.nav-projeto {
+  font-family: var(--titulo);
+  font-size: 1rem; font-style: italic;
+  color: var(--creme);
+}
+.nav-cta {
+  font-size: .65rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: var(--preto);
+  padding: .55rem 1.5rem;
+  text-decoration: none;
+  transition: background .2s;
+}
+.nav-cta:hover { background: var(--azul); }
+
+/* ══ HERO ══ */
+.hero-case {
+  padding-top: 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 88vh;
+}
+.hero-esq {
+  background: var(--azul);
+  padding: 6rem 4.5rem;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.hero-esq::before {
+  content: '';
+  position: absolute; top: -100px; right: -100px;
+  width: 480px; height: 480px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(43,87,160,.5) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-num {
+  font-family: var(--titulo);
+  font-size: 10rem; font-weight: 400; font-style: italic;
+  color: rgba(240,235,227,.05);
+  line-height: 1; position: absolute; top: 3rem; right: 2.5rem;
+}
+.hero-cat {
+  font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--caramelo); font-weight: 500; margin-bottom: 2rem;
+}
+.hero-titulo-case {
+  font-family: var(--titulo);
+  font-size: clamp(2.8rem, 4.5vw, 5rem);
+  font-weight: 400; line-height: .95;
+  color: var(--creme); margin-bottom: 1.8rem;
+}
+.hero-titulo-case em {
+  font-style: italic; display: block;
+  color: var(--caramelo);
+}
+.hero-sub {
+  font-size: .95rem; font-weight: 300;
+  color: rgba(240,235,227,.5);
+  line-height: 1.9; max-width: 380px;
+}
+.hero-meta {
+  display: flex; gap: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(240,235,227,.1);
+}
+.meta-item { display: flex; flex-direction: column; gap: .3rem; }
+.meta-label {
+  font-size: .58rem; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(240,235,227,.3);
+}
+.meta-valor { font-size: .8rem; color: rgba(240,235,227,.7); font-weight: 400; }
+
+.hero-dir {
+  background: #1A1A18;
+  padding: 6rem 4.5rem;
+  display: flex; flex-direction: column; justify-content: center; gap: 2.5rem;
+}
+.resumo-label {
+  font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--terracota); font-weight: 500;
+  margin-bottom: 1rem; display: block;
+}
+.resumo-frase {
+  font-family: var(--titulo);
+  font-size: 1.85rem; font-weight: 400; font-style: italic;
+  color: #5B9AD5; line-height: 1.45;
+  border-left: 3px solid var(--caramelo);
+  padding-left: 1.8rem;
+}
+.hero-nums {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border: 1px solid var(--t12);
+}
+.hero-n {
+  padding: 1.8rem 2rem;
+  border-right: 1px solid var(--t12);
+  border-bottom: 1px solid var(--t12);
+}
+.hero-n:nth-child(even) { border-right: none; }
+.hero-n:nth-child(3), .hero-n:nth-child(4) { border-bottom: none; }
+.n-val {
+  font-family: var(--titulo);
+  font-size: 2.6rem; font-style: italic;
+  color: var(--terracota); line-height: 1;
+}
+.n-desc { font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color: rgba(239,233,225,.45); margin-top: .4rem;
+}
+
+/* ══ SEÇÕES COMUNS ══ */
+.sec { padding: 7rem 4.5rem; }
+.sec-alt { background: var(--fundo-alt); }
+.sec-escura { background: var(--azul); }
+.sec-terracota { background: var(--terracota); }
+.sec-max { max-width: 1200px; margin: 0 auto; }
+
+.sec-label {
+  font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--terracota); font-weight: 500;
+  display: block; margin-bottom: .8rem;
+}
+.sec-label-claro { color: rgba(240,235,227,.4); }
+.sec-titulo {
+  font-family: var(--titulo);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 400; line-height: 1.1; color: var(--creme);
+}
+.sec-titulo em { font-style: italic; color: #5B9AD5; }
+.sec-titulo-claro { color: var(--creme); }
+.sec-titulo-claro em { color: var(--areia); }
+
+.corpo-texto {
+  font-size: .95rem; font-weight: 300;
+  line-height: 1.9; color: var(--t60);
+  max-width: 640px;
+}
+.corpo-texto-claro { color: rgba(240,235,227,.65); }
+
+/* ══ CONTEXTO ══ */
+.contexto-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: start;
+  margin-top: 4rem;
+}
+.portaria-bloco {
+  background: var(--azul);
+  padding: 2.5rem;
+  position: relative;
+}
+.portaria-bloco::before {
+  content: '§';
+  position: absolute; top: 1.5rem; right: 2rem;
+  font-family: var(--titulo); font-size: 4rem;
+  color: rgba(212,148,91,.2); line-height: 1;
+}
+.portaria-titulo {
+  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--caramelo); margin-bottom: 1.2rem;
+}
+.portaria-texto {
+  font-size: .9rem; color: rgba(240,235,227,.75);
+  line-height: 1.8;
+}
+.portaria-cod {
+  display: inline-block; margin-top: 1.2rem;
+  font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--caramelo); border-top: 1px solid rgba(212,148,91,.3);
+  padding-top: .6rem;
+}
+
+.obj-lista { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
+.obj-item { display: flex; gap: 1.2rem; align-items: flex-start; }
+.obj-num {
+  font-family: var(--titulo); font-size: 1.5rem; font-style: italic;
+  color: var(--caramelo); line-height: 1; flex-shrink: 0;
+  min-width: 2rem;
+}
+.obj-desc { font-size: .9rem; color: var(--t60); line-height: 1.7; }
+.obj-titulo { font-weight: 500; color: var(--creme); display: block; margin-bottom: .3rem; }
+
+/* ══ ESCOLA / VÍDEOS ══ */
+.escola-destaque {
+  background: var(--preto);
+  padding: 5rem 4.5rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+}
+.escola-txt {}
+.escola-frase {
+  font-family: var(--titulo);
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+  font-weight: 400; font-style: italic;
+  color: var(--creme); line-height: 1.4;
+  margin-bottom: 1.8rem;
+}
+.escola-frase span { color: var(--caramelo); }
+.escola-p {
+  font-size: .9rem; color: rgba(240,235,227,.6);
+  line-height: 1.85; margin-bottom: 1.2rem;
+}
+.escola-nome {
+  font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--caramelo);
+}
+.escola-placeholder {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  height: 340px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 1rem; padding: 2rem;
+}
+.escola-icon {
+  width: 48px; height: 48px;
+  border: 1.5px solid rgba(212,148,91,.5);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.escola-icon svg { width: 20px; height: 20px; stroke: var(--caramelo); fill: none; stroke-width: 1.5; }
+.escola-placeholder-txt {
+  font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(240,235,227,.25); text-align: center;
+}
+
+/* ══ ESTRATÉGIAS ══ */
+.estrategias-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-top: 4rem;
+}
+.estrategia { background: var(--fundo);
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--t12);
+  position: relative;
+  transition: background .2s;
+}
+.estrategia:hover { background: var(--fundo-alt); }
+.est-num {
+  font-family: var(--titulo); font-size: 3rem;
+  font-style: italic; color: rgba(192,95,60,.1);
+  line-height: 1; margin-bottom: 1rem;
+}
+.est-titulo {
+  font-family: var(--titulo); font-size: 1.1rem;
+  font-weight: 500; color: #5B9AD5;
+  margin-bottom: .8rem; line-height: 1.3;
+}
+.est-desc {
+  font-size: .85rem; color: var(--t60); line-height: 1.75;
+}
+.est-tag {
+  display: inline-block; margin-top: 1.2rem;
+  font-size: .58rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--terracota);
+  border: 1px solid rgba(192,95,60,.3);
+  padding: .25rem .7rem;
+}
+
+/* ══ MARINA / STORYTELLING ══ */
+.marina-sec {
+  background: var(--azul);
+  padding: 7rem 4.5rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6rem; align-items: center;
+}
+.marina-quote {
+  position: relative; padding-left: 2rem;
+}
+.marina-quote::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: var(--caramelo);
+}
+.marina-q-txt {
+  font-family: var(--titulo);
+  font-size: clamp(1.5rem, 2.2vw, 2.1rem);
+  font-weight: 400; font-style: italic;
+  color: var(--creme); line-height: 1.5;
+}
+.marina-q-txt span { color: var(--caramelo); }
+.marina-q-fonte {
+  display: block; margin-top: 1.5rem;
+  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(240,235,227,.35);
+}
+.marina-info {}
+.marina-titulo {
+  font-family: var(--titulo);
+  font-size: 2rem; font-weight: 400;
+  color: var(--creme); margin-bottom: 1.2rem; line-height: 1.2;
+}
+.marina-titulo em { font-style: italic; color: var(--caramelo); }
+.marina-p {
+  font-size: .9rem; color: rgba(240,235,227,.6);
+  line-height: 1.85; margin-bottom: 1.4rem;
+}
+.marina-tags {
+  display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.8rem;
+}
+.m-tag {
+  font-size: .6rem; letter-spacing: .12em; text-transform: uppercase;
+  padding: .4rem 1rem;
+  border: 1px solid rgba(212,148,91,.4);
+  color: var(--caramelo);
+}
+
+/* ══ DADOS ══ */
+.dados-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; margin-top: 3.5rem;
+}
+.dado {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid var(--t12);
+  border-bottom: 1px solid var(--t12);
+  position: relative;
+}
+.dado:nth-child(4n) { border-right: none; }
+.dado-val {
+  font-family: var(--titulo);
+  font-size: 3.8rem; font-style: italic;
+  color: #5B9AD5; line-height: 1;
+}
+.dado-un {
+  font-size: 1.4rem; color: var(--terracota);
+}
+.dado-label {
+  font-size: .65rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--t35); margin-top: .8rem; line-height: 1.5;
+}
+.dado-sub {
+  font-size: .78rem; color: var(--t60);
+  margin-top: .5rem; line-height: 1.5;
+}
+
+/* barra de satisfação */
+.barra-wrap { margin-top: 4rem; }
+.barra-item { margin-bottom: 2rem; }
+.barra-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: .6rem;
+}
+.barra-nome {
+  font-size: .78rem; font-weight: 500; color: var(--creme);
+}
+.barra-nota {
+  font-family: var(--titulo); font-size: 1.5rem; font-style: italic;
+  color: #5B9AD5;
+}
+.barra-track {
+  height: 4px; background: var(--t12); border-radius: 2px;
+  position: relative;
+}
+.barra-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, var(--azul-vivo), var(--terracota));
+  width: 0; transition: width 1.2s ease;
+}
+
+/* ══ FEEDBACK ══ */
+.feedback-cols {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 3rem; margin-top: 3.5rem;
+}
+.feedback-bloco {
+  padding: 2.5rem;
+  border: 1px solid var(--t12);
+}
+.fb-ico {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.2rem;
+}
+.fb-ico svg { width: 16px; height: 16px; fill: none; stroke: #fff; stroke-width: 2; }
+.fb-titulo {
+  font-family: var(--titulo); font-size: 1.1rem;
+  font-weight: 500; color: var(--creme); margin-bottom: 1rem;
+}
+.fb-lista { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+.fb-lista li {
+  font-size: .87rem; color: var(--t60); line-height: 1.65;
+  padding-left: 1.2rem; position: relative;
+}
+.fb-lista li::before {
+  content: '—';
+  position: absolute; left: 0;
+  color: var(--terracota); font-size: .7rem;
+}
+
+.feedback-num {
+  text-align: center; padding: 2rem;
+  border-top: 1px solid var(--t12);
+  margin-top: 3.5rem;
+}
+.fb-n-val {
+  font-family: var(--titulo); font-size: 5rem;
+  font-style: italic; color: #5B9AD5; line-height: 1;
+}
+.fb-n-label {
+  font-size: .65rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--t35); margin-top: .5rem;
+}
+
+/* ══ APRENDIZADOS ══ */
+.aprend-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2rem; margin-top: 4rem;
+}
+.aprend {
+  padding: 2.5rem;
+  background: var(--fundo);
+  border-top: 3px solid var(--azul);
+}
+.aprend-cat {
+  font-size: .6rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--terracota); margin-bottom: .8rem;
+}
+.aprend-titulo {
+  font-family: var(--titulo); font-size: 1rem;
+  font-weight: 500; color: var(--creme);
+  margin-bottom: .8rem; line-height: 1.35;
+}
+.aprend-desc {
+  font-size: .85rem; color: var(--t60); line-height: 1.75;
+}
+
+/* ══ IMPACTO FINAL ══ */
+.impacto-faixa {
+  background: var(--preto);
+  padding: 6rem 4.5rem;
+  text-align: center;
+}
+.impacto-subtitulo {
+  font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--caramelo); margin-bottom: 1.2rem;
+}
+.impacto-frase {
+  font-family: var(--titulo);
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-weight: 400; font-style: italic;
+  color: var(--creme); line-height: 1.3;
+  max-width: 800px; margin: 0 auto;
+}
+.impacto-frase span { color: var(--caramelo); }
+
+/* ══ FOOTER ══ */
+.footer-case {
+  background: var(--azul);
+  padding: 3rem 4.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-volta {
+  font-size: .65rem; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(240,235,227,.4);
+}
+.footer-nav { display: flex; gap: 2.5rem; }
+.footer-nav a {
+  font-size: .65rem; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(240,235,227,.55); text-decoration: none;
+  transition: color .2s;
+}
+.footer-nav a:hover { color: var(--caramelo); }
+
+/* ══ MARINA IMAGES ══ */
+.marina-imagens {
+  display: flex; gap: 1.2rem;
+  margin-top: 2.5rem; flex-wrap: wrap;
+}
+.marina-img {
+  width: 130px; height: 130px;
+  object-fit: contain;
+  object-position: bottom;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,.35));
+  transition: transform .25s ease;
+}
+.marina-img:hover { transform: translateY(-4px) scale(1.05); }
+
+/* ══ CONTRAST FIXES ══ */
+.hero-sub { color: rgba(240,235,227,.8); }
+.meta-label { color: rgba(240,235,227,.6); }
+.sec-label-claro { color: rgba(240,235,227,.7); }
+.corpo-texto-claro { color: rgba(240,235,227,.82); }
+.marina-q-fonte { color: rgba(240,235,227,.6); }
+.marina-p { color: rgba(240,235,227,.82); }
+.escola-p { color: rgba(240,235,227,.82); }
+@media (max-width: 900px) {
+  .hero-case, .contexto-grid, .escola-destaque,
+  .marina-sec, .feedback-cols { grid-template-columns: 1fr; }
+  .estrategias-grid, .dados-grid, .aprend-grid { grid-template-columns: 1fr; }
+  .sec { padding: 4rem 2rem; }
+  nav { padding: 0 1.5rem; }
+  .nav-projeto { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-back" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    Portfólio
+  </a>
+  <span class="nav-projeto">Didática · UNIVESP</span>
+  <a class="nav-cta" href="index.html#contato">Contato</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero-case">
+  <div class="hero-esq">
+    <span class="hero-num">02</span>
+    <div>
+      <p class="hero-cat">Design Instrucional · EAD · Metodologias Ativas</p>
+      <h1 class="hero-titulo-case">
+        Didática
+        <em>que transforma</em>
+      </h1>
+      <p class="hero-sub">
+        Reformulação completa da disciplina Didática na UNIVESP como projeto piloto, em resposta às novas diretrizes nacionais para licenciatura, integrando teoria, prática e conexão com a escola real.
+      </p>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span class="meta-label">Instituição</span>
+        <span class="meta-valor">UNIVESP</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Período</span>
+        <span class="meta-valor">2023 – 2024</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Natureza</span>
+        <span class="meta-valor">Projeto Piloto</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-dir">
+    <div>
+      <span class="resumo-label">Propósito central</span>
+      <p class="resumo-frase">
+        Aproximar os futuros educadores da realidade das salas de aula, antes mesmo de pisar nelas.
+      </p>
+    </div>
+    <div class="hero-nums">
+      <div class="hero-n">
+        <div class="n-val">707</div>
+        <div class="n-desc">Respostas de avaliação coletadas</div>
+      </div>
+      <div class="hero-n">
+        <div class="n-val">4,55<span style="font-size:1.4rem">/5</span></div>
+        <div class="n-desc">Média do material didático</div>
+      </div>
+      <div class="hero-n">
+        <div class="n-val">72<span style="font-size:1.6rem">%</span></div>
+        <div class="n-desc">Feedbacks positivos sobre o curso</div>
+      </div>
+      <div class="hero-n">
+        <div class="n-val">10</div>
+        <div class="n-desc">Estratégias pedagógicas inéditas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTEXTO ══ -->
+<section class="sec">
+  <div class="sec-max">
+    <span class="sec-label rev">O ponto de partida</span>
+    <h2 class="sec-titulo rev rev-d1">
+      Uma portaria que <em>exigiu repensar</em><br>a formação docente
+    </h2>
+    <div class="contexto-grid">
+      <div class="rev rev-d2">
+        <div class="portaria-bloco">
+          <p class="portaria-titulo">Portaria CNE/CP nº 22/2023</p>
+          <p class="portaria-texto">
+            As novas diretrizes curriculares nacionais para os cursos de licenciatura estabeleceram a necessidade urgente de superar a desarticulação histórica entre formação acadêmica e realidade prática do trabalho docente nas redes de ensino, com foco em métodos mais ativos, digitais e conectados às escolas de educação básica.
+          </p>
+          <span class="portaria-cod">Conselho Nacional de Educação · 2023</span>
+        </div>
+      </div>
+      <div class="rev rev-d3">
+        <p class="corpo-texto" style="margin-bottom:2rem;">
+          A UNIVESP elegeu a disciplina Didática como projeto piloto: um espaço de experimentação pedagógica onde novas abordagens pudessem ser testadas, avaliadas e replicadas em outras disciplinas e cursos.
+        </p>
+        <p class="corpo-texto">
+          A equipe formada para o projeto reuniu uma designer instrucional, equipe de TI, equipe de arte e programação, com um objetivo compartilhado: transformar a experiência educacional em algo mais dinâmico, aplicável e envolvente para os futuros professores.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OBJETIVOS ══ -->
+<section class="sec sec-alt">
+  <div class="sec-max">
+    <span class="sec-label rev">Objetivos da reformulação</span>
+    <h2 class="sec-titulo rev rev-d1">Três frentes de <em>transformação</em></h2>
+    <div class="contexto-grid" style="margin-top:3rem;">
+      <ul class="obj-lista rev rev-d2">
+        <li class="obj-item">
+          <span class="obj-num">01</span>
+          <div class="obj-desc">
+            <span class="obj-titulo">Integrar teoria e prática</span>
+            Criar situações que permitissem aos futuros educadores aplicar teorias em contextos práticos de maneira competente, superando a passividade do EAD tradicional.
+          </div>
+        </li>
+        <li class="obj-item">
+          <span class="obj-num">02</span>
+          <div class="obj-desc">
+            <span class="obj-titulo">Engajar por meio de tecnologia</span>
+            Reformular o currículo com abordagens práticas, utilizando tecnologias digitais e recursos interativos que tornassem o aprendizado mais envolvente.
+          </div>
+        </li>
+        <li class="obj-item">
+          <span class="obj-num">03</span>
+          <div class="obj-desc">
+            <span class="obj-titulo">Conectar a escola real</span>
+            Criar pontes entre a universidade e a educação básica, proporcionando experiências práticas relevantes que enriquecessem a preparação profissional dos alunos.
+          </div>
+        </li>
+      </ul>
+      <div class="rev rev-d3">
+        <p class="corpo-texto" style="margin-bottom: 1.5rem;">
+          A proposta era ir além das exigências regulatórias: explorar novas possibilidades pedagógicas que pudessem servir de modelo replicável dentro da universidade.
+        </p>
+        <p class="corpo-texto">
+          A escolha da Didática como disciplina piloto não foi acidental: é precisamente nela que os futuros professores aprendem a <em>ensinar</em>. Reformulá-la significava criar um exemplo vivo do que a própria disciplina pregava.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ESCOLA REAL ══ -->
+<div class="escola-destaque">
+  <div class="escola-txt rev">
+    <span class="sec-label-claro" style="font-size:.65rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(212,148,91,.8); display:block; margin-bottom:1rem;">Inovação metodológica</span>
+    <p class="escola-frase">
+      Gravar nas salas de aula, e não em estúdios, foi uma <span>decisão pedagógica</span>.
+    </p>
+    <p class="escola-p">
+      Os vídeos educativos foram produzidos na Escola Municipal Ângelo Bizzo. Professores e coordenadores foram filmados em atividade real: executando aulas, e depois explicando as metodologias que estavam usando. Os alunos da UNIVESP viam a teoria em ação: não como simulação, mas como realidade documentada.
+    </p>
+    <p class="escola-p">
+      Os vídeos foram projetados para ser curtos e focados. Imediatamente após cada vídeo, quizzes e atividades de fixação consolidavam o aprendizado no momento exato em que ele acontecia.
+    </p>
+    <span class="escola-nome">Escola Municipal Ângelo Bizzo · São Paulo</span>
+  </div>
+  <div class="rev rev-d2" style="position:relative; width:100%; padding-bottom:56.25%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);">
+    <iframe
+      src="https://www.youtube.com/embed/W5uMop1hySM"
+      style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;"
+      allowfullscreen
+      loading="lazy"
+      title="Vídeos gravados em contexto real — Escola Municipal Ângelo Bizzo">
+    </iframe>
+  </div>
+</div>
+
+<!-- ══ ESTRATÉGIAS ══ -->
+<section class="sec">
+  <div class="sec-max">
+    <span class="sec-label rev">Estratégias de aprendizagem</span>
+    <h2 class="sec-titulo rev rev-d1">10 recursos criados <em>do zero</em></h2>
+    <div class="estrategias-grid">
+      <div class="estrategia rev">
+        <div class="est-num">01</div>
+        <div class="est-titulo">Vídeos Costurando</div>
+        <p class="est-desc">A cada semana, a professora introduzia os temas em vídeos curtos, estabelecendo vínculo pessoal com os alunos e delineando os objetivos de aprendizado.</p>
+        <span class="est-tag">Engajamento emocional</span>
+      </div>
+      <div class="estrategia rev rev-d1">
+        <div class="est-num">02</div>
+        <div class="est-titulo">Desafios Semanais</div>
+        <p class="est-desc">Exercícios baseados em cenários práticos da personagem Marina, uma estagiária em escola pública enfrentando dilemas reais alinhados ao conteúdo da semana.</p>
+        <span class="est-tag">Storytelling · Aplicação</span>
+      </div>
+      <div class="estrategia rev rev-d2">
+        <div class="est-num">03</div>
+        <div class="est-titulo">Blog Colaborativo</div>
+        <p class="est-desc">Grupos de estudo produziam postagens coletivas para auxiliar a personagem Marina. Um formato que estimulou colaboração e simplificou a avaliação pelos facilitadores.</p>
+        <span class="est-tag">Colaboração · Escrita reflexiva</span>
+      </div>
+      <div class="estrategia rev rev-d3">
+        <div class="est-num">04</div>
+        <div class="est-titulo">Wiki da Disciplina</div>
+        <p class="est-desc">Repositório de conhecimento construído coletivamente pelos alunos, reforçando conceitos e estimulando a colaboração horizontal na construção de saberes.</p>
+        <span class="est-tag">Construção coletiva</span>
+      </div>
+      <div class="estrategia rev">
+        <div class="est-num">05</div>
+        <div class="est-titulo">Quizzes H5P</div>
+        <p class="est-desc">Superando as limitações do BlackBoard, os quizzes foram elaborados com feedbacks instantâneos, criando uma experiência engajadora de verificação do aprendizado.</p>
+        <span class="est-tag">Avaliação formativa</span>
+      </div>
+      <div class="estrategia rev rev-d1">
+        <div class="est-num">06</div>
+        <div class="est-titulo">E-books Semanais</div>
+        <p class="est-desc">Material de leitura criado para atender diferentes estilos de aprendizagem, resumindo os conceitos teóricos de cada semana de forma acessível e estruturada.</p>
+        <span class="est-tag">Multimodalidade</span>
+      </div>
+      <div class="estrategia rev rev-d2">
+        <div class="est-num">07</div>
+        <div class="est-titulo">Infográficos e Mapas Mentais</div>
+        <p class="est-desc">Recursos visuais desenvolvidos com o departamento de arte para descomplicar conceitos complexos, atendendo às múltiplas inteligências dos alunos.</p>
+        <span class="est-tag">Design visual · Cognição</span>
+      </div>
+      <div class="estrategia rev rev-d3">
+        <div class="est-num">08</div>
+        <div class="est-titulo">Tutoriais das Ferramentas</div>
+        <p class="est-desc">Guias detalhados para cada nova tecnologia introduzida, para que alunos e facilitadores pudessem usar as ferramentas com autonomia e confiança.</p>
+        <span class="est-tag">Autonomia digital</span>
+      </div>
+      <div class="estrategia rev">
+        <div class="est-num">09</div>
+        <div class="est-titulo">Resumos Visuais</div>
+        <p class="est-desc">Disponibilizados ao final da disciplina, consolidaram os principais pontos de aprendizagem de forma clara e visualmente acessível para revisão e fixação.</p>
+        <span class="est-tag">Síntese de conteúdo</span>
+      </div>
+      <div class="estrategia rev rev-d1" style="grid-column: 1 / -1; max-width: 400px;">
+        <div class="est-num">10</div>
+        <div class="est-titulo">Página de Apoio aos Facilitadores</div>
+        <p class="est-desc">Espaço dedicado com orientações sobre a condução das atividades e uso das ferramentas, garantindo suporte estruturado para a mediação do aprendizado.</p>
+        <span class="est-tag">Suporte pedagógico</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MARINA · STORYTELLING ══ -->
+<section class="marina-sec">
+  <div class="marina-quote rev">
+    <div>
+      <p class="marina-q-txt">
+        "Marina chegava toda semana com um <span>novo desafio na escola</span>. Os alunos precisavam ajudá-la e, ao fazer isso, aprendiam didática."
+      </p>
+      <span class="marina-q-fonte">Estratégia central de storytelling · Didática UNIVESP</span>
+    </div>
+  </div>
+  <div class="marina-info rev rev-d2">
+    <h3 class="marina-titulo">
+      Marina, a estagiária que <em>tornou o abstrato concreto</em>
+    </h3>
+    <p class="marina-p">
+      Marina era uma personagem fictícia. Seus problemas eram reais. Toda semana ela enfrentava um dilema pedagógico diretamente relacionado ao conteúdo estudado pelos alunos: como lidar com turmas heterogêneas, como planejar uma aula inclusiva, como engajar estudantes desmotivados.
+    </p>
+    <p class="marina-p">
+      A tarefa dos alunos era reunir-se em grupos, discutir e publicar no blog coletivo uma orientação concreta para ajudá-la. O storytelling transformou o exercício teórico em algo que parecia urgente e humano.
+    </p>
+    <div class="marina-tags">
+      <span class="m-tag">Pensamento crítico</span>
+      <span class="m-tag">Aplicação prática</span>
+      <span class="m-tag">Trabalho em grupo</span>
+      <span class="m-tag">Escrita argumentativa</span>
+    </div>
+    <div class="marina-imagens">
+      <img src="assets/case-didatica-img1.png" alt="Marina pensativa diante do laptop" class="marina-img">
+      <img src="assets/case-didatica-img2.png" alt="Marina apresentando uma ideia para o grupo" class="marina-img">
+      <img src="assets/case-didatica-img3.png" alt="Marina ajudando uma professora no computador" class="marina-img">
+      <img src="assets/case-didatica-img4.png" alt="Marina conectada em rede com colegas e dispositivos" class="marina-img">
+    </div>
+  </div>
+</section>
+
+<!-- ══ DADOS DE AVALIAÇÃO ══ -->
+<section class="sec sec-alt">
+  <div class="sec-max">
+    <span class="sec-label rev">Dados da avaliação</span>
+    <h2 class="sec-titulo rev rev-d1">O que os <em>707 alunos</em> disseram</h2>
+    <p class="corpo-texto rev rev-d2" style="margin-top:1.2rem;">
+      A avaliação combinou questões fechadas (escala 1–5) com respostas abertas, coletadas anonimamente para garantir honestidade. Os resultados revelaram tendências consistentes sobre o que funcionou e o que precisava evoluir.
+    </p>
+
+    <div class="dados-grid rev rev-d3">
+      <div class="dado">
+        <div class="dado-val">4<span class="dado-un">,31</span></div>
+        <div class="dado-label">Facilidade de navegação no AVA</div>
+        <div class="dado-sub">Mediana 4 · Desvio padrão 0,84</div>
+      </div>
+      <div class="dado">
+        <div class="dado-val">4<span class="dado-un">,55</span></div>
+        <div class="dado-label">Material didático atende às necessidades</div>
+        <div class="dado-sub">Mediana 5 · Desvio padrão 0,75</div>
+      </div>
+      <div class="dado">
+        <div class="dado-val">4<span class="dado-un">,40</span></div>
+        <div class="dado-label">Nível de interatividade da disciplina</div>
+        <div class="dado-sub">Mediana 5 · Desvio padrão 0,82</div>
+      </div>
+      <div class="dado">
+        <div class="dado-val">4<span class="dado-un">,24</span></div>
+        <div class="dado-label">Suporte em caso de dúvidas ou problemas</div>
+        <div class="dado-sub">Mediana 5 · Desvio padrão 0,97</div>
+      </div>
+    </div>
+
+    <div class="barra-wrap">
+      <div class="barra-item rev">
+        <div class="barra-header">
+          <span class="barra-nome">Material didático</span>
+          <span class="barra-nota">4,55 /5</span>
+        </div>
+        <div class="barra-track"><div class="barra-fill" data-w="91"></div></div>
+      </div>
+      <div class="barra-item rev rev-d1">
+        <div class="barra-header">
+          <span class="barra-nome">Interatividade</span>
+          <span class="barra-nota">4,40 /5</span>
+        </div>
+        <div class="barra-track"><div class="barra-fill" data-w="88"></div></div>
+      </div>
+      <div class="barra-item rev rev-d2">
+        <div class="barra-header">
+          <span class="barra-nome">Navegação no AVA</span>
+          <span class="barra-nota">4,31 /5</span>
+        </div>
+        <div class="barra-track"><div class="barra-fill" data-w="86"></div></div>
+      </div>
+      <div class="barra-item rev rev-d3">
+        <div class="barra-header">
+          <span class="barra-nome">Suporte pedagógico</span>
+          <span class="barra-nota">4,24 /5</span>
+        </div>
+        <div class="barra-track"><div class="barra-fill" data-w="85"></div></div>
+      </div>
+      <div class="barra-item rev rev-d4">
+        <div class="barra-header">
+          <span class="barra-nome">Desafios e Blog</span>
+          <span class="barra-nota">4,08 /5</span>
+        </div>
+        <div class="barra-track"><div class="barra-fill" data-w="82"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEEDBACK QUALITATIVO ══ -->
+<section class="sec">
+  <div class="sec-max">
+    <span class="sec-label rev">Análise qualitativa</span>
+    <h2 class="sec-titulo rev rev-d1">O que os alunos <em>disseram com suas palavras</em></h2>
+
+    <div class="feedback-num rev">
+      <div class="fb-n-val">511</div>
+      <div class="fb-n-label">de 707 respostas destacaram aspectos positivos · 72% de satisfação</div>
+    </div>
+
+    <div class="feedback-cols">
+      <div class="feedback-bloco rev">
+        <div class="fb-ico" style="background: var(--azul);">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="fb-titulo">O que os alunos mais apreciaram</div>
+        <ul class="fb-lista">
+          <li>O blog como ferramenta eficaz de consolidação do conhecimento coletivo</li>
+          <li>O trabalho em grupo alinhado aos princípios didáticos da própria disciplina</li>
+          <li>A personagem Marina como oportunidade real de aplicar teorias à prática</li>
+          <li>Os desafios como fonte de inspiração para o pensamento criativo</li>
+          <li>A abordagem interativa que evitou a monotonia do EAD convencional</li>
+          <li>A qualidade e organização do material didático disponível no AVA</li>
+        </ul>
+      </div>
+      <div class="feedback-bloco rev rev-d2">
+        <div class="fb-ico" style="background: var(--terracota);">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="fb-titulo">Pontos que orientaram melhorias</div>
+        <ul class="fb-lista">
+          <li>Dificuldades de engajamento quando há participação desigual nos grupos</li>
+          <li>Barreiras técnicas no acesso e uso inicial do blog</li>
+          <li>Demanda por instruções mais claras e tutoriais passo a passo</li>
+          <li>Pedido de feedback individual dos facilitadores sobre os desafios</li>
+          <li>Desejo por mais vídeos, mais textos e mais quizzes: sinal de engajamento alto</li>
+          <li>Qualidade do áudio em parte dos vídeos considerada insatisfatória</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ APRENDIZADOS ══ -->
+<section class="sec sec-alt">
+  <div class="sec-max">
+    <span class="sec-label rev">Lições do piloto</span>
+    <h2 class="sec-titulo rev rev-d1">O que esse projeto <em>ensinou sobre ensinar</em></h2>
+    <div class="aprend-grid">
+      <div class="aprend rev">
+        <div class="aprend-cat">Storytelling</div>
+        <div class="aprend-titulo">Personagens aproximam teoria de vida</div>
+        <p class="aprend-desc">Marina não era um exercício. Era uma pessoa. Esse deslocamento narrativo transformou a relação dos alunos com o conteúdo, tornando abstrato em urgente.</p>
+      </div>
+      <div class="aprend rev rev-d1">
+        <div class="aprend-cat">Colaboração</div>
+        <div class="aprend-titulo">Grupos precisam de estrutura, não só de incentivo</div>
+        <p class="aprend-desc">O formato coletivo do blog funcionou bem quando bem orientado. O principal aprendizado: colaboração genuína exige instruções claras e ritos de participação definidos.</p>
+      </div>
+      <div class="aprend rev rev-d2">
+        <div class="aprend-cat">Multimodalidade</div>
+        <div class="aprend-titulo">Não existe um único formato para todos</div>
+        <p class="aprend-desc">A combinação de vídeo, e-book, infográfico e quiz reconhece que estudantes aprendem de formas diferentes. Oferecer múltiplos caminhos é uma decisão de inclusão.</p>
+      </div>
+      <div class="aprend rev rev-d3">
+        <div class="aprend-cat">Conexão com a escola real</div>
+        <div class="aprend-titulo">Vídeos gravados em sala valem mais que encenações</div>
+        <p class="aprend-desc">A Escola Municipal Ângelo Bizzo entregou autenticidade. Ver professores reais em ação e ouvir sua reflexão sobre a prática teve impacto que nenhum estúdio poderia replicar.</p>
+      </div>
+      <div class="aprend rev">
+        <div class="aprend-cat">Suporte técnico</div>
+        <div class="aprend-titulo">Digitalização exige letramento, não só acesso</div>
+        <p class="aprend-desc">Ferramentas novas precisam vir acompanhadas de tutoriais e suporte contínuo. A demanda dos alunos por mais orientação revelou que tecnologia sem mediação pode gerar exclusão.</p>
+      </div>
+      <div class="aprend rev rev-d1">
+        <div class="aprend-cat">Replicabilidade</div>
+        <div class="aprend-titulo">O piloto criou um modelo a ser seguido</div>
+        <p class="aprend-desc">O objetivo desde o início era que a Didática servisse de referência. As metodologias documentadas e avaliadas aqui foram projetadas para ser transferíveis a outras disciplinas e cursos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAIXA IMPACTO ══ -->
+<div class="impacto-faixa">
+  <p class="impacto-subtitulo rev">Síntese do projeto</p>
+  <p class="impacto-frase rev rev-d1">
+    Uma disciplina que ensina a <span>ensinar</span>. Ao ser reformulada, praticou exatamente o que pregava: aprendizado ativo, contextualizado e conectado à realidade.
+  </p>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer-case">
+  <span class="footer-volta">Portfólio · Claudia Mori</span>
+  <nav class="footer-nav">
+    <a href="index.html">Início</a>
+    <a href="index.html#cases">Outros projetos</a>
+    <a href="index.html#contato">Contato</a>
+  </nav>
+</footer>
+
+<script>
+// Barra de progresso
+window.addEventListener('scroll', () => {
+  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  document.getElementById('prog').style.width = (p * 100) + '%';
+});
+
+// Revelar ao scroll
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+      // Animar barras
+      const fill = e.target.querySelector('.barra-fill');
+      if (fill) {
+        setTimeout(() => {
+          fill.style.width = fill.dataset.w + '%';
+        }, 200);
+      }
+    }
+  });
+}, { threshold: 0.07 });
+
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+
+// Animar barras quando já visíveis
+document.querySelectorAll('.barra-fill').forEach(fill => {
+  const obs2 = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => {
+          fill.style.width = fill.dataset.w + '%';
+        }, 300);
+        obs2.unobserve(fill);
+      }
+    });
+  }, { threshold: 0.5 });
+  obs2.observe(fill);
+});
+</script>
+</body>
+</html>
