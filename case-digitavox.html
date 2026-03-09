@@ -562,11 +562,89 @@ nav {
 
     /* Acessibilidade - Teclado */
     a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid #E8AB12; outline-offset: 4px; }
-  </style>
+      /* â”€â”€ MOBILE FIX (Telas Pequenas < 600px) â”€â”€ */
+    @media (max-width: 600px) {
+      body, html { overflow-x: hidden; }
+      img, svg, video { max-width: 100% !important; height: auto !important; }
+      
+      .sec, .hero-case-esq, .hero-case-dir, .hero-esq, .hero-dir, .sobre, .cases, .metodo, .parceiros {
+        padding: 3rem 1.2rem !important;
+      }
+      
+      .tres-pilares, .capitulos-lista, .recursos-grid, .contexto-grid, .papel-grid, .narrativa-wrap, 
+      .resultados-big, .case-grid, .sobre-inner, .metodo-inner, .parceiros-inner, .problema-grid, .rodada-grid,
+      .semanas-grid, .mecanicas-grade, .melhorias-grade, .vozes-grade, .lacunas {
+        gap: 1.5rem !important;
+      }
+      
+      .hero-titulo, .hero-titulo-case, .hero-num {
+        font-size: clamp(2.2rem, 8vw, 3rem) !important;
+      }
+      
+      .hero-desc, .hero-cargo, .hero-descricao {
+        font-size: 1rem !important;
+      }
+      
+      .footer-case, footer {
+        padding: 3rem 1.2rem !important;
+      }
+      
+      .pilar, .recurso, .diag-item, .fase, .cap, .case-item, .big-stat, .metodologia-pilar, .semana, .mecanica, .voz-card {
+        padding: 1.5rem 1.2rem !important;
+      }
+      
+      /* Ajuste nas grids que usavam itens muito pequenos Ã  esquerda (ex: nÃºmeros dos caps) */
+      .cap, .fase {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem !important;
+      }
+      .fase-significado { grid-column: 1 !important; }
+      
+      .pilar-num, .big-val, .semana-num { font-size: 2.5rem !important; }
+    }  </style>
 <style type="text/css" id="operaUserStyle">
     /* Acessibilidade - Teclado */
     a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid #E8AB12; outline-offset: 4px; }
-  </style></head>
+      /* â”€â”€ MOBILE FIX (Telas Pequenas < 600px) â”€â”€ */
+    @media (max-width: 600px) {
+      body, html { overflow-x: hidden; }
+      img, svg, video { max-width: 100% !important; height: auto !important; }
+      
+      .sec, .hero-case-esq, .hero-case-dir, .hero-esq, .hero-dir, .sobre, .cases, .metodo, .parceiros {
+        padding: 3rem 1.2rem !important;
+      }
+      
+      .tres-pilares, .capitulos-lista, .recursos-grid, .contexto-grid, .papel-grid, .narrativa-wrap, 
+      .resultados-big, .case-grid, .sobre-inner, .metodo-inner, .parceiros-inner, .problema-grid, .rodada-grid,
+      .semanas-grid, .mecanicas-grade, .melhorias-grade, .vozes-grade, .lacunas {
+        gap: 1.5rem !important;
+      }
+      
+      .hero-titulo, .hero-titulo-case, .hero-num {
+        font-size: clamp(2.2rem, 8vw, 3rem) !important;
+      }
+      
+      .hero-desc, .hero-cargo, .hero-descricao {
+        font-size: 1rem !important;
+      }
+      
+      .footer-case, footer {
+        padding: 3rem 1.2rem !important;
+      }
+      
+      .pilar, .recurso, .diag-item, .fase, .cap, .case-item, .big-stat, .metodologia-pilar, .semana, .mecanica, .voz-card {
+        padding: 1.5rem 1.2rem !important;
+      }
+      
+      /* Ajuste nas grids que usavam itens muito pequenos Ã  esquerda (ex: nÃºmeros dos caps) */
+      .cap, .fase {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem !important;
+      }
+      .fase-significado { grid-column: 1 !important; }
+      
+      .pilar-num, .big-val, .semana-num { font-size: 2.5rem !important; }
+    }  </style></head>
 <body>
 
 <div id="prog" style="width: 56.1018%;"></div>
