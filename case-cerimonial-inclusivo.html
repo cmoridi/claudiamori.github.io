@@ -477,7 +477,10 @@ nav {
   nav { padding: 0 1.5rem; }
   .nav-projeto { display: none; }
 }
-</style>
+
+    /* Acessibilidade - Teclado */
+    a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid #E8AB12; outline-offset: 4px; }
+  </style>
 </head>
 <body>
 
@@ -485,8 +488,8 @@ nav {
 
 <!-- NAV -->
 <nav>
-  <a class="nav-back" href="index.html">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+  <a class="nav-back" aria-label="Voltar para a pÃ¡gina inicial" href="index.html">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <polyline points="15 18 9 12 15 6"/>
     </svg>
     Portfólio
@@ -848,7 +851,7 @@ nav {
         </p>
         <a href="https://www.pessoacomdeficiencia.sp.gov.br/sec_deficiencia/noticias/sedpcd-+escola-inclusao-promove-workshop-cerimonial-inclusivo" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:.6rem; margin-top:1.8rem; font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ouro); text-decoration:none; border-bottom:1px solid rgba(184,137,42,.3); padding-bottom:.3rem;">
           Ver notícia no site da SEDPcD
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
             <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
           </svg>
@@ -863,7 +866,7 @@ nav {
           </p>
           <a href="https://guia-cerim-e64griuj.manus.space/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:.7rem; font-size:.62rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--vinho); background:var(--ouro); padding:.9rem 2rem; text-decoration:none;">
             Acessar o guia
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
               <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
             </svg>

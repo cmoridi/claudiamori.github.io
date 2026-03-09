@@ -559,16 +559,22 @@ nav {
   nav { padding: 0 1.5rem; }
   .nav-projeto { display: none; }
 }
-</style>
-<style type="text/css" id="operaUserStyle"></style></head>
+
+    /* Acessibilidade - Teclado */
+    a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid #E8AB12; outline-offset: 4px; }
+  </style>
+<style type="text/css" id="operaUserStyle">
+    /* Acessibilidade - Teclado */
+    a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid #E8AB12; outline-offset: 4px; }
+  </style></head>
 <body>
 
 <div id="prog" style="width: 56.1018%;"></div>
 
 <!-- ══ NAV ══ -->
 <nav>
-  <a class="nav-back" href="index.html">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+  <a class="nav-back" aria-label="Voltar para a pÃ¡gina inicial" href="index.html">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <polyline points="15 18 9 12 15 6"></polyline>
     </svg>
     Portfólio

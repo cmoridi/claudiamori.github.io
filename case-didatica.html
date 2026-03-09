@@ -565,7 +565,10 @@ nav {
   nav { padding: 0 1.5rem; }
   .nav-projeto { display: none; }
 }
-</style>
+
+    /* Acessibilidade - Teclado */
+    a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid #E8AB12; outline-offset: 4px; }
+  </style>
 </head>
 <body>
 
@@ -573,8 +576,8 @@ nav {
 
 <!-- ══ NAV ══ -->
 <nav>
-  <a class="nav-back" href="index.html">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+  <a class="nav-back" aria-label="Voltar para a pÃ¡gina inicial" href="index.html">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <polyline points="15 18 9 12 15 6"/>
     </svg>
     Portfólio
@@ -928,7 +931,7 @@ nav {
     <div class="feedback-cols">
       <div class="feedback-bloco rev">
         <div class="fb-ico" style="background: var(--azul);">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <div class="fb-titulo">O que os alunos mais apreciaram</div>
         <ul class="fb-lista">
@@ -942,7 +945,7 @@ nav {
       </div>
       <div class="feedback-bloco rev rev-d2">
         <div class="fb-ico" style="background: var(--terracota);">
-          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
         <div class="fb-titulo">Pontos que orientaram melhorias</div>
         <ul class="fb-lista">

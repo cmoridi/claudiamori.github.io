@@ -1371,6 +1371,9 @@
         align-items: flex-start;
       }
     }
+  
+    /* Acessibilidade - Teclado */
+    a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid #E8AB12; outline-offset: 4px; }
   </style>
 </head>
 
@@ -1380,8 +1383,8 @@
 
   <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-back">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <a href="index.html" class="nav-back" aria-label="Voltar para a pÃ¡gina inicial">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M19 12H5M12 5l-7 7 7 7" />
       </svg>
       Voltar ao portfólio
@@ -1519,7 +1522,7 @@
           <div class="diagnostico-lista" style="margin-top:2.5rem;">
             <div class="diag-item">
               <div class="diag-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="var(--borgonha)" stroke-width="1.5">
+                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="var(--borgonha)" stroke-width="1.5">
                   <path
                     d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
                 </svg>
@@ -1532,7 +1535,7 @@
             </div>
             <div class="diag-item">
               <div class="diag-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="var(--borgonha)" stroke-width="1.5">
+                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="var(--borgonha)" stroke-width="1.5">
                   <circle cx="12" cy="12" r="10" />
                   <polyline points="12 6 12 12 16 14" />
                 </svg>
@@ -1545,7 +1548,7 @@
             </div>
             <div class="diag-item">
               <div class="diag-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="var(--borgonha)" stroke-width="1.5">
+                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="var(--borgonha)" stroke-width="1.5">
                   <line x1="18" y1="20" x2="18" y2="10" />
                   <line x1="12" y1="20" x2="12" y2="4" />
                   <line x1="6" y1="20" x2="6" y2="14" />
@@ -1605,7 +1608,7 @@
 
       <div class="decisao-destaque rev">
         <div style="flex-shrink:0;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <svg aria-hidden="true" focusable="false" width="28" height="28" viewBox="0 0 24 24" fill="none">
             <path
               d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
               stroke="rgba(239,233,225,.3)" stroke-width="1.5" />
